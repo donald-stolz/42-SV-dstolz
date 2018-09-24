@@ -18,6 +18,7 @@ NAME = libftprintf
 
 SRC_DIR = sources/
 INC_DIR = includes/
+TEST_DIR = tests/
 
 FILES = b_printf.c		\
 		ft_putchar.c	\
@@ -58,5 +59,5 @@ re: fclean
 	make all
 
 test: comp
-	$(CC) $(CFLAGS) tests/$(TEST).c -I $(INC)
+	$(CC) $(CFLAGS) $(TEST_DIR)$(TEST).c -I $(INC)
 	$(CC) $(OBJ) $(TEST).o  -o $(TEST)
