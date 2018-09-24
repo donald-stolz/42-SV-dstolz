@@ -6,11 +6,11 @@
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:18:05 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/24 11:07:32 by dstolz           ###   ########.fr       */
+/*   Updated: 2018/09/24 13:26:53 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libprintf.h"
+#include "../includes/libftprintf.h"
 
 int	ft_putnbr(va_list arg)
 {
@@ -18,7 +18,7 @@ int	ft_putnbr(va_list arg)
 
 	i = va_arg(arg, int);
 	if (i == -2147483648)
-		return ft_puts("-2147483648");
+		return (ft_puts("-2147483648"));
 	return (ft_printitoa(i, 10));
 }
 

@@ -6,7 +6,7 @@
 #    By: dstolz <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/12 08:08:44 by dstolz            #+#    #+#              #
-#    Updated: 2018/09/24 11:24:38 by dstolz           ###   ########.fr        #
+#    Updated: 2018/09/24 13:36:12 by dstolz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ CC = gcc
 
 CFLAGS = -c -Wall -Wextra -Werror
 
-NAME = libprintf
+NAME = libftprintf
 
 SRC_DIR = sources/
+INC_DIR = includes/
 
 FILES = b_printf.c		\
 		ft_putchar.c	\
@@ -32,9 +33,9 @@ SRC = $(FILES:%=$(SRC_DIR)%)
 
 OBJ = $(FILES:%.c=%.o)
 
-TEST = test_printf
+INC = $(INC_DIR)$(NAME).h
 
-INC = $(NAME).h
+TEST = b_printftest
 
 LIB = $(NAME).a
 
@@ -43,13 +44,9 @@ all: comp $(NAME) clean
 comp:
 	$(CC) $(CFLAGS) $(SRC) -I $(INC)
 
-$(NAME):
+$(NAME): comp
 	ar rcs $(LIB) $(OBJ)
 	ranlib $(LIB)
-
-test: comp
-	$(CC) $(CFLAGS) $(SRC_DIR)$(TEST).c -I $(INC)
-	$(CC) $(OBJ) $(TEST).o  -o runtest
 
 clean:
 	rm -rf $(OBJ)
@@ -59,3 +56,7 @@ fclean: clean
 
 re: fclean
 	make all
+
+test: comp
+	$(CC) $(CFLAGS) tests/$(TEST).c -I $(INC)
+	$(CC) $(OBJ) $(TEST).o  -o $(TEST)

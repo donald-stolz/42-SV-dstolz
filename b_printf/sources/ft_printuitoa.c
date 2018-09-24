@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libprintf.h"
+#include "../includes/libftprintf.h"
 
 int	ft_printuitoa(t_uint value, int base)
 {

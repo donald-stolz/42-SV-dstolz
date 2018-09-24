@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libprintf.h"
+#include "../includes/libftprintf.h"
 
 int	ft_printitoa(int value, int base)
 {

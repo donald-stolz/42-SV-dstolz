@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/12 08:33:02 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/24 13:22:24 by dstolz           ###   ########.fr       */
+/*   Created: 2018/09/17 08:23:32 by dstolz            #+#    #+#             */
+/*   Updated: 2018/09/19 14:30:40 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libftprintf.h"
+#ifndef MACROS_H
+# define MACROS_H
 
-int		ft_putchar(char c)
-{
-	return ((int)write(1, &c, 1));
-}
+# define SWAP(x, y, T) { T swap = x; x = y; y = swap;}
+# define SWAPC(a, b) {a^=b, b^=a, a^=b;}
+# define MAX(a, b)  (((a) > (b)) ? (a) : (b))
+# define MIN(a, b)  (((a) < (b)) ? (a) : (b))
+# define ABS(x) ((x) < 0 ? -(x) : (x))
 
-char	ft_tochar(int num)
-{
-	if (num >= 0 && num <= 9)
-		return ((char)(num + '0'));
-	else
-		return ((char)(num - 10 + 'a'));
-}
+#endif
