@@ -6,7 +6,7 @@
 #    By: dstolz <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/12 08:08:44 by dstolz            #+#    #+#              #
-#    Updated: 2018/09/19 15:30:30 by dstolz           ###   ########.fr        #
+#    Updated: 2018/09/24 11:24:38 by dstolz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME = libprintf
 
 SRC_DIR = sources/
 
-FILES = ft_printf.c		\
+FILES = b_printf.c		\
 		ft_putchar.c	\
 		ft_puts.c		\
 		ft_putptr.c		\
@@ -27,8 +27,6 @@ FILES = ft_printf.c		\
 		ft_printuitoa.c	\
 		ft_printltoa.c	\
 		ft_numdigits.c	\
-		ft_strlen.c		\
-		test_printf.c
 
 SRC = $(FILES:%=$(SRC_DIR)%)
 
@@ -50,7 +48,8 @@ $(NAME):
 	ranlib $(LIB)
 
 test: comp
-	$(CC) $(OBJ) -o $(TEST)
+	$(CC) $(CFLAGS) $(SRC_DIR)$(TEST).c -I $(INC)
+	$(CC) $(OBJ) $(TEST).o  -o runtest
 
 clean:
 	rm -rf $(OBJ)

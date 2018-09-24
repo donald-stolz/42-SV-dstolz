@@ -6,7 +6,7 @@
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 08:00:03 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/20 08:40:41 by dstolz           ###   ########.fr       */
+/*   Updated: 2018/09/24 11:24:21 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef unsigned long	t_long;
 
 # endif
 
-int		ft_printf(char *format, ...);
+int		b_printf(char *format, ...);
 int		ft_putchar(char c);
 int		ft_puts(char *s);
 int		ft_putnbr(va_list arg);
@@ -43,7 +43,6 @@ int		ft_printitoa(int value, int base);
 int		ft_printuitoa(t_uint value, int base);
 int		ft_printltoa(t_long	value, int base);
 int		ft_numdigits(int value, int base);
-int		ft_strlen(const char *s);
 int		ft_searchflags(char option, va_list arg);
 int		ft_putptr(va_list arg);
 int		ft_putarg(va_list arg);
