@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 #include <limits.h>
 #include "../includes/libftprintf.h"
 
@@ -81,7 +82,17 @@ void test_printf()
 
 }
 
-int main() {
+int main(void) {
+	char s[]= "abcd";
+    assert(
+        b_printf("hello %c %c %s %s %p bye\n", 'a', 'b', s, s, s) ==
+        printf("hello %c %c %s %s %p bye\n", 'a', 'b', s, s, s)
+     );
+
+   	 assert(
+       	b_printf("%d %d %i %o %o %x %x %u %u\n", INT_MIN, INT_MAX, 123, INT_MIN, INT_MAX,INT_MIN, INT_MAX,INT_MIN, UINT_MAX) ==
+       	printf("%d %d %i %o %o %x %x %u %u\n", INT_MIN, INT_MAX, 123, INT_MIN, INT_MAX,INT_MIN, INT_MAX,INT_MIN, UINT_MAX)
+     );
 	test_printf();
 	return 0;
 }
