@@ -18,7 +18,6 @@ NAME = libftprintf
 
 SRC_DIR = sources/
 INC_DIR = includes/
-TEST_DIR = tests/
 
 FILES = b_printf.c		\
 		ft_putchar.c	\
@@ -51,13 +50,15 @@ $(NAME): comp
 
 clean:
 	rm -rf $(OBJ)
+	rm -rf $(TEST).o
 
 fclean: clean
 	rm -rf $(LIB)
+	rm -rf $(TEST)
 
 re: fclean
 	make all
 
 test: comp
-	$(CC) $(CFLAGS) $(TEST_DIR)$(TEST).c -I $(INC)
+	$(CC) $(CFLAGS) tests/$(TEST).c -I $(INC)
 	$(CC) $(OBJ) $(TEST).o  -o $(TEST)
