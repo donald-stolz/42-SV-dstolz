@@ -1,3 +1,28 @@
+## Subject:
+```
+Assignment name  : ft_rrange
+Expected files   : ft_rrange.c
+Allowed functions: malloc
+--------------------------------------------------------------------------------
+
+Write the following function:
+
+int     *ft_rrange(int start, int end);
+
+It must allocate (with malloc()) an array of integers, fill it with consecutive
+values that begin at end and end at start (Including start and end !), then
+return a pointer to the first value of the array.
+
+Examples:
+
+- With (1, 3) you will return an array containing 3, 2 and 1
+- With (-1, 2) you will return an array containing 2, 1, 0 and -1.
+- With (0, 0) you will return an array containing 0.
+- With (0, -3) you will return an array containing -3, -2, -1 and 0.
+```
+
+## Results
+```
 = Host-specific information ====================================================
 $> hostname; uname -msr
 e1z1r7p15.42.us.org
@@ -29,7 +54,7 @@ c73a3a515d8b2ff53209734f8305e1ff4286ad19 - Exam 42, Fri Sep 21 11:50:09 2018 -07
 8f200a0c3d03c1e6e9ca9d097f4d5a6e569b84da - Exam 42, Fri Sep 21 09:55:36 2018 -0700 : Submitting level 2
 1a5037fa1f93984868c68b8805507a361607b0bb - Exam 42, Fri Sep 21 09:23:20 2018 -0700 : Finished level 1
 cb0bba95777b1e9c6c7ea5e0c50a623c8ad1b61f - Exam 42, Fri Sep 21 09:13:59 2018 -0700 : Finished level 0
- 
+
 = Collected files ==========================================
 $> ls -lAR /var/folders/1j/g1t_p42n3yj41r6_nvksm98r0000gp/T/tmpCOXoNR/user
 total 8
@@ -65,12 +90,12 @@ total 8
 /var/folders/1j/g1t_p42n3yj41r6_nvksm98r0000gp/T/tmpCOXoNR/user/rstr_capitalizer:
 total 8
 -rw-r--r--  1 deepthought  deepthought  1709 Sep 21 12:32 rstr_capitalizer.c
- 
+
 = ft_rrange ====================================================================
-$> gcc -Wextra -Wall -Werror main.c ft_rrange.c -o user_exe 
+$> gcc -Wextra -Wall -Werror main.c ft_rrange.c -o user_exe
 
 = Test 1 ===================================================
-$> ./uvyt5f5oysxxfjc8r1hgv39f 
+$> ./uvyt5f5oysxxfjc8r1hgv39f
 $> diff -U 3 user_output_test1 test1.output | cat -e
 
 Diff OK :D
@@ -172,3 +197,4 @@ Diff OK :D
 Grade: 1
 
 = Final grade: 1 ===============================================================
+```

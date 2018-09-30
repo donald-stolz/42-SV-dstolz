@@ -1,3 +1,36 @@
+## Subject:
+```
+Assignment name  : rstr_capitalizer
+Expected files   : rstr_capitalizer.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that takes one or more strings and, for each argument, puts
+the last character that is a letter of each word in uppercase and the rest
+in lowercase, then displays the result followed by a \n.
+
+A word is a section of string delimited by spaces/tabs or the start/end of the
+string. If a word has a single letter, it must be capitalized.
+
+A letter is a character in the set [a-zA-Z]
+
+If there are no parameters, display \n.
+
+Examples:
+
+$> ./rstr_capitalizer | cat -e
+$
+$> ./rstr_capitalizer "a FiRSt LiTTlE TESt" | cat -e
+A firsT littlE tesT$
+$> ./rstr_capitalizer "SecONd teST A LITtle BiT   Moar comPLEX" "   But... This iS not THAT COMPLEX" "     Okay, this is the last 1239809147801 but not    the least    t" | cat -e
+seconD tesT A littlE biT   moaR compleX$
+   but... thiS iS noT thaT compleX$
+     okay, thiS iS thE lasT 1239809147801 buT noT    thE leasT    T$
+$>
+```
+
+## Results
+```
 = Host-specific information ====================================================
 $> hostname; uname -msr
 e1z2r5p20.42.us.org
@@ -27,7 +60,7 @@ c73a3a515d8b2ff53209734f8305e1ff4286ad19 - Exam 42, Fri Sep 21 11:50:09 2018 -07
 8f200a0c3d03c1e6e9ca9d097f4d5a6e569b84da - Exam 42, Fri Sep 21 09:55:36 2018 -0700 : Submitting level 2
 1a5037fa1f93984868c68b8805507a361607b0bb - Exam 42, Fri Sep 21 09:23:20 2018 -0700 : Finished level 1
 cb0bba95777b1e9c6c7ea5e0c50a623c8ad1b61f - Exam 42, Fri Sep 21 09:13:59 2018 -0700 : Finished level 0
- 
+
 = Collected files ==========================================
 $> ls -lAR /var/folders/nf/602w9vzn5z94mbng99df9vj00000gp/T/tmpquNqUb/user
 total 8
@@ -58,17 +91,17 @@ total 8
 /var/folders/nf/602w9vzn5z94mbng99df9vj00000gp/T/tmpquNqUb/user/rstr_capitalizer:
 total 8
 -rw-r--r--  1 deepthought  deepthought  1709 Sep 21 11:50 rstr_capitalizer.c
- 
+
 = rstr_capitalizer =============================================================
-$> gcc -Wextra -Wall -Werror rstr_capitalizer.c -o user_exe 
+$> gcc -Wextra -Wall -Werror rstr_capitalizer.c -o user_exe
 
 = Test 1 ===================================================
-$> ./rqw8t8p6jyu60gwffzxdt4qf 
+$> ./rqw8t8p6jyu60gwffzxdt4qf
 $> diff -U 3 user_output_test1 test1.output | cat -e
 
 Diff OK :D
 = Test 2 ===================================================
-$> ./8254lofj86bmztxf849g1qhf 
+$> ./8254lofj86bmztxf849g1qhf
 $> diff -U 3 user_output_test2 test2.output | cat -e
 
 Diff OK :D
@@ -90,3 +123,4 @@ Diff KO :(
 Grade: 0
 
 = Final grade: 0 ===============================================================
+```

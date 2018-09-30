@@ -1,3 +1,22 @@
+## Subject:
+```
+Assignment name  : ft_putstr
+Expected files   : ft_putstr.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a function that displays a string on the standard output.
+
+The pointer passed to the function contains the address of the string's first
+character.
+
+Your function must be declared as follows:
+
+void	ft_putstr(char *str);
+```
+
+### Results:
+```
 = Host-specific information ====================================================
 $> hostname; uname -msr
 e1z2r2p7.42.us.org
@@ -24,7 +43,7 @@ Repository URL: auto-exam/2018/c-exam-alone-in-the-dark-beginner/exam_20180921/d
 $> git -C /var/folders/gp/dy07w8m53vzb74r3xdrtgcwc0000gp/T/tmpCz9vvs/user log --pretty='%H - %an, %ad : %s'
 1a5037fa1f93984868c68b8805507a361607b0bb - Exam 42, Fri Sep 21 09:23:20 2018 -0700 : Finished level 1
 cb0bba95777b1e9c6c7ea5e0c50a623c8ad1b61f - Exam 42, Fri Sep 21 09:13:59 2018 -0700 : Finished level 0
- 
+
 = Collected files ==========================================
 $> ls -lAR /var/folders/gp/dy07w8m53vzb74r3xdrtgcwc0000gp/T/tmpCz9vvs/user
 total 8
@@ -40,9 +59,9 @@ total 8
 total 32
 -rwxr-xr-x  1 deepthought  deepthought  8564 Sep 21 09:23 a.out
 -rw-r--r--  1 deepthought  deepthought  1008 Sep 21 09:23 maff_alpha.c
- 
+
 = ft_putstr ====================================================================
-$> gcc -Wextra -Wall -Werror main.c ft_putstr.c -o user_exe 
+$> gcc -Wextra -Wall -Werror main.c ft_putstr.c -o user_exe
 
 = Test 1 ===================================================
 $> ./vzakojzlhd5l1m2sz5lqyqcy "eGEuFwyIp"
@@ -80,10 +99,11 @@ $> diff -U 3 user_output_test7 test7.output | cat -e
 
 Diff OK :D
 = Test 8 ===================================================
-$> ./mwubfusowo23r4xmdvovtde3 
+$> ./mwubfusowo23r4xmdvovtde3
 $> diff -U 3 user_output_test8 test8.output | cat -e
 
 Diff OK :D
 Grade: 1
 
 = Final grade: 1 ===============================================================
+```

@@ -1,3 +1,24 @@
+## Subject:
+```
+Assignment name  : max
+Expected files   : max.c
+Allowed functions:
+--------------------------------------------------------------------------------
+
+Write the following function:
+
+int		max(int* tab, unsigned int len);
+
+The first parameter is an array of int, the second is the number of elements in
+the array.
+
+The function returns the largest number found in the array.
+
+If the array is empty, the function returns 0.
+```
+
+## Results
+```
 = Host-specific information ====================================================
 $> hostname; uname -msr
 e1z3r3p16.42.us.org
@@ -25,7 +46,7 @@ $> git -C /var/folders/04/cb3y2vf957l2n3jlmy3tcx2m0000gp/T/tmp6oHOvC/user log --
 8f200a0c3d03c1e6e9ca9d097f4d5a6e569b84da - Exam 42, Fri Sep 21 09:55:36 2018 -0700 : Submitting level 2
 1a5037fa1f93984868c68b8805507a361607b0bb - Exam 42, Fri Sep 21 09:23:20 2018 -0700 : Finished level 1
 cb0bba95777b1e9c6c7ea5e0c50a623c8ad1b61f - Exam 42, Fri Sep 21 09:13:59 2018 -0700 : Finished level 0
- 
+
 = Collected files ==========================================
 $> ls -lAR /var/folders/04/cb3y2vf957l2n3jlmy3tcx2m0000gp/T/tmp6oHOvC/user
 total 8
@@ -46,12 +67,12 @@ total 32
 /var/folders/04/cb3y2vf957l2n3jlmy3tcx2m0000gp/T/tmp6oHOvC/user/max:
 total 8
 -rw-r--r--  1 deepthought  deepthought  1205 Sep 21 09:56 max.c
- 
+
 = max ==========================================================================
-$> gcc -Wextra -Wall -Werror main.c max.c -o user_exe 
+$> gcc -Wextra -Wall -Werror main.c max.c -o user_exe
 
 = Test 1 ===================================================
-$> ./xh0syawj382d5u53owj7wful 
+$> ./xh0syawj382d5u53owj7wful
 $> diff -U 3 user_output_test1 test1.output | cat -e
 
 Diff OK :D
@@ -153,3 +174,4 @@ Diff OK :D
 Grade: 1
 
 = Final grade: 1 ===============================================================
+```

@@ -1,3 +1,28 @@
+## Subject:
+```
+Assignment name  : paramsum
+Expected files   : paramsum.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that displays the number of arguments passed to it, followed by
+a newline.
+
+If there are no arguments, just display a 0 followed by a newline.
+
+Example:
+
+$>./paramsum 1 2 3 5 7 24
+6
+$>./paramsum 6 12 24 | cat -e
+3$
+$>./paramsum | cat -e
+0$
+$>
+```
+
+## Results
+```
 = Host-specific information ====================================================
 $> hostname; uname -msr
 e1z1r4p25.42.us.org
@@ -26,7 +51,7 @@ $> git -C /var/folders/bj/z289pnxx6ys5wqswm9fg6j940000gp/T/tmp4wcJbI/user log --
 8f200a0c3d03c1e6e9ca9d097f4d5a6e569b84da - Exam 42, Fri Sep 21 09:55:36 2018 -0700 : Submitting level 2
 1a5037fa1f93984868c68b8805507a361607b0bb - Exam 42, Fri Sep 21 09:23:20 2018 -0700 : Finished level 1
 cb0bba95777b1e9c6c7ea5e0c50a623c8ad1b61f - Exam 42, Fri Sep 21 09:13:59 2018 -0700 : Finished level 0
- 
+
 = Collected files ==========================================
 $> ls -lAR /var/folders/bj/z289pnxx6ys5wqswm9fg6j940000gp/T/tmp4wcJbI/user
 total 8
@@ -52,12 +77,12 @@ total 8
 /var/folders/bj/z289pnxx6ys5wqswm9fg6j940000gp/T/tmp4wcJbI/user/paramsum:
 total 8
 -rw-r--r--  1 deepthought  deepthought  1246 Sep 21 10:57 paramsum.c
- 
+
 = paramsum =====================================================================
-$> gcc -Wextra -Wall -Werror paramsum.c -o user_exe 
+$> gcc -Wextra -Wall -Werror paramsum.c -o user_exe
 
 = Test 1 ===================================================
-$> ./3ziq6q9fh39w4sts16j0awjx 
+$> ./3ziq6q9fh39w4sts16j0awjx
 $> diff -U 3 user_output_test1 test1.output | cat -e
 
 Diff OK :D
@@ -99,3 +124,4 @@ Diff KO :(
 Grade: 0
 
 = Final grade: 0 ===============================================================
+```
