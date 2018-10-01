@@ -29,26 +29,26 @@ Testing with [Libftest](https://github.com/jtoty/Libftest) & [libft-unit-test](h
 - [x] isprint
 - [x] toupper
 - [x] tolower
-- [ ] memalloc
-- [ ] memdel
-- [ ] strnew
-- [ ] strdel
-- [ ] strclr
-- [ ] striter
-- [ ] striteri
-- [ ] strmap
-- [ ] strmapi
+- [x] memalloc
+- [x] memdel
+- [x] strnew
+- [x] strdel
+- [x] strclr
+- [x] striter
+- [x] striteri
+- [x] strmap
+- [x] strmapi
 - [ ] strequ
 - [ ] strsub
 - [ ] strjoin
 - [ ] strtrim
 - [ ] strsplit
-- [ ] itoa
+- [x] itoa
 - [x] putchar
 - [x] putstr
 - [x] putendl
-- [ ] putnbr
+- [x] putnbr
 - [x] putchar_fd
 - [x] putstr_fd
 - [x] putendl_fd
-- [ ] putnbr_fd
+- [x] putnbr_fd
