@@ -14,6 +14,9 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <stdlib.h>
+
+
 
 int		ft_tolower(int c);
 int		ft_toupper(int c);
@@ -48,7 +51,21 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_putchar(char c);
 void	ft_putstr(const char *s);
 void	ft_putendl(const char *s);
+void	ft_putnbr(int n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(const char *s, int fd);
 void	ft_putendl_fd(const char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+char	*ft_itoa(int n);
+char	*ft_strrev(char *str);
+size_t	ft_numlen(int n, int base);
+char	*ft_strnew(size_t size);
+void	*ft_memalloc(size_t size);
+void	ft_memdel(void **ap);
+void	ft_strdel(char **as);
+void	ft_strclr(char *s);
+void	ft_striter(char *s, void (*f)(char *));
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+char	*ft_strmap(char const *s, char (*f)(char));
+char	*ft_strmapi(char const *s, char(*f)(unsigned int, char));
 #endif

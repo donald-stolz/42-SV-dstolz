@@ -20,11 +20,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	check;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	check = 0;
 	if (!ft_strlen(needle))
-		return ((char *)haystack);	
+		return ((char *)haystack);
 	while (*haystack + i && i < len)
 	{
 		if (*(haystack + i) == *needle)

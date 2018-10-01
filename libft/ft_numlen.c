@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_numlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/28 10:25:09 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/28 10:35:14 by dstolz           ###   ########.fr       */
+/*   Created: 2018/09/30 09:53:44 by dstolz            #+#    #+#             */
+/*   Updated: 2018/09/30 09:53:46 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(const char *s, int fd)
+size_t  ft_numlen(int n, int base)
 {
-	if (s)
-		while (*s)
-			ft_putchar_fd(*s++, fd);
+    size_t digits;
+
+	digits = 0;
+	if (n <= 0)
+	{
+		n = -n;
+		digits++;
+	}
+	while (n)
+	{
+		n /= base;
+		digits++;
+	}
+	return (digits);
 }

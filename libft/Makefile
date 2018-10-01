@@ -49,7 +49,21 @@ SRC =	ft_isdigit.c	\
 		ft_putendl.c	\
 		ft_putchar_fd.c	\
 		ft_putstr_fd.c	\
-		ft_putendl.c	\
+		ft_putnbr.c		\
+		ft_putendl_fd.c	\
+		ft_putnbr_fd.c	\
+		ft_itoa.c		\
+		ft_strrev.c		\
+		ft_numlen.c		\
+		ft_strnew.c		\
+		ft_memalloc.c	\
+		ft_memdel.c		\
+		ft_strclr.c		\
+		ft_strdel.c		\
+		ft_striter.c	\
+		ft_striteri.c	\
+		ft_strmap.c		\
+		ft_strmapi.c		\
 
 OBJ =  $(SRC:%.c=%.o)
 

@@ -24,7 +24,7 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	k = 0;
 	check = 0;
 	if (!ft_strlen(needle))
-		return ((char *)haystack);	
+		return ((char *)haystack);
 	while (*haystack + i)
 	{
 		if (*(haystack + i) == *needle)

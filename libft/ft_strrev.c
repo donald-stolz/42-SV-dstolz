@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/28 10:25:09 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/28 10:35:14 by dstolz           ###   ########.fr       */
+/*   Created: 2018/09/30 10:03:38 by dstolz            #+#    #+#             */
+/*   Updated: 2018/09/30 10:03:41 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(const char *s, int fd)
+char    *ft_strrev(char *str)
 {
-	if (s)
-		while (*s)
-			ft_putchar_fd(*s++, fd);
+    int i;
+    int q;
+    char temp;
+
+    i = 0;
+    q = ft_strlen(str) - 1;
+    while (i < q)
+    {
+        temp = *(str + i);
+        *(str + i++) = *(str + q);
+        *(str + q--) = temp;
+    }
+    return (str);
 }
