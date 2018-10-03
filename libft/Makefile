@@ -20,7 +20,6 @@ NUM		=	ft_itoa.c		\
 			ft_numlen.c		\
 			ft_atoi.c		\
 
-
 STR		=	ft_strchr.c		\
 			ft_strcmp.c		\
 			ft_strncmp.c	\
@@ -48,7 +47,9 @@ STR		=	ft_strchr.c		\
 			ft_strsub.c		\
 			ft_strnew.c		\
 			ft_strrev.c		\
-
+			ft_strtrim.c	\
+			ft_strjoin.c	\
+			ft_strsplit.c	\
 
 MEM		=	ft_memcpy.c		\
 			ft_memccpy.c	\
