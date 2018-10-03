@@ -13,18 +13,18 @@
 #include "../libft.h"
 #include <stdio.h>
 
-char    *ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
 	size_t	i;
 	size_t	start;
 	size_t	end;
-	char		*str;
+	char	*str;
 
 	i = 0;
 	if (!s)
 		return (NULL);
 	while (*(s + i) <= ' ' && *(s + i))
-        i++;
+		i++;
 	start = i;
 	while (*(s + i))
 		i++;
@@ -37,6 +37,6 @@ char    *ft_strtrim(char const *s)
 		return (NULL);
 	while (start <= end)
 		*(str + i++) = *((char *)s + start++);
-	str[i] = '\0';
+	*(str + i) = '\0';
 	return (str);
 }

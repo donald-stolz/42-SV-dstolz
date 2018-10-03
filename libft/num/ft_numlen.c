@@ -12,9 +12,9 @@
 
 #include "../libft.h"
 
-size_t  ft_numlen(int n, int base)
+size_t	ft_numlen(int n, int base)
 {
-    size_t digits;
+	size_t digits;
 
 	digits = 0;
 	if (n <= 0)

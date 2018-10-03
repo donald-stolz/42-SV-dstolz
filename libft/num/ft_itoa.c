@@ -28,10 +28,7 @@ char	*ft_itoa(int n)
 	if (str == NULL)
 		return (NULL);
 	if (value == 0)
-	{
 		*(str + i++) = '0';
-		*(str + i) = '\0';
-	}
 	while (value != 0)
 	{
 		*(str + i++) = value % 10 + '0';

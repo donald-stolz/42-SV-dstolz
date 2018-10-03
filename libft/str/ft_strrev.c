@@ -12,19 +12,19 @@
 
 #include "../libft.h"
 
-char    *ft_strrev(char *str)
+char	*ft_strrev(char *str)
 {
-    int i;
-    int q;
-    char temp;
+	int		i;
+	int		q;
+	char	temp;
 
-    i = 0;
-    q = ft_strlen(str) - 1;
-    while (i < q)
-    {
-        temp = *(str + i);
-        *(str + i++) = *(str + q);
-        *(str + q--) = temp;
-    }
-    return (str);
+	i = 0;
+	q = ft_strlen(str) - 1;
+	while (i < q)
+	{
+		temp = *(str + i);
+		*(str + i++) = *(str + q);
+		*(str + q--) = temp;
+	}
+	return (str);
 }
