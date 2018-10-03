@@ -38,11 +38,11 @@ Testing with [Libftest](https://github.com/jtoty/Libftest) & [libft-unit-test](h
 - [x] striteri
 - [x] strmap
 - [x] strmapi
-- [ ] strequ
-- [ ] strsub
-- [ ] strjoin
-- [ ] strtrim
-- [ ] strsplit
+- [x] strequ
+- [x] strsub
+- [x] strjoin
+- [x] strtrim
+- [x] strsplit
 - [x] itoa
 - [x] putchar
 - [x] putstr
