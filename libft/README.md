@@ -1,54 +1,74 @@
-Testing with [Libftest](https://github.com/jtoty/Libftest) & [libft-unit-test](https://github.com/alelievr/libft-unit-test)
+# Personal C Library
 
-## This Library contains (or will contain) the following functions:
-- [x] memset
-- [x] bzero
-- [x] memcpy
-- [x] memccpy
-- [x] memmove
-- [x] memchr
-- [x] memcmp
-- [x] strlen
-- [x] strdup
-- [x] strcpy
-- [x] strncpy
-- [x] strcat
-- [x] strncat
-- [x] strlcat
-- [x] strchr
-- [x] strrchr
-- [x] strstr
-- [x] strnstr
-- [x] strcmp
-- [x] strncmp
-- [x] atoi
-- [x] isalpha
-- [x] isdigit
-- [x] isalnum
-- [x] isascii
-- [x] isprint
-- [x] toupper
-- [x] tolower
-- [x] memalloc
-- [x] memdel
-- [x] strnew
-- [x] strdel
-- [x] strclr
-- [x] striter
-- [x] striteri
-- [x] strmap
-- [x] strmapi
-- [x] strequ
-- [x] strsub
-- [x] strjoin
-- [x] strtrim
-- [x] strsplit
-- [x] itoa
-- [x] putchar
-- [x] putstr
-- [x] putendl
-- [x] putnbr
-- [x] putchar_fd
-- [x] putstr_fd
-- [x] putendl_fd
-- [x] putnbr_fd
+This library contains the functions completed for 42's libft project, as well as some additional functions I find useful.
+
+### /check
+- isalpha
+- isdigit
+- isalnum
+- isascii
+- isprint
+
+### /mem
+- memset
+- memcpy
+- memccpy
+- memmove
+- memchr
+- memcmp
+- memalloc
+- memdel
+
+### /num
+- atoi
+- itoa
+- numlen
+
+### /print
+- putchar
+- putstr
+- putendl
+- putnbr
+- putchar_fd
+- putstr_fd
+- putendl_fd
+- putnbr_fd
+
+### /str
+- bzero
+- strlen
+- strdup
+- strcpy
+- strncpy
+- strcat
+- strncat
+- strlcat
+- strchr
+- strrchr
+- strstr
+- strnstr
+- strcmp
+- strncmp
+- toupper
+- tolower
+- strnew
+- strdel
+- strclr
+- striter
+- striteri
+- strmap
+- strmapi
+- strequ
+- strsub
+- strjoin
+- strtrim
+- strsplit
+- strrev
+
+### /list
+- [ ] lstnew
+- [ ] lstdelone
+- [ ] lstdel
+- [ ] lstadd
+- [ ] lstiter
+- [ ] lstmap
