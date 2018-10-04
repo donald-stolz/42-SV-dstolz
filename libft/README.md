@@ -19,6 +19,14 @@ This library contains the functions completed for 42's libft project, as well as
 - memalloc
 - memdel
 
+### /list
+- lstnew
+- lstdelone
+- lstdel
+- lstadd
+- lstiter
+- lstmap
+
 ### /num
 - atoi
 - itoa
@@ -64,11 +72,3 @@ This library contains the functions completed for 42's libft project, as well as
 - strtrim
 - strsplit
 - strrev
-
-### /list
-- lstnew
-- lstdelone
-- lstdel
-- lstadd
-- lstiter
-- lstmap
