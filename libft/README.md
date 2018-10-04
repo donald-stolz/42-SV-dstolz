@@ -66,9 +66,9 @@ This library contains the functions completed for 42's libft project, as well as
 - strrev
 
 ### /list
-- [ ] lstnew
-- [ ] lstdelone
-- [ ] lstdel
-- [ ] lstadd
-- [ ] lstiter
-- [ ] lstmap
+- lstnew
+- lstdelone
+- lstdel
+- lstadd
+- lstiter
+- lstmap
