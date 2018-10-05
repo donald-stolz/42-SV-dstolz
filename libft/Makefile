@@ -16,9 +16,40 @@ CFLAGS = -c -Wall -Wextra -Werror
 
 NAME = libft
 
+CHECK	=	ft_isdigit.c	\
+			ft_isalpha.c	\
+			ft_isalnum.c	\
+			ft_isascii.c	\
+			ft_isprint.c	\
+
+LST		=	ft_lstadd.c		\
+			ft_del.c		\
+			ft_delone.c		\
+			ft_lstiter.c	\
+			ft_lstmap.c		\
+			ft_lstnew.c		\
+
+MEM		=	ft_memcpy.c		\
+			ft_memccpy.c	\
+			ft_memmove.c	\
+			ft_memchr.c		\
+			ft_memcmp.c		\
+			ft_memalloc.c	\
+			ft_memdel.c		\
+			ft_memset.c		\
+
 NUM		=	ft_itoa.c		\
 			ft_numlen.c		\
 			ft_atoi.c		\
+
+PRINT	=	ft_putchar.c	\
+			ft_putstr.c		\
+			ft_putendl.c	\
+			ft_putchar_fd.c	\
+			ft_putstr_fd.c	\
+			ft_putnbr.c		\
+			ft_putendl_fd.c	\
+			ft_putnbr_fd.c	\
 
 STR		=	ft_strchr.c		\
 			ft_strcmp.c		\
@@ -51,45 +82,19 @@ STR		=	ft_strchr.c		\
 			ft_strjoin.c	\
 			ft_strsplit.c	\
 
-MEM		=	ft_memcpy.c		\
-			ft_memccpy.c	\
-			ft_memmove.c	\
-			ft_memchr.c		\
-			ft_memcmp.c		\
-			ft_memalloc.c	\
-			ft_memdel.c		\
-			ft_memset.c		\
-
-CHECK	=	ft_isdigit.c	\
-			ft_isalpha.c	\
-			ft_isalnum.c	\
-			ft_isascii.c	\
-			ft_isprint.c	\
-
-PRINT	=	ft_putchar.c	\
-			ft_putstr.c		\
-			ft_putendl.c	\
-			ft_putchar_fd.c	\
-			ft_putstr_fd.c	\
-			ft_putnbr.c		\
-			ft_putendl_fd.c	\
-			ft_putnbr_fd.c	\
-
-
-
-SRC =	$(NUM:%=num/%)		\
-		$(STR:%=str/%)		\
+SRC =	$(CHECK:%=check/%)	\
+		$(LST:%=lst/%)		\
 		$(MEM:%=mem/%)		\
-		$(CHECK:%=check/%)	\
-		$(PRINT:%=print/%)
-		
+		$(NUM:%=num/%)		\
+		$(PRINT:%=print/%)	\
+		$(STR:%=str/%)		\
 
-
-OBJ =	$(NUM:%.c=%.o)	\
-		$(STR:%.c=%.o)	\
-		$(MEM:%.c=%.o)	\
-		$(CHECK:%.c=%.o)\
-		$(PRINT:%.c=%.o)
+OBJ =	$(CHECK:%=%.o)		\
+		$(LST:%=%.o)		\
+		$(MEM:%=%.o)		\
+		$(NUM:%=%.o)		\
+		$(PRINT:%=%.o)		\
+		$(STR:%=%.o)		\
 
 INC = libft.h
 

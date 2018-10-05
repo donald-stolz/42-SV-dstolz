@@ -21,21 +21,20 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 		return (NULL);
 	if (content == NULL)
 	{
-		lst.content_size = 0;
-		lst.content = NULL;
+		lst->content_size = 0;
+		lst->content = NULL;
 	}
 	else
 	{
-		new.content_size = content_size;
-		new.content = malloc(new->content_size);
-		if (!new->content)
+		lst->content_size = content_size;
+		lst->content = malloc(lst->content_size);
+		if (!lst->content)
 		{
-			free(content);
+			free((void *)content);
 			return (NULL);
 		}
-		new.content = ft_memccpy(new->content, content, new->content_size);
+		lst->content = ft_memcpy(lst->content, content, lst->content_size);
 	}
-	new->next = NULL;
+	lst->next = NULL;
 	return (NULL);
 }
-/* Using '.' instead of '->' in order to make copies */
