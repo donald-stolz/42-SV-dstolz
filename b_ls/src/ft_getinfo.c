@@ -12,12 +12,75 @@
 
 #include "../inc/b_ls.h"
 
-t_dir	ft_sortdir(t_dir dir, s_opt option)
+char	*ft_parsepermissions(mode_t st_mode)
 {
-	/**
-	 * 0. Setup tmps for swapping
-	 * 1. Parse options for sorting parameters
-	 * 2. Sort
-	 * 3. return t_dir
-	 **/
+	char	*permissions;
+
+	permissions = malloc(11);
+	*(permissions + 0) = (S_ISDIR(st_mode)) ? 'd' : '-';
+	if (S_ISLNK(st_mode)) *(permissions + 0) = 'l';
+	*(permissions + 1) = (st_mode & S_IRUSR) ? 'r' : '-';
+	*(permissions + 2) = (st_mode & S_IWUSR) ? 'w' : '-';
+	*(permissions + 3) = (st_mode & S_IXUSR) ? 'x' : '-';
+	*(permissions + 4) = (st_mode & S_IRGRP) ? 'r' : '-';
+	*(permissions + 5) = (st_mode & S_IWGRP) ? 'w' : '-';
+	*(permissions + 6) = (st_mode & S_IXGRP) ? 'x' : '-';
+	*(permissions + 7) = (st_mode & S_IROTH) ? 'r' : '-';
+	*(permissions + 8) = (st_mode & S_IWOTH) ? 'w' : '-';
+	*(permissions + 9) = (st_mode & S_IXOTH) ? 'x' : '-';
+	*(permissions + 10) = '\0';
+	return (permissions);
+}
+
+/**
+ *	Note: Will likely have to move this to print:
+ *		-ft_parsetime(ctime(&fileStats.st_mtime)); 
+ **/
+char	*ft_parsetime(char *m_time)
+{
+	char *new;
+	int i;
+
+	i = 0;
+	new = (char *)malloc(13);
+	// Need to free later
+	while( i < 12)
+	{
+		*(new + i) = *(m_time + (4 + i));
+		i++;
+	}
+	*(new + i) = '\0';
+	return (new);
+}
+
+t_dir *ft_getinfo(DIR *dirstream, char *directory)
+{
+	t_dir 			*info;
+	t_dir *tmp;
+	struct dirent	*dirRD;
+	struct stat		fileStats;
+	struct passwd *pwd;
+	struct group *grp;
+
+	info = malloc(sizeof(struct s_dir));
+	while( (dirRD = readdir(dirstream)) != NULL)
+	{
+		tmp = malloc(sizeof(struct s_dir));
+		lstat(ft_strjoin(directory, dirRD->d_name), &fileStats);
+		tmp->name = dirRD->d_name;
+		tmp->permissions = ft_parsepermissions(fileStats.st_mode);
+		tmp->links = fileStats.st_nlink;
+		pwd = getpwuid(fileStats.st_uid);
+		tmp->owner = pwd->pw_name;
+		grp = getgrgid(fileStats.st_gid);
+		tmp->group = grp->gr_name;
+		// or dirRD.d_reclen for links ? Can also check type dirRD.d_type
+		tmp->size = fileStats.st_size;
+		tmp->mtime = fileStats.st_mtime;
+		tmp->next = info ? : NULL;
+		info = tmp;
+	}
+	tmp = NULL;
+	free(tmp);
+	return (info);
 }

@@ -16,7 +16,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra
 #  -Werror
 
-FILES =	b_ls.c	\
+FILES =	b_ls.c			\
+		ft_getinfo.c	\
+		ft_sortdir.c	\
 
 HEADERS	= 	b_ls.h	\
 			libft.h	\
@@ -49,7 +51,7 @@ clean:
 fclean: clean
 	rm -rf $(NAME).a
 	rm -rf a.out
+	rm -rf a.out.dSYM
 	rm -rf $(LIBS:%=%.a)
 
-re: fclean
-	make all
+re: fclean all

@@ -12,13 +12,110 @@
 
 #include "../inc/b_ls.h"
 
-t_dir	ft_getinfo(DIR *dirstream, s_opt options)
+void	ft_swapdata(t_dir *dir1, t_dir *dir2)
+{
+	t_dir tmp;
+
+	tmp = *dir1;
+
+	dir1->permissions = dir2->permissions;
+	dir1->links = dir2->links;
+	dir1->owner = dir2->owner;
+	dir1->group = dir2->group;
+	dir1->size = dir2->size;
+	dir1->mtime = dir2->mtime;
+	dir1->name = dir2->name;
+	dir2->permissions = tmp.permissions;
+	dir2->links = tmp.links;
+	dir2->owner = tmp.owner;
+	dir2->group = tmp.group;
+	dir2->size = tmp.size;
+	dir2->mtime = tmp.mtime;
+	dir2->name = tmp.name;
+}
+
+t_dir	*ft_revlist(t_dir *dir)
+{
+	t_dir	*current;
+	t_dir	*prev;
+	t_dir	*next;
+
+	current = dir;
+	prev = NULL;
+	next = NULL;
+	while(current != NULL){
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	dir = prev;
+	if (dir->mtime == 0 || dir->links == 0)
+		dir = dir->next; //Leak?
+	return (dir);
+}
+
+void	ft_sortmtime(t_dir *dir)
+{
+	t_dir *nav;
+	t_dir *sort;
+
+	sort = dir;
+	while (sort != NULL)
+	{
+		nav = sort;
+		// Sometimes hit error here
+		while (nav != NULL)
+		{
+			//Swap for option -t; Q: How to sort when values are the same?
+			if (nav->mtime > sort->mtime)
+				ft_swapdata(sort, nav);
+			nav = nav->next;
+		}
+		sort = sort->next;
+	}
+}
+
+void ft_sortlex(t_dir *dir)
+{
+	t_dir *nav;
+	t_dir *sort;
+
+	sort = dir;
+	while (sort != NULL)
+	{
+		nav = sort;
+		// Sometimes hit error here
+		while (nav != NULL)
+		{
+			if (ft_strcmp(nav->name, sort->name) < 0)
+				ft_swapdata(sort, nav);
+			nav = nav->next;
+		}
+		sort = sort->next;
+	}
+}
+
+t_dir	*ft_sortdir(t_dir *dir, t_opt *options)
 {
 	/**
-	 * 0. Create t_dir
-	 * 1. Read dirstream
-	 * 2. Check for -a (& -R later)
-	 * 3. Add stats & time info to t_dir
-	 * 4. Return t_dir
+	 * 0. Setup tmps for swapping
+	 * 1. Parse options for sorting parameters
+	 * 2. Sort
+	 * 3. return t_dir
 	 **/
+	//ft_sortlex(dir);
+	if (options->t_op)
+		ft_sortmtime(dir);
+	else 
+		ft_sortlex(dir);
+	if (options->r_op)
+		dir = ft_revlist(dir);
+	return (dir);
 }
+
+/**
+ * // Lexiographical sort. Not tested
+ * if (ft_strcmp(nav->name, sort->name) < 0)
+ * 		ft_swapdata(sort, nav);
+ **/

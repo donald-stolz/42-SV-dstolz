@@ -17,7 +17,7 @@ char **ft_getdirnames(int argc, const char **argv, int numdirs)
 	int i;
 	char **dirnames;
 
-	dirnames = (char **)malloc((sizeof(char *) * (numdirs)) + 1);
+	dirnames = (char **)malloc((sizeof(char *) * (numdirs)));
 	i = 1;
 	if (*(*(argv + 1) + 0) == '-')
 		i++;
@@ -38,10 +38,9 @@ char **ft_getdirnames(int argc, const char **argv, int numdirs)
 t_opt	*ft_setflags(const char *flags)
 {
 	t_opt *options;
-
+	// malloc?
 	if (*(flags + 0) == '-')
 	{
-		printf("In set flags: %s \n", flags);
 		options = malloc(sizeof(t_opt));
 		options->l_op = ft_strchr(flags, 'l') ? true : false;
 		options->a_op = ft_strchr(flags, 'a') ? true : false;
@@ -61,8 +60,9 @@ int		main(int argc, const char *argv[])
 	DIR		*dirstream;
 	int		numdirs;
 	int		i;
-	// t_dir	*dir;
+	t_dirlist	*directory;
 
+	//NOTE: can have multipl '-' args need to restructure arg parsing
 	if (argc > 1)
 		options = ft_setflags(*(argv + 1));
 	else
@@ -73,19 +73,19 @@ int		main(int argc, const char *argv[])
 	if (!dirnames)
 		return (0);
 	i = 0;
+	directory = malloc(sizeof(struct s_dirlist));
 	/** Place in a loop to handle multiple dirnames **/
 	while(i < numdirs){
-		dirstream = opendir(*(dirnames + i));
+		directory->name = *(dirnames + i);
+		dirstream = opendir(directory->name);
+		if (directory == NULL)
+			printf("Error"); // TODO: Handle error
 		/** May just want to pass as *dir to getinfo and sort**/
-		dir = ft_getinfo(dirstream, options);
-		/** 
-		 * May be able to use an "if" to skip. 
-		 * If dir is sorted properly intially
-		 **/
-		// ft_sortdir(&dir, options);
-		// ft_displaydir(&dir, options);
+		directory->head = ft_getinfo(dirstream, directory->name);
+		directory->head = ft_sortdir(directory->head, options);
+		// ft_displaydir(&directory, options);
 		closedir(dirstream);
-	// 	// Free everything?
+	 	// ft_freelist
 		i++;
 	}
     return 0;
