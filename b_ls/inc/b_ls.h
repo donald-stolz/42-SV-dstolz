@@ -64,7 +64,7 @@ typedef struct s_dirlist
 char	**ft_getdirnames(int argc, const char **argv, int numdirs);
 t_opt	*ft_setflags(const char *flags);
 char	*ft_parsepermissions(mode_t st_mode);
-t_dir	*ft_getinfo(DIR *dirstream, char *directory);
+t_dir	*ft_getinfo(DIR *dirstream, char *directory, size_t *size);
 t_dir	*ft_sortdir(t_dir *dir, t_opt *option);
 void	ft_sortmtime(t_dir *dir);
 t_dir	*ft_revlist(t_dir *dir);

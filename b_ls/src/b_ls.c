@@ -78,10 +78,12 @@ int		main(int argc, const char *argv[])
 	/** Place in a loop to handle multiple dirnames **/
 	while(i < numdirs){
 		directory->name = *(dirnames + i);
+		directory->total = 0;
 		dirstream = opendir(directory->name);
 		if (directory == NULL)
 			printf("Error"); // TODO: Handle error
-		directory->head = ft_getinfo(dirstream, directory->name);
+		directory->head = ft_getinfo(dirstream, directory->name,
+							&directory->total);
 		directory->head = ft_sortdir(directory->head, options);
 		closedir(dirstream);
 		ft_displaydir(directory, options);

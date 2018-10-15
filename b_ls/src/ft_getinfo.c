@@ -32,7 +32,7 @@ char	*ft_parsepermissions(mode_t st_mode)
 	return (permissions);
 }
 
-t_dir *ft_getinfo(DIR *dirstream, char *directory)
+t_dir *ft_getinfo(DIR *dirstream, char *directory, size_t *size)
 {
 	t_dir 			*info;
 	t_dir *tmp;
@@ -55,6 +55,7 @@ t_dir *ft_getinfo(DIR *dirstream, char *directory)
 		tmp->group = grp->gr_name;
 		// or dirRD.d_reclen for links ? Can also check type dirRD.d_type
 		tmp->size = fileStats.st_size;
+		*size += (size_t)fileStats.st_blocks;
 		tmp->mtime = fileStats.st_mtime;
 		tmp->next = info->name ? info : NULL;
 		info = tmp;

@@ -50,9 +50,7 @@ void	ft_displaydir(t_dirlist *dir, t_opt *options)
 	nav = dir->head;
 	if (options->l_op)
 	{
-		int total = 69; // dir->total
-		// Print total
-		printf("total %d\n", total);
+		printf("total %zu\n", dir->total);
 		return ft_displayl(nav);
 	}
 	printf("%s	", nav->name);
