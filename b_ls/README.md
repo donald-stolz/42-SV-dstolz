@@ -67,4 +67,5 @@ typedef struct		s_dirlist
 ```
   
 #### Misc. Links:
-[parse permissions to char  *](http://codewiki.wikidot.com/c:system-calls:stat)
+[parse permissions to char  *](http://codewiki.wikidot.com/c:system-calls:stat)  
+[stat struct](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/sys/stat.h.html)  
