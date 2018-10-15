@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
@@ -36,5 +36,5 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 		lst->content = ft_memcpy(lst->content, content, lst->content_size);
 	}
 	lst->next = NULL;
-	return (NULL);
+	return (lst);
 }
