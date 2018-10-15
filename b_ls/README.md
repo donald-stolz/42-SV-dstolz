@@ -60,9 +60,9 @@ typedef struct 			s_dir
 
 typedef struct		s_dirlist
 {
-	char *name;
-	t_dir *head;
-	size_t total;
+	char	*name;
+	t_dir	*head;
+	size_t	total;
 } 			t_dirlist;
 ```
   
