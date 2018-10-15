@@ -62,7 +62,7 @@ typedef struct		s_dirlist
 {
 	char *name;
 	t_dir *head;
-	// Will need to add directory size. size_t total;
+	size_t total;
 } 			t_dirlist;
 ```
   
