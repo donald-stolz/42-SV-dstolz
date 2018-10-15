@@ -36,21 +36,12 @@ typedef enum { false, true } t_bool;
 
 typedef struct	s_opt
 {
-	t_bool	l_op; // use a long listing format
-	t_bool	a_op; // --all; do not ignore entries starting with .
-	t_bool	r_op; // --reverse; reverse order while sorting
-	t_bool	t_op; // sort by modification time
+	t_bool	l_op;
+	t_bool	a_op;
+	t_bool	r_op;
+	t_bool	t_op;
 }				t_opt;
 
-/**	- file permissions (in st_mode)
- *		+http://codewiki.wikidot.com/c:system-calls:stat
- *	- number of links
- * 	- owner name
- * 	- owner group
- * 	- file size
- * 	- time of last modification	
- * 	- file/directory name
- **/
 typedef struct s_dir
 {
 	char *permissions;
@@ -62,16 +53,13 @@ typedef struct s_dir
 	char *name;
 	struct s_dir	*next;
 }				t_dir;
-// t_file	*subdirs;
-//Works for regular files; Not symbolic links
-// Might need to parse into "char *" https://en.wikibooks.org/wiki/C_Programming/time.h/time_t
 
 typedef struct s_dirlist
 {
 	char *name;
 	t_dir *head;
+	size_t total;
 } 				t_dirlist;
-//int total?
 
 char	**ft_getdirnames(int argc, const char **argv, int numdirs);
 t_opt	*ft_setflags(const char *flags);
@@ -81,4 +69,6 @@ t_dir	*ft_sortdir(t_dir *dir, t_opt *option);
 void	ft_sortmtime(t_dir *dir);
 t_dir	*ft_revlist(t_dir *dir);
 void	ft_swapdata(t_dir *dir1, t_dir *dir2);
+void	ft_displaydir(t_dirlist *dir, t_opt *options);
+char	*ft_printtime(char *m_time);
 #endif

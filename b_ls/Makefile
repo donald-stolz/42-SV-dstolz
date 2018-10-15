@@ -19,12 +19,12 @@ CFLAGS = -Wall -Wextra
 FILES =	b_ls.c			\
 		ft_getinfo.c	\
 		ft_sortdir.c	\
+		ft_displaydir.c	\
 
 HEADERS	= 	b_ls.h	\
 			libft.h	\
 
 LIBS =	libft	\
-		# b_printf/	
 
 SRC_DIR = src/
 INC_DIR = inc/

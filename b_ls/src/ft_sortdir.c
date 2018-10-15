@@ -51,7 +51,7 @@ t_dir	*ft_revlist(t_dir *dir)
 	}
 	dir = prev;
 	if (dir->mtime == 0 || dir->links == 0)
-		dir = dir->next; //Leak?
+		dir = dir->next;
 	return (dir);
 }
 
@@ -67,7 +67,7 @@ void	ft_sortmtime(t_dir *dir)
 		// Sometimes hit error here
 		while (nav != NULL)
 		{
-			//Swap for option -t; Q: How to sort when values are the same?
+			//Q: How to sort when values are the same?
 			if (nav->mtime > sort->mtime)
 				ft_swapdata(sort, nav);
 			nav = nav->next;
@@ -82,11 +82,11 @@ void ft_sortlex(t_dir *dir)
 	t_dir *sort;
 
 	sort = dir;
-	while (sort != NULL)
+	while (sort)
 	{
 		nav = sort;
-		// Sometimes hit error here
-		while (nav != NULL)
+		// Often hit error here or just below
+		while (nav)
 		{
 			if (ft_strcmp(nav->name, sort->name) < 0)
 				ft_swapdata(sort, nav);
@@ -98,13 +98,6 @@ void ft_sortlex(t_dir *dir)
 
 t_dir	*ft_sortdir(t_dir *dir, t_opt *options)
 {
-	/**
-	 * 0. Setup tmps for swapping
-	 * 1. Parse options for sorting parameters
-	 * 2. Sort
-	 * 3. return t_dir
-	 **/
-	//ft_sortlex(dir);
 	if (options->t_op)
 		ft_sortmtime(dir);
 	else 
@@ -113,9 +106,3 @@ t_dir	*ft_sortdir(t_dir *dir, t_opt *options)
 		dir = ft_revlist(dir);
 	return (dir);
 }
-
-/**
- * // Lexiographical sort. Not tested
- * if (ft_strcmp(nav->name, sort->name) < 0)
- * 		ft_swapdata(sort, nav);
- **/

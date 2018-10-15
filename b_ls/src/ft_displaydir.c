@@ -12,11 +12,54 @@
 
 #include "../inc/b_ls.h"
 
-void	ft_displaydir(t_dir dir, s_opt options)
+// + use: ft_printtime(ctime(&fileStats.st_mtime));
+char *ft_parsetime(char *m_time)
 {
-	/**
-	 * 0. Get print options
-	 * 1. Print using formatter for specific option(s)
-	 * 		- Use if else
-	 **/
+	char *new;
+	int i;
+
+	i = 0;
+	new = (char *)malloc(13);
+	// Need to free later
+	while (i < 12)
+	{
+		*(new + i) = *(m_time + (4 + i));
+		i++;
+	}
+	*(new + i) = '\0';
+	return (new);
+}
+
+void ft_displayl(t_dir *dir)
+{
+	// Setup method to iterate through list printing rows
+	char *m_time;
+
+	while(dir){
+		m_time = ft_parsetime(ctime(&dir->mtime));
+		printf("%s %3d %s %s %5lld %s %s\n", dir->permissions, dir->links, 
+					dir->owner, dir->group, dir->size, m_time, dir->name);
+		dir = dir->next;
+	}
+}
+
+void	ft_displaydir(t_dirlist *dir, t_opt *options)
+{
+	t_dir	*nav;
+
+	nav = dir->head;
+	if (options->l_op)
+	{
+		int total = 69; // dir->total
+		// Print total
+		printf("total %d\n", total);
+		return ft_displayl(nav);
+	}
+	printf("%s	", nav->name);
+	while (nav)
+	{
+		printf("%s	", nav->name);
+		nav = nav->next;
+	}
+	free(nav);
 }

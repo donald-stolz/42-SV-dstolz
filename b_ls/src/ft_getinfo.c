@@ -32,27 +32,6 @@ char	*ft_parsepermissions(mode_t st_mode)
 	return (permissions);
 }
 
-/**
- *	Note: Will likely have to move this to print:
- *		-ft_parsetime(ctime(&fileStats.st_mtime)); 
- **/
-char	*ft_parsetime(char *m_time)
-{
-	char *new;
-	int i;
-
-	i = 0;
-	new = (char *)malloc(13);
-	// Need to free later
-	while( i < 12)
-	{
-		*(new + i) = *(m_time + (4 + i));
-		i++;
-	}
-	*(new + i) = '\0';
-	return (new);
-}
-
 t_dir *ft_getinfo(DIR *dirstream, char *directory)
 {
 	t_dir 			*info;
@@ -77,7 +56,7 @@ t_dir *ft_getinfo(DIR *dirstream, char *directory)
 		// or dirRD.d_reclen for links ? Can also check type dirRD.d_type
 		tmp->size = fileStats.st_size;
 		tmp->mtime = fileStats.st_mtime;
-		tmp->next = info ? : NULL;
+		tmp->next = info->name ? info : NULL;
 		info = tmp;
 	}
 	tmp = NULL;

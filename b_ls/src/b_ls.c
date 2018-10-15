@@ -31,6 +31,7 @@ char **ft_getdirnames(int argc, const char **argv, int numdirs)
 		*(dirnames + i) = *((char **)(argv + i));
 		i++;
 	}
+	//Check for -a here
 	return (dirnames);
 }
 
@@ -38,10 +39,9 @@ char **ft_getdirnames(int argc, const char **argv, int numdirs)
 t_opt	*ft_setflags(const char *flags)
 {
 	t_opt *options;
-	// malloc?
 	if (*(flags + 0) == '-')
 	{
-		options = malloc(sizeof(t_opt));
+		options = malloc(sizeof(t_opt)); // Free later
 		options->l_op = ft_strchr(flags, 'l') ? true : false;
 		options->a_op = ft_strchr(flags, 'a') ? true : false;
 		options->r_op = ft_strchr(flags, 'r') ? true : false;
@@ -63,6 +63,7 @@ int		main(int argc, const char *argv[])
 	t_dirlist	*directory;
 
 	//NOTE: can have multipl '-' args need to restructure arg parsing
+	// Crashes when there are no args
 	if (argc > 1)
 		options = ft_setflags(*(argv + 1));
 	else
@@ -80,12 +81,11 @@ int		main(int argc, const char *argv[])
 		dirstream = opendir(directory->name);
 		if (directory == NULL)
 			printf("Error"); // TODO: Handle error
-		/** May just want to pass as *dir to getinfo and sort**/
 		directory->head = ft_getinfo(dirstream, directory->name);
 		directory->head = ft_sortdir(directory->head, options);
-		// ft_displaydir(&directory, options);
 		closedir(dirstream);
-	 	// ft_freelist
+		ft_displaydir(directory, options);
+	 	// ft_freelist(directory->head);
 		i++;
 	}
     return 0;
