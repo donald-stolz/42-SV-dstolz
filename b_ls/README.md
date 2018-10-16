@@ -27,12 +27,13 @@ following: -l, -a, -r and -t.
 ## Notes & Pseudo Code  
 
 ### Basic Pseudo Code:  
-0. Parse command line arguments. Get options and create list of dirnames.
+0. Parse command line arguments. Get options and create list of directories.
 1. Get directory stats/info for (n) directory.
 2. Create a linked list of contents.
-3. Send head to sort. Sort based on options.
-4. Display list. Display sorted list based on options  
-  
+3. Send directory's list to sort - Sort based on options.
+4. Display list - Display sorted list based on options  
+5. Repeat 1-4 for the next item in the list of directories 
+ 
   
 #### Structs:
 ```h
@@ -60,9 +61,10 @@ typedef struct 			s_dir
 
 typedef struct		s_dirlist
 {
-	char	*name;
-	t_dir	*head;
-	size_t	total;
+	char			*name;
+	t_dir			*head;
+	size_t			total;
+	struct s_dirlist	*next;
 } 			t_dirlist;
 ```
   
