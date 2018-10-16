@@ -61,10 +61,10 @@ typedef struct 			s_dir
 
 typedef struct		s_dirlist
 {
-	char			*name;
-	t_dir			*head;
-	size_t			total;
-	struct s_dirlist	*next;
+	char			*name;	// Directory name
+	t_dir			*head;	// Pointer to head of list containing directory's content
+	size_t			total;	// The block size total of the directory
+	struct s_dirlist	*next;	// Pointer to the next directory
 } 			t_dirlist;
 ```
   
