@@ -39,19 +39,19 @@ all: comp clean
 comp:
 	$(CC) $(CFLAGS) -c  $(SRC) -I $(INC)
 	make -C $(LIBS:%=$(LIB_DIR)%)
-	$(CC) $(OBJ) $(LIBS:%=%.a)
+	$(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
 
 debug:
 	make -C $(LIBS:%=$(LIB_DIR)%)
-	$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o a.out
+	$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
 
 fclean: clean
 	rm -rf $(NAME).a
-	rm -rf a.out
-	rm -rf a.out.dSYM
+	rm -rf $(NAME)
+	rm -rf $(NAME).dSYM
 	rm -rf $(LIBS:%=%.a)
 
 re: fclean all

@@ -11,85 +11,92 @@
 /* ************************************************************************** */
 
 #include "../inc/b_ls.h"
+/**	TODOS:
+ * [x] setup -a option in getinfo		(Today)
+ * [x] concat '/' to dirs if nesscary	(Today)
+ * [ ] ft_freelist						(Start Today)
+ * [x] handle dirstream error case		(Today)
+ * [ ] Simplify/Clean up and write out	(Pre-Exam)
+ **/
+/**	BONUS:
+ * [ ] -R								(Post-Exam)
+ **/
 
-char **ft_getdirnames(int argc, const char **argv, int numdirs)
+t_dirlist	*ft_parseargs(int argc, const char **argv, t_opt *options)
 {
-	int i;
-	char **dirnames;
+	t_dirlist	*curr;
+	t_dirlist	*head;
+	size_t		i;
 
-	dirnames = (char **)malloc((sizeof(char *) * (numdirs)));
+	curr = malloc(sizeof(struct s_dirlist));
+	head = NULL;
 	i = 1;
-	if (*(*(argv + 1) + 0) == '-')
-		i++;
-	if ((i + 1) == argc)
+	while (argv[i] && *(*(argv + i) + 0) == '-')
 	{
-		*(dirnames) = "./";
+		ft_setflags(argv[i], options);
 		i++;
 	}
-	while (i < argc)
+	while (argv[i])
 	{
-		*(dirnames + i) = *((char **)(argv + i));
+		curr->name = ft_checkname((char *)argv[i]);
+		curr->next = head;
+		head = curr;
 		i++;
 	}
-	//Check for -a here
-	return (dirnames);
+	if (argc == 1 || head == NULL)
+	{
+		curr->name = "./";
+		curr->next = NULL;
+		ft_setflags("-", options);
+		return (curr);
+	}
+	return (head);
 }
 
-// NOTE: May want to send options as a pointer for case: 'ls -a -r -t ./'
-t_opt	*ft_setflags(const char *flags)
+char *ft_checkname(char *str)
 {
-	t_opt *options;
-	if (*(flags + 0) == '-')
+	int i;
+	char c;
+
+	i = ft_strlen(str);
+	c = *(str + (i - 1));
+	if (c != '/')
+		return (ft_strcat(ft_strcpy(ft_strnew(++i), str), "/"));
+	return (str);
+}
+
+void	ft_setflags(const char *flags, t_opt *options)
+{
+	if (*(flags) == '-')
 	{
-		options = malloc(sizeof(t_opt)); // Free later
-		options->l_op = ft_strchr(flags, 'l') ? true : false;
-		options->a_op = ft_strchr(flags, 'a') ? true : false;
-		options->r_op = ft_strchr(flags, 'r') ? true : false;
-		options->t_op = ft_strchr(flags, 't') ? true : false;
-		flags++;
+		options->l_op = ft_strchr(flags, 'l') ? true : options->l_op;
+		options->a_op = ft_strchr(flags, 'a') ? true : options->a_op;
+		options->r_op = ft_strchr(flags, 'r') ? true : options->r_op;
+		options->t_op = ft_strchr(flags, 't') ? true : options->t_op;
 	}
-	else
-		options = NULL;
-	return (options);
 }
 
 int		main(int argc, const char *argv[])
 {
-	t_opt	*options;
-	char	**dirnames;
-	DIR		*dirstream;
-	int		numdirs;
-	int		i;
 	t_dirlist	*directory;
+	t_opt		*options;
+	int			i;
 
-	//NOTE: can have multipl '-' args need to restructure arg parsing
-	// Crashes when there are no args
-	if (argc > 1)
-		options = ft_setflags(*(argv + 1));
-	else
-		options = NULL;
-	numdirs = argc > 1 ? argc - 1 : 1;
-	numdirs -= options && numdirs > 1 ? 1 : 0;
-	dirnames = ft_getdirnames(argc, argv, numdirs);
-	if (!dirnames)
-		return (0);
+	options = malloc(sizeof(t_opt));
+	options->l_op = false; // Not auto setting to false for some reason
+	options->a_op = false;
+	options->r_op = false;
+	options->t_op = false;
+	directory = ft_parseargs(argc, argv, options);
 	i = 0;
-	directory = malloc(sizeof(struct s_dirlist));
-	/** Place in a loop to handle multiple dirnames **/
-	while(i < numdirs){
-		directory->name = *(dirnames + i);
+	while(directory){
 		directory->total = 0;
-		dirstream = opendir(directory->name);
-		if (directory == NULL)
-			printf("Error"); // TODO: Handle error
-		directory->head = ft_getinfo(dirstream, directory->name,
-							&directory->total);
-		directory->head = ft_sortdir(directory->head, options);
-		closedir(dirstream);
+		directory->head = ft_getinfo(directory, options);
+		directory->head = ft_sortdir(directory->head, options);	
 		ft_displaydir(directory, options);
 	 	// ft_freelist(directory->head);
-		i++;
+		directory = directory->next;
 	}
-    return 0;
+    return (0);
 }
 

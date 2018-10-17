@@ -32,35 +32,47 @@ char	*ft_parsepermissions(mode_t st_mode)
 	return (permissions);
 }
 
-t_dir *ft_getinfo(DIR *dirstream, char *directory, size_t *size)
+//TODO: skip ".*" when NOT '-a'
+t_dir *ft_getinfo(t_dirlist *directory, t_opt *options)
 {
+	DIR				*dirstream;
 	t_dir 			*info;
-	t_dir *tmp;
+	t_dir 			*tmp;
 	struct dirent	*dirRD;
 	struct stat		fileStats;
-	struct passwd *pwd;
-	struct group *grp;
+	struct passwd	*pwd;
+	struct group	*grp;
 
+	dirstream = opendir(directory->name);
+	if (dirstream == NULL)
+	{
+		printf("b_ls: %s: No such file or directory", directory->name);
+		return (NULL);
+	}
 	info = malloc(sizeof(struct s_dir));
 	while( (dirRD = readdir(dirstream)) != NULL)
-	{
-		tmp = malloc(sizeof(struct s_dir));
-		lstat(ft_strjoin(directory, dirRD->d_name), &fileStats);
-		tmp->name = dirRD->d_name;
-		tmp->permissions = ft_parsepermissions(fileStats.st_mode);
-		tmp->links = fileStats.st_nlink;
-		pwd = getpwuid(fileStats.st_uid);
-		tmp->owner = pwd->pw_name;
-		grp = getgrgid(fileStats.st_gid);
-		tmp->group = grp->gr_name;
-		// or dirRD.d_reclen for links ? Can also check type dirRD.d_type
-		tmp->size = fileStats.st_size;
-		*size += (size_t)fileStats.st_blocks;
-		tmp->mtime = fileStats.st_mtime;
-		tmp->next = info->name ? info : NULL;
-		info = tmp;
+	{		
+		char c = *(dirRD->d_name);
+		if (c != '.' || options->a_op)
+		{
+			tmp = malloc(sizeof(struct s_dir));
+			lstat(ft_strjoin(directory->name, dirRD->d_name), &fileStats);
+			tmp->name = dirRD->d_name;
+			tmp->permissions = ft_parsepermissions(fileStats.st_mode);
+			tmp->links = fileStats.st_nlink;
+			pwd = getpwuid(fileStats.st_uid);
+			tmp->owner = pwd->pw_name;
+			grp = getgrgid(fileStats.st_gid);
+			tmp->group = grp->gr_name;
+			tmp->size = fileStats.st_size;
+			directory->total += (size_t)fileStats.st_blocks;
+			tmp->mtime = fileStats.st_mtime;
+			tmp->next = info->name ? info : NULL;
+			info = tmp;
+		}
 	}
 	tmp = NULL;
 	free(tmp);
+	closedir(dirstream);
 	return (info);
 }

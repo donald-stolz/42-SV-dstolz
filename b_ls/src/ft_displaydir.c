@@ -12,7 +12,6 @@
 
 #include "../inc/b_ls.h"
 
-// + use: ft_printtime(ctime(&fileStats.st_mtime));
 char *ft_parsetime(char *m_time)
 {
 	char *new;
@@ -32,7 +31,6 @@ char *ft_parsetime(char *m_time)
 
 void ft_displayl(t_dir *dir)
 {
-	// Setup method to iterate through list printing rows
 	char *m_time;
 
 	while(dir){
@@ -53,10 +51,9 @@ void	ft_displaydir(t_dirlist *dir, t_opt *options)
 		printf("total %zu\n", dir->total);
 		return ft_displayl(nav);
 	}
-	printf("%s	", nav->name);
 	while (nav)
 	{
-		printf("%s	", nav->name);
+		printf("%s\n", nav->name);
 		nav = nav->next;
 	}
 	free(nav);

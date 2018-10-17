@@ -50,8 +50,6 @@ t_dir	*ft_revlist(t_dir *dir)
 		current = next;
 	}
 	dir = prev;
-	if (dir->mtime == 0 || dir->links == 0)
-		dir = dir->next;
 	return (dir);
 }
 
@@ -64,7 +62,6 @@ void	ft_sortmtime(t_dir *dir)
 	while (sort != NULL)
 	{
 		nav = sort;
-		// Sometimes hit error here
 		while (nav != NULL)
 		{
 			//Q: How to sort when values are the same?
@@ -101,7 +98,7 @@ t_dir	*ft_sortdir(t_dir *dir, t_opt *options)
 	if (options->t_op)
 		ft_sortmtime(dir);
 	else 
-		ft_sortlex(dir);
+		ft_sortlex(dir); //Only running in debug WTF?
 	if (options->r_op)
 		dir = ft_revlist(dir);
 	return (dir);
