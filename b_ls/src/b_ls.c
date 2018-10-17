@@ -11,16 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/b_ls.h"
-/**	TODOS:
- * [x] setup -a option in getinfo		(Today)
- * [x] concat '/' to dirs if nesscary	(Today)
- * [ ] ft_freelist						(Start Today)
- * [x] handle dirstream error case		(Today)
- * [ ] Simplify/Clean up and write out	(Pre-Exam)
- **/
-/**	BONUS:
- * [ ] -R								(Post-Exam)
- **/
 
 t_dirlist	*ft_parseargs(int argc, const char **argv, t_opt *options)
 {
@@ -76,27 +66,36 @@ void	ft_setflags(const char *flags, t_opt *options)
 	}
 }
 
+t_opt	*ft_newflags()
+{
+	t_opt *new;
+
+	new = malloc(sizeof(t_opt));
+	new->l_op = false;
+	new->a_op = false;
+	new->r_op = false;
+	new->t_op = false;
+	return (new);
+}
+
 int		main(int argc, const char *argv[])
 {
 	t_dirlist	*directory;
 	t_opt		*options;
 	int			i;
 
-	options = malloc(sizeof(t_opt));
-	options->l_op = false; // Not auto setting to false for some reason
-	options->a_op = false;
-	options->r_op = false;
-	options->t_op = false;
+	options = ft_newflags();
 	directory = ft_parseargs(argc, argv, options);
 	i = 0;
 	while(directory){
 		directory->total = 0;
 		directory->head = ft_getinfo(directory, options);
-		directory->head = ft_sortdir(directory->head, options);	
+		directory->head = ft_sortdir(directory->head, options);
 		ft_displaydir(directory, options);
-	 	// ft_freelist(directory->head);
+	 	ft_freelist(directory->head);
 		directory = directory->next;
 	}
+	free(directory);
+	free(options);
     return (0);
 }
-

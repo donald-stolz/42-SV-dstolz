@@ -20,6 +20,7 @@ FILES =	b_ls.c			\
 		ft_getinfo.c	\
 		ft_sortdir.c	\
 		ft_displaydir.c	\
+		ft_freestructs.c\
 
 HEADERS	= 	b_ls.h	\
 			libft.h	\

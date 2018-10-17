@@ -17,7 +17,6 @@ void	ft_swapdata(t_dir *dir1, t_dir *dir2)
 	t_dir tmp;
 
 	tmp = *dir1;
-
 	dir1->permissions = dir2->permissions;
 	dir1->links = dir2->links;
 	dir1->owner = dir2->owner;
@@ -43,7 +42,8 @@ t_dir	*ft_revlist(t_dir *dir)
 	current = dir;
 	prev = NULL;
 	next = NULL;
-	while(current != NULL){
+	while (current != NULL)
+	{
 		next = current->next;
 		current->next = prev;
 		prev = current;
@@ -64,7 +64,6 @@ void	ft_sortmtime(t_dir *dir)
 		nav = sort;
 		while (nav != NULL)
 		{
-			//Q: How to sort when values are the same?
 			if (nav->mtime > sort->mtime)
 				ft_swapdata(sort, nav);
 			nav = nav->next;
@@ -73,7 +72,7 @@ void	ft_sortmtime(t_dir *dir)
 	}
 }
 
-void ft_sortlex(t_dir *dir)
+void	ft_sortlex(t_dir *dir)
 {
 	t_dir *nav;
 	t_dir *sort;
@@ -82,7 +81,6 @@ void ft_sortlex(t_dir *dir)
 	while (sort)
 	{
 		nav = sort;
-		// Often hit error here or just below
 		while (nav)
 		{
 			if (ft_strcmp(nav->name, sort->name) < 0)
@@ -97,8 +95,8 @@ t_dir	*ft_sortdir(t_dir *dir, t_opt *options)
 {
 	if (options->t_op)
 		ft_sortmtime(dir);
-	else 
-		ft_sortlex(dir); //Only running in debug WTF?
+	else
+		ft_sortlex(dir);
 	if (options->r_op)
 		dir = ft_revlist(dir);
 	return (dir);

@@ -12,14 +12,13 @@
 
 #include "../inc/b_ls.h"
 
-char *ft_parsetime(char *m_time)
+char	*ft_parsetime(char *m_time)
 {
-	char *new;
-	int i;
+	char	*new;
+	int		i;
 
 	i = 0;
 	new = (char *)malloc(13);
-	// Need to free later
 	while (i < 12)
 	{
 		*(new + i) = *(m_time + (4 + i));
@@ -29,14 +28,16 @@ char *ft_parsetime(char *m_time)
 	return (new);
 }
 
-void ft_displayl(t_dir *dir)
+void	ft_displayl(t_dir *dir)
 {
 	char *m_time;
 
-	while(dir){
+	while (dir)
+	{
 		m_time = ft_parsetime(ctime(&dir->mtime));
-		printf("%s %3d %s %s %5lld %s %s\n", dir->permissions, dir->links, 
-					dir->owner, dir->group, dir->size, m_time, dir->name);
+		printf("%s %3d %s %s %5lld %s %s\n", dir->permissions, dir->links,
+				dir->owner, dir->group, dir->size, m_time, dir->name);
+		free(m_time);
 		dir = dir->next;
 	}
 }
@@ -49,11 +50,11 @@ void	ft_displaydir(t_dirlist *dir, t_opt *options)
 	if (options->l_op)
 	{
 		printf("total %zu\n", dir->total);
-		return ft_displayl(nav);
+		return (ft_displayl(nav));
 	}
 	while (nav)
 	{
-		printf("%s\n", nav->name);
+		printf("%-15s", nav->name);
 		nav = nav->next;
 	}
 	free(nav);

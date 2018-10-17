@@ -12,14 +12,15 @@
 
 #include "../inc/b_ls.h"
 
-void ft_freedir(t_dir *dir)
+void	ft_freelist(t_dir *dir)
 {
-	//Do I have to free more? Or allocate mem in more places?
-	if (dir)
+	t_dir *curr;
+	curr = dir;
+	while (curr)
 	{
-		ft_freedir(dir->next);
+		curr = dir->next;
 		free(dir->permissions);
 		free(dir);
-		*dir=NULL;
+		dir = curr;
 	}
 }
