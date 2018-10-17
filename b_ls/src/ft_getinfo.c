@@ -50,7 +50,7 @@ t_dir	*ft_getfile(char *name, size_t *total, struct dirent *dirread)
 	grp = getgrgid(filestats.st_gid);
 	tmp->group = grp->gr_name;
 	tmp->size = filestats.st_size;
-	total += (size_t)filestats.st_blocks;
+	*total += (size_t)filestats.st_blocks;
 	tmp->mtime = filestats.st_mtime;
 	return (tmp);
 }
