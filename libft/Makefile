@@ -6,7 +6,7 @@
 #    By: dstolz <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/11 08:08:33 by dstolz            #+#    #+#              #
-#    Updated: 2018/09/28 10:27:41 by dstolz           ###   ########.fr        #
+#    Updated: 2018/10/14 12:22:26 by dstolz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,12 @@ CHECK	=	ft_isdigit.c	\
 			ft_isprint.c	\
 
 LST		=	ft_lstadd.c		\
-			ft_del.c		\
-			ft_delone.c		\
+			ft_lstdel.c		\
+			ft_lstdelone.c	\
 			ft_lstiter.c	\
 			ft_lstmap.c		\
 			ft_lstnew.c		\
+			ft_lstrev.c		\
 
 MEM		=	ft_memcpy.c		\
 			ft_memccpy.c	\
@@ -82,19 +83,19 @@ STR		=	ft_strchr.c		\
 			ft_strjoin.c	\
 			ft_strsplit.c	\
 
-SRC =	$(CHECK:%=check/%)	\
-		$(LST:%=lst/%)		\
-		$(MEM:%=mem/%)		\
-		$(NUM:%=num/%)		\
-		$(PRINT:%=print/%)	\
-		$(STR:%=str/%)		\
+SRC =	$(CHECK:%=%)		\
+		$(LST:%=%)			\
+		$(MEM:%=%)			\
+		$(NUM:%=%)			\
+		$(PRINT:%=%)		\
+		$(STR:%=%)			\
 
-OBJ =	$(CHECK:%=%.o)		\
-		$(LST:%=%.o)		\
-		$(MEM:%=%.o)		\
-		$(NUM:%=%.o)		\
-		$(PRINT:%=%.o)		\
-		$(STR:%=%.o)		\
+OBJ =	$(CHECK:%.c=%.o)	\
+		$(LST:%.c=%.o)		\
+		$(MEM:%.c=%.o)		\
+		$(NUM:%.c=%.o)		\
+		$(PRINT:%.c=%.o)	\
+		$(STR:%.c=%.o)		\
 
 INC = libft.h
 
@@ -112,6 +113,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME).a
+	rm -rf a.out.dSYM/
+	rm -f a.out
 
-re: fclean
-	make all
+re: fclean all
