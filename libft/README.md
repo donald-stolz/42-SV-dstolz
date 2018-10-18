@@ -1,6 +1,7 @@
 # Personal C Library
 
-This library contains the functions completed for 42's libft project, as well as some additional functions I find useful.
+This library contains the functions completed for 42's libft project, as well as some additional functions I find useful.  
+Tested using [42FileChecker](https://github.com/jgigault/42FileChecker)
 
 ### /check
 - isalpha
