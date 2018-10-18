@@ -27,6 +27,7 @@ Tested using [42FileChecker](https://github.com/jgigault/42FileChecker)
 - lstadd
 - lstiter
 - lstmap
+- lstrev
 
 ### /num
 - atoi
