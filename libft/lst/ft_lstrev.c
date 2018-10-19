@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_revlist(t_list *list)
+void	ft_lstrev(t_list *list)
 {
 	t_list *current;
 	t_list *prev;
