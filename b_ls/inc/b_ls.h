@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "macros.h"
+# include <unistd.h>
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -46,7 +47,7 @@ typedef struct	s_dir
 	char			*owner;
 	char			*group;
 	off_t			size;
-	time_t			mtime;
+	struct timespec mtime;
 	char			*name;
 	struct s_dir	*next;
 }				t_dir;
@@ -73,4 +74,6 @@ char			*ft_printtime(char *m_time);
 t_opt			*ft_newflags();
 t_dir			*ft_getfile(char *name, size_t *total, struct dirent *dirread);
 void			ft_freelist(t_dir *dir);
+void			ft_getlink(char **path, size_t size);
+t_dirlist		*ft_revnames(t_dirlist *names);
 #endif

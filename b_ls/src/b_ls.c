@@ -18,16 +18,16 @@ t_dirlist	*ft_parseargs(int argc, const char **argv, t_opt *options)
 	t_dirlist	*head;
 	size_t		i;
 
-	curr = malloc(sizeof(struct s_dirlist));
 	head = NULL;
 	i = 1;
-	while (argv[i] && *(*(argv + i) + 0) == '-')
+	while (argv[i] && *(*(argv + i) + 0) == '-' && *(*(argv + i) + 1))
 	{
 		ft_setflags(argv[i], options);
 		i++;
 	}
 	while (argv[i])
 	{
+		curr = malloc(sizeof(struct s_dirlist));
 		curr->name = ft_checkname((char *)argv[i]);
 		curr->next = head;
 		head = curr;
@@ -35,12 +35,32 @@ t_dirlist	*ft_parseargs(int argc, const char **argv, t_opt *options)
 	}
 	if (argc == 1 || head == NULL)
 	{
+		curr = malloc(sizeof(struct s_dirlist));
 		curr->name = "./";
 		curr->next = NULL;
-		ft_setflags("-", options);
 		return (curr);
 	}
-	return (head);
+	return (ft_revnames(head));
+}
+
+t_dirlist	*ft_revnames(t_dirlist *names)
+{
+	t_dirlist *current;
+	t_dirlist *prev;
+	t_dirlist *next;
+
+	current = names;
+	prev = NULL;
+	next = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	names = prev;
+	return (names);
 }
 
 char *ft_checkname(char *str)
@@ -51,19 +71,22 @@ char *ft_checkname(char *str)
 	i = ft_strlen(str);
 	c = *(str + (i - 1));
 	if (c != '/')
-		return (ft_strcat(ft_strcpy(ft_strnew(++i), str), "/"));
+		return (ft_strjoin(str, "/"));
 	return (str);
 }
 
-void	ft_setflags(const char *flags, t_opt *options)
+void ft_setflags(const char *flags, t_opt *options) 
 {
-	if (*(flags) == '-')
+	if (*(flags + 1) != '-')
 	{
 		options->l_op = ft_strchr(flags, 'l') ? true : options->l_op;
 		options->a_op = ft_strchr(flags, 'a') ? true : options->a_op;
 		options->r_op = ft_strchr(flags, 'r') ? true : options->r_op;
 		options->t_op = ft_strchr(flags, 't') ? true : options->t_op;
+		return ;
 	}
+	printf("b_ls: illegal option -- - \n");
+	exit(1);
 }
 
 t_opt	*ft_newflags()
@@ -90,9 +113,12 @@ int		main(int argc, const char *argv[])
 	while(directory){
 		directory->total = 0;
 		directory->head = ft_getinfo(directory, options);
-		directory->head = ft_sortdir(directory->head, options);
-		ft_displaydir(directory, options);
-	 	ft_freelist(directory->head);
+		if (directory->head)
+		{
+			directory->head = ft_sortdir(directory->head, options);
+			ft_displaydir(directory, options);
+			ft_freelist(directory->head);
+		}
 		directory = directory->next;
 	}
 	free(directory);

@@ -64,8 +64,16 @@ void	ft_sortmtime(t_dir *dir)
 		nav = sort;
 		while (nav != NULL)
 		{
-			if (nav->mtime > sort->mtime)
+			if (nav->mtime.tv_sec > sort->mtime.tv_sec)
 				ft_swapdata(sort, nav);
+			else if (nav->mtime.tv_sec == sort->mtime.tv_sec)
+			{
+				if (nav->mtime.tv_nsec > sort->mtime.tv_nsec)
+					ft_swapdata(sort, nav);
+				else if (ft_strcmp(nav->name, sort->name) < 0 &&
+						 nav->mtime.tv_nsec == sort->mtime.tv_nsec)
+					ft_swapdata(sort, nav);
+			}
 			nav = nav->next;
 		}
 		sort = sort->next;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlst.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-t_list	*ft_lstlst(void const *content, size_t content_size)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
 	t_list *lst;
 
@@ -36,5 +36,5 @@ t_list	*ft_lstlst(void const *content, size_t content_size)
 		lst->content = ft_memcpy(lst->content, content, lst->content_size);
 	}
 	lst->next = NULL;
-	return (NULL);
+	return (lst);
 }

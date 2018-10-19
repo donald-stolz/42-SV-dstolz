@@ -13,8 +13,7 @@
 NAME = b_ls
 
 CC = gcc
-CFLAGS = -Wall -Wextra
-#  -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 FILES =	b_ls.c			\
 		ft_getinfo.c	\
@@ -43,7 +42,6 @@ comp:
 	$(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
 
 debug:
-	make -C $(LIBS:%=$(LIB_DIR)%)
 	$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o $(NAME)
 
 clean:

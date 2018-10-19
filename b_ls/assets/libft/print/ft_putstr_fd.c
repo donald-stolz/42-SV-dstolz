@@ -11,10 +11,17 @@
 /* ************************************************************************** */
 
 #include "../libft.h"
+#include <unistd.h>
 
 void	ft_putstr_fd(const char *s, int fd)
 {
+	size_t i;
+
+	i = 0;
 	if (s)
-		while (*s)
-			ft_putchar_fd(*s++, fd);
+	{
+		while (*(s + i))
+			i++;
+		write(fd, s, i);
+	}
 }

@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_lstrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/30 17:44:42 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/30 17:45:05 by dstolz           ###   ########.fr       */
+/*   Created: 2018/10/18 15:40:55 by dstolz            #+#    #+#             */
+/*   Updated: 2018/10/18 15:40:59 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_strnequ(char const *s1, char const *s2, size_t n)
+void	ft_lstrev(t_list *list)
 {
-	size_t i;
+	t_list *current;
+	t_list *prev;
+	t_list *next;
 
-	i = 0;
-	if (!s1 || !s2)
-		return (0);
-	if (n == 0)
-		return (1);
-	while (*(s1 + i) && (*(s1 + i) == *(s2 + i)) && i < (n - 1))
-		i++;
-	if (*((unsigned char *)s1 + i) - *((unsigned char *)s2 + i) != 0)
-		return (0);
-	return (1);
+	current = list;
+	prev = NULL;
+	next = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	list = prev;
 }

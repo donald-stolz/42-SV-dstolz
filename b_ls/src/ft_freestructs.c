@@ -16,10 +16,11 @@ void	ft_freelist(t_dir *dir)
 {
 	t_dir *curr;
 	curr = dir;
+
 	while (curr)
 	{
 		curr = dir->next;
-		free(dir->permissions);
+		free(dir->permissions); // pointer freed that wasn't allocated
 		free(dir);
 		dir = curr;
 	}
