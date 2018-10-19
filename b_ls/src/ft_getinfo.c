@@ -12,14 +12,31 @@
 
 #include "../inc/b_ls.h"
 
+char	ft_getdescriptor(mode_t m)
+{
+	if ((m & S_IFMT) == S_IFREG)
+		return ('-');
+	else if ((m & S_IFMT) == S_IFDIR)
+		return ('d');
+	else if ((m & S_IFMT) == S_IFCHR)
+		return ('c');
+	else if ((m & S_IFMT) == S_IFBLK)
+		return ('b');
+	else if ((m & S_IFMT) == S_IFIFO)
+		return ('p');
+	else if ((m & S_IFMT) == S_IFLNK)
+		return ('l');
+	else if ((m & S_IFMT) == S_IFSOCK)
+		return ('s');
+	return ('0');
+}
+
 char	*ft_parsepermissions(mode_t st_mode)
 {
 	char	*permissions;
 
 	permissions = malloc(11);
-	*(permissions + 0) = (S_ISDIR(st_mode)) ? 'd' : '-';
-	if (S_ISLNK(st_mode))
-		*(permissions + 0) = 'l';
+	*(permissions + 0) = ft_getdescriptor(st_mode);
 	*(permissions + 1) = (st_mode & S_IRUSR) ? 'r' : '-';
 	*(permissions + 2) = (st_mode & S_IWUSR) ? 'w' : '-';
 	*(permissions + 3) = (st_mode & S_IXUSR) ? 'x' : '-';
@@ -31,6 +48,17 @@ char	*ft_parsepermissions(mode_t st_mode)
 	*(permissions + 9) = (st_mode & S_IXOTH) ? 'x' : '-';
 	*(permissions + 10) = '\0';
 	return (permissions);
+}
+
+void	ft_getlink(char **path, char *permissions, size_t size)
+{
+	char	*linkname;
+
+	linkname = malloc(size);
+	*(permissions + 0) = 'l';
+	readlink(*path, linkname, size);
+	*path = ft_strjoin(*path, " -> ");
+	*path = ft_strjoin(*path, linkname);
 }
 
 t_dir	*ft_getfile(char *name, size_t *total, struct dirent *dirread)
@@ -50,6 +78,8 @@ t_dir	*ft_getfile(char *name, size_t *total, struct dirent *dirread)
 	grp = getgrgid(filestats.st_gid);
 	tmp->group = grp->gr_name;
 	tmp->size = filestats.st_size;
+	if (S_ISLNK(filestats.st_mode))
+		ft_getlink(&tmp->name, tmp->permissions, (tmp->size + 1));
 	*total += (size_t)filestats.st_blocks;
 	tmp->mtime = filestats.st_mtime;
 	return (tmp);
@@ -65,13 +95,13 @@ t_dir	*ft_getinfo(t_dirlist *directory, t_opt *options)
 	dirstream = opendir(directory->name);
 	if (dirstream == NULL)
 		printf("b_ls: %s: No such file or directory", directory->name);
-	info = malloc(sizeof(struct s_dir));
+	info = NULL;
 	while ((dirread = readdir(dirstream)) != NULL)
 	{
 		if (*(dirread->d_name) != '.' || options->a_op)
 		{
 			tmp = ft_getfile(directory->name, &directory->total, dirread);
-			tmp->next = info->name ? info : NULL;
+			tmp->next = info;
 			info = tmp;
 		}
 	}
