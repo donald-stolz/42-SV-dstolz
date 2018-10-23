@@ -13,6 +13,7 @@
 #ifndef MACROS_H
 # define MACROS_H
 
+# define MALLCHECK(x) if (!x) return (-1);
 # define SWAP(x, y, T) { T swap = x; x = y; y = swap;}
 # define SWAPC(a, b) {a^=b, b^=a, a^=b;}
 # define MAX(a, b)  (((a) > (b)) ? (a) : (b))
