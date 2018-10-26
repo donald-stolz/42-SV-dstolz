@@ -17,6 +17,7 @@
 # include <stdlib.h>
 
 # define ABS(x) ((x) < 0 ? -(x) : (x))
+# define MALLCHECK(x) if (!x) return (NULL);
 
 typedef	struct	s_list
 {

@@ -17,9 +17,7 @@ char	*ft_strnew(size_t size)
 	char	*p;
 	char	*ptr;
 
-	ptr = (char *)malloc(size + 1);
-	if (ptr == NULL)
-		return (NULL);
+	MALLCHECK((ptr = (char *)malloc(size + 1)));
 	p = ptr;
 	size++;
 	while (size-- > 0)

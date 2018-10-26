@@ -83,12 +83,12 @@ STR		=	ft_strchr.c		\
 			ft_strjoin.c	\
 			ft_strsplit.c	\
 
-SRC =	$(CHECK:%=%)		\
-		$(LST:%=%)			\
-		$(MEM:%=%)			\
-		$(NUM:%=%)			\
-		$(PRINT:%=%)		\
-		$(STR:%=%)			\
+SRC =	$(CHECK:%=check/%)	\
+		$(LST:%=lst/%)		\
+		$(MEM:%=mem/%)		\
+		$(NUM:%=num/%)		\
+		$(PRINT:%=print/%)	\
+		$(STR:%=str/%)		\
 
 OBJ =	$(CHECK:%.c=%.o)	\
 		$(LST:%.c=%.o)		\

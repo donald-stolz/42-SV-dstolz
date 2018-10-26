@@ -18,13 +18,10 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	size_t	size;
 	char	*str;
 
-	if (!s)
-		return (NULL);
+	MALLCHECK(s);
 	i = 0;
 	size = ft_strlen(s);
-	str = (char *)malloc((size + 1) * sizeof(*str));
-	if (str == NULL)
-		return (NULL);
+	MALLCHECK((str = (char *)malloc((size + 1) * sizeof(*str))));
 	while (i < size)
 	{
 		*(str + i) = f(*((char *)s + i));

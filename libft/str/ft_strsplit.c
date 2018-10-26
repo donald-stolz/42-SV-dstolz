@@ -44,8 +44,7 @@ char		**ft_strsplit(char const *s, char c)
 
 	i = 0;
 	words = 0;
-	if (!s)
-		return (NULL);
+	MALLCHECK(s);
 	while (*(s + i) != '\0')
 	{
 		if (*(s + i) != c && (*(s + (i + 1)) == c || *(s + (i + 1)) == '\0'))
@@ -54,9 +53,7 @@ char		**ft_strsplit(char const *s, char c)
 	}
 	i = 0;
 	j = 0;
-	rtn = (char**)malloc(sizeof(char*) * (words + 1));
-	if (!rtn)
-		return (NULL);
+	MALLCHECK((rtn = (char**)malloc(sizeof(char*) * (words + 1))));
 	while (i < words)
 		*(rtn + i++) = word_builder(s, c, &j);
 	*(rtn + i) = 0;

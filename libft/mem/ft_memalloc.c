@@ -17,9 +17,7 @@ void	*ft_memalloc(size_t size)
 	char	*p;
 	void	*ptr;
 
-	ptr = malloc(size);
-	if (ptr == NULL)
-		return (NULL);
+	MALLCHECK((ptr = malloc(size)));
 	p = (char *)ptr;
 	while (size-- > 0)
 		*p++ = 0;

@@ -21,8 +21,7 @@ char	*ft_strtrim(char const *s)
 	char	*str;
 
 	i = 0;
-	if (!s)
-		return (NULL);
+	MALLCHECK(s);
 	while (*(s + i) <= ' ' && *(s + i))
 		i++;
 	start = i;
@@ -31,10 +30,8 @@ char	*ft_strtrim(char const *s)
 	while (*(s + i) <= ' ' && i > start)
 		i--;
 	end = i;
-	str = ft_strnew(end - start + 1);
 	i = 0;
-	if (!str)
-		return (NULL);
+	MALLCHECK((str = ft_strnew(end - start + 1)));
 	while (start <= end)
 		*(str + i++) = *((char *)s + start++);
 	*(str + i) = '\0';

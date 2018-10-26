@@ -10,13 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (!((int *)dst > (int *)src && (int *)src + len > (int *)dst))
-		ft_memcpy(dst, src, len);
-	else
+	if (((int *)dst > (int *)src && (int *)src + len > (int *)dst))
 	{
 		while (len > 0)
 		{
@@ -24,5 +22,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			*((char *)dst + len) = *((char *)src + len);
 		}
 	}
+	else
+		ft_memcpy(dst, src, len);
 	return (dst);
 }

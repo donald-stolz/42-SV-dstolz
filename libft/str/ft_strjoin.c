@@ -20,9 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	str = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
-	if (!str)
-		return (NULL);
+	MALLCHECK((str = ft_strnew(ft_strlen(s1) + ft_strlen(s2))));
 	while (*s1)
 		*(str + i++) = *s1++;
 	while (*s2)

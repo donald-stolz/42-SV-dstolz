@@ -17,11 +17,8 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	char	*str;
 	size_t	i;
 
-	if (!s)
-		return (NULL);
-	str = ft_strnew(len);
-	if (str == NULL)
-		return (NULL);
+	MALLCHECK(s);
+	MALLCHECK((str = ft_strnew(len)));
 	i = 0;
 	while (len-- > 0)
 		*(str + i++) = *(s + start++);

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../libft.h"
-#include <stdlib.h>
 
 char	*ft_itoa(int n)
 {
@@ -22,11 +21,9 @@ char	*ft_itoa(int n)
 
 	i = 0;
 	sign = n < 0 ? -1 : 0;
-	str = (char *)malloc(sizeof(char) * ft_numlen(n, 10) + 1);
+	MALLCHECK((str = (char *)malloc(sizeof(char) * ft_numlen(n, 10) + 1)));
 	value = n;
 	value = sign ? -value : value;
-	if (str == NULL)
-		return (NULL);
 	if (value == 0)
 		*(str + i++) = '0';
 	while (value != 0)
