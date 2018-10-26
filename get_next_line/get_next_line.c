@@ -12,14 +12,29 @@
 
 #include "get_next_line.h"
 
-static t_list	*get_file(t_list **file, int fd)
+static size_t		copy_line(char *dst, const char *src)
 {
-	t_list	*tmp;
+	char *tmp;
+	size_t i;
+
+	i = 0;
+	while(*(src + i) != '\n' )
+		i++;
+	tmp = ft_strnew(i);
+	ft_strncpy(tmp, src, i);
+	dst = ft_strjoin(dst, tmp);
+	free(tmp);
+	return (i);
+}
+
+static t_list	*get_list(t_list **file, int fd)
+{
+	t_list *tmp;
 
 	tmp = *file;
 	while (tmp)
 	{
-		if ((int) tmp->content_size == fd)
+		if ((int)tmp->content_size == fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
@@ -28,46 +43,32 @@ static t_list	*get_file(t_list **file, int fd)
 	return (*file);
 }
 
-static int	read_line(const int fd, char **buf)
+int				get_next_line(const int fd, char **line)
 {
-	char	*str1;
-	int		bytes_read;
-
-	MALLCHECK((str1 = ft_strnew(BUFF_SIZE)));
-	bytes_read = 1;
-	while (bytes_read > 0 && ft_strchr(*buf, '\n') == NULL)
-	{
-		bytes_read = read(fd, str1, BUFF_SIZE);
-		if (bytes_read < 0)
-			return (-1);
-		*(str1 + bytes_read) = '\0';
-		*buf = ft_strjoin(*buf, (const char *) str1);
-		ft_bzero(str1, BUFF_SIZE);
-	}
-	return (bytes_read);
-}
-
-int			get_next_line(const int fd, char **line)
-{
-	static char	*buf;
-	char		*str;
-	int			bytes_read;
+	static t_list	*buffers;
+	t_list			*curr;
+	char			buf[BUFF_SIZE + 1];
+	ssize_t			bytes_read;
+	size_t			bytes_copied;
 
 	if (fd < 0 || line == NULL || (-1 == read(fd, buf, 0)))
 		return (-1);
-	if (!buf)
-		buf = ft_strnew(BUFF_SIZE);
-	bytes_read = read_line(fd, &buf);
-	if (bytes_read == -1)
-		return (-1);
-	if ((str = ft_strchr(buf, '\n')))
+	curr = get_list(&buffers, fd);
+	while ((bytes_read = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
-		*(str) = '\0';
-		*line = ft_strdup(buf);
-		buf = str + 1;
-		return (1);
+		buf[bytes_read] = '\0';
+		curr->content = ft_strjoin((const char *)curr->content,
+						(const char *)&buf);
+		MALLCHECK(curr->content);
+		if(ft_strchr((const char *)&buf, '\n'))
+			break;
 	}
-	*line = ft_strdup(buf);
-	buf = NULL;
-	return (ft_strlen(*line) == 0 ? : 1);
+	if (bytes_read < BUFF_SIZE && !ft_strlen((const char *)curr->content))
+		return (0);
+	MALLCHECK((*line = ft_strnew(1)));
+	bytes_copied = copy_line(*line, (const char *)curr->content);
+	(bytes_copied < ft_strlen((const char *)curr->content)) 
+		? curr->content += (bytes_copied + 1) 
+		: ft_strclr((char *)curr->content);
+	return (1);
 }
