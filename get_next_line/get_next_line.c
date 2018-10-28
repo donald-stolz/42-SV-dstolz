@@ -11,18 +11,19 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "stdio.h"
 
-static size_t		copy_line(char *dst, const char *src)
+static size_t	copy_line(char **line, const char *src)
 {
-	char *tmp;
-	size_t i;
+	char	*tmp;
+	size_t	i;
 
 	i = 0;
-	while(*(src + i) != '\n' )
+	while (*(src + i) != '\n' && *(src + i))
 		i++;
 	tmp = ft_strnew(i);
 	ft_strncpy(tmp, src, i);
-	dst = ft_strjoin(dst, tmp);
+	*line = ft_strjoin(*line, tmp);
 	free(tmp);
 	return (i);
 }
@@ -38,7 +39,7 @@ static t_list	*get_list(t_list **file, int fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	tmp = ft_lstnew("\0", fd);
+	tmp = ft_lstnew(ft_strnew(1), fd);
 	ft_lstadd(file, tmp);
 	return (*file);
 }
@@ -49,7 +50,6 @@ int				get_next_line(const int fd, char **line)
 	t_list			*curr;
 	char			buf[BUFF_SIZE + 1];
 	ssize_t			bytes_read;
-	size_t			bytes_copied;
 
 	if (fd < 0 || line == NULL || (-1 == read(fd, buf, 0)))
 		return (-1);
@@ -60,15 +60,15 @@ int				get_next_line(const int fd, char **line)
 		curr->content = ft_strjoin((const char *)curr->content,
 						(const char *)&buf);
 		MALLCHECK(curr->content);
-		if(ft_strchr((const char *)&buf, '\n'))
-			break;
+		if (ft_strchr((const char *)&buf, '\n'))
+			break ;
 	}
 	if (bytes_read < BUFF_SIZE && !ft_strlen((const char *)curr->content))
 		return (0);
 	MALLCHECK((*line = ft_strnew(1)));
-	bytes_copied = copy_line(*line, (const char *)curr->content);
-	(bytes_copied < ft_strlen((const char *)curr->content)) 
-		? curr->content += (bytes_copied + 1) 
+	bytes_read = copy_line(line, (const char *)curr->content);
+	((size_t)bytes_read < ft_strlen((const char *)curr->content))
+		? curr->content += (bytes_read + 1)
 		: ft_strclr((char *)curr->content);
 	return (1);
 }

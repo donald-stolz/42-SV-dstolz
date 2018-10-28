@@ -113,7 +113,7 @@ debug: comp
 
 clean:
 	rm -rf $(OBJ)
-	mv $(NAME).a ../
+	# mv $(NAME).a ../
 
 fclean: clean
 	rm -rf $(NAME).a
