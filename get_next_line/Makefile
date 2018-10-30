@@ -1,40 +1,27 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dstolz <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/09/11 08:08:33 by dstolz            #+#    #+#              #
-#    Updated: 2018/09/20 11:26:30 by dstolz           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = get_next_line
+NAME = next_line
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined -v
 
-FILES =	get_next_line.c		\
+FILES =	get_next_line.c \
+		main.c
 
-HEADERS	= 	get_next_line.h	\
-			libft.h			\
-			macros.h		\
+HEADERS	= 	get_next_line.h
 
 LIBS =	libft	\
 
 SRC_DIR = src/
-INC_DIR = headers/
+INC_DIR = inc/
 LIB_DIR = assets/
 
-SRC = $(FILES:%=$(SRC_DIR)%) 
+SRC = $(FILES:%=%) 
 OBJ = $(FILES:%.c=%.o)
-INC = $(HEADERS:%=$(INC_DIR)%)
+INC = $(HEADERS:%=%)
 
 all: comp clean
 
 comp:
-	$(CC) $(CFLAGS) -c  $(SRC) -I $(INC)
+	$(CC) $(CFLAGS) $(SRC) -I $(INC)
 	make -C $(LIBS:%=$(LIB_DIR)%)
 	$(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
 
