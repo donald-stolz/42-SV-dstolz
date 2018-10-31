@@ -1,7 +1,7 @@
 NAME = next_line
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined -v
+CFLAGS = -Wall -Wextra -Werror
 
 FILES =	get_next_line.c \
 		main.c
