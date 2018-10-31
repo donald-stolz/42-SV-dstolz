@@ -24,7 +24,7 @@ static t_list	*get_list(t_list **file, int fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	tmp = ft_lstnew(ft_strnew(1), fd); //MEMCHECK(1)
+	tmp = ft_lstnew("\0", fd);
 	ft_lstadd(file, tmp);
 	return (*file);
 }
@@ -35,7 +35,6 @@ static int		read_file(char **str, const int fd)
 	ssize_t	bytes_read;
 	char	*tmp;
 
-	
 	tmp = *str;
 	if (ft_strlen(tmp) > 1)
 		*str = ft_strchr((const char *)tmp, '\n') + 1;
@@ -43,10 +42,11 @@ static int		read_file(char **str, const int fd)
 	while ((bytes_read = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
 		buf[bytes_read] = '\0';
-		MALLCHECK((*str = ft_strjoin((const char *)(*str), (const char *)&buf)));
+		MALLCHECK((*str = ft_strjoin((const char *)(*str),
+					(const char *)&buf)));
 		free(tmp);
 		if (ft_strchr((const char *)&buf, '\n'))
-			break;
+			break ;
 		else
 			tmp = *str;
 	}
@@ -80,16 +80,12 @@ int				get_next_line(const int fd, char **line)
 
 	if (fd < 0 || line == NULL || (-1 == read(fd, buf, 0)))
 		return (-1);
-	curr = get_list(&buffers, fd); //MEMCHECK(1)
+	curr = get_list(&buffers, fd);
 	bytes_read = read_file((char **)(&curr->content), fd);
 	if (bytes_read < BUFF_SIZE && !ft_strlen((const char *)curr->content))
-	{
-		// Free list
 		return (0);
-	}
 	MALLCHECK((*line = ft_strnew(1)));
 	bytes_read = copy_line(line, (const char *)curr->content);
-
 	if (!((size_t)bytes_read < ft_strlen((const char *)curr->content)))
 		ft_strclr((char *)curr->content);
 	return (1);

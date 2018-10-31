@@ -1,7 +1,7 @@
 NAME = next_line
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined -v
+CFLAGS = -Wall -Wextra -Werror
 
 FILES =	get_next_line.c \
 		main.c
@@ -18,23 +18,16 @@ SRC = $(FILES:%=%)
 OBJ = $(FILES:%.c=%.o)
 INC = $(HEADERS:%=%)
 
-all: comp clean
-
-comp:
-	$(CC) $(CFLAGS) $(SRC) -I $(INC)
-	make -C $(LIBS:%=$(LIB_DIR)%)
-	$(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
 
 debug:
-	$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o $(NAME)
+	cd libft && make && mv libft.a ../ && cd ../
+	$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o a.out
 
 clean:
 	rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME).a
-	rm -rf $(NAME)
-	rm -rf $(NAME).dSYM
+	rm -rf a.*
 	rm -rf $(LIBS:%=%.a)
 
 re: fclean all
