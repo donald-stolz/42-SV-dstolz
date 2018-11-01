@@ -36,7 +36,7 @@ static int		read_file(char **str, const int fd)
 	char	*tmp;
 
 	tmp = *str;
-	if (ft_strlen(tmp) > 1)
+	if (ft_strcmp(tmp, "\0"))
 		*str = ft_strchr((const char *)tmp, '\n') + 1;
 	bytes_read = 0;
 	while ((bytes_read = read(fd, &buf, BUFF_SIZE)) > 0)
