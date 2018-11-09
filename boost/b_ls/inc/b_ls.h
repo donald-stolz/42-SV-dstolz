@@ -6,7 +6,7 @@
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 09:53:01 by dstolz            #+#    #+#             */
-/*   Updated: 2018/10/02 09:53:03 by dstolz           ###   ########.fr       */
+/*   Updated: 2018/11/09 09:46:38 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ typedef enum
 
 typedef struct	s_opt
 {
-	t_bool	l_op;
-	t_bool	a_op;
-	t_bool	r_op;
-	t_bool	t_op;
+	t_bool	l_op: 1;
+	t_bool	a_op: 1;
+	t_bool	r_op: 1;
+	t_bool	t_op: 1;
 }				t_opt;
 
 typedef struct	s_dir
