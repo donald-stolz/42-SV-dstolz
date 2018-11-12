@@ -29,25 +29,32 @@ SRC = $(SOURCES:%=src/%)
 OBJ = $(SOURCES:%.c=%.o)
 INC = $(HEADERS:%=inc/%)
 
-all: comp $(NAME) clean
+all: @$(NAME) clean
 
-comp:
-	$(CC) $(CFLAGS) $(SRC) -I $(INC)
-
-# $(NAME)
-
-debug:
-	@cd inc/libft && make && mv libft.a ../../ && cd ../../
+lib:
+	@make -C inc/$(LIBS)
+	@mv inc/libft/libft.a ./
 	@echo "Compiled libft"
+
+comp: lib
+	@$(CC) $(CFLAGS) $(SRC) -I $(INC)
+
+$(NAME): comp
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
+	@echo "Compiled fillit"
+
+debug: lib
 	@$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o a.out
 	@echo "Compiled fillit debug"
 
 clean:
 	rm -rf $(OBJ)
+	@echo "Removed all object files"
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf a.*
-	rm -rf $(LIBS:%=%.a)
+	@rm -rf $(NAME)
+	@rm -rf a.*
+	@rm -rf $(LIBS:%=%.a)
+	@echo "Removed all temp files"
 
 re: fclean all

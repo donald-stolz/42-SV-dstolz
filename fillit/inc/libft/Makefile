@@ -102,18 +102,18 @@ INC = libft.h
 all: comp $(NAME) clean
 
 comp:
-	$(CC) $(CFLAGS) $(SRC) -I $(INC)
+	@$(CC) $(CFLAGS) $(SRC) -I $(INC)
 
 $(NAME): comp
-	ar rcs $(NAME).a $(OBJ)
-	ranlib $(NAME).a
+	@ar rcs $(NAME).a $(OBJ)
+	@ranlib $(NAME).a
 
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME).a
-	rm -rf a.out.dSYM/
-	rm -f a.out
+	@rm -rf $(NAME).a
+	@rm -rf a.out.dSYM/
+	@rm -f a.out
 
-re: fclean all
+re: @fclean all
