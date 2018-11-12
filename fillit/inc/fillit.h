@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
-# define FILLIT_H
-# define MAX_TETRI 26
-# include <string.h>
-# include <stdint.h>
-# include <unistd.h>
-# include "libft.h"
-
+#define FILLIT_H
+#define MAX_TETRI 26
+#include <string.h>
+#include <stdint.h>
+#include <unistd.h>
+#include "libft/libft.h"
 
 #endif

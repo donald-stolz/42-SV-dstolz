@@ -10,38 +10,44 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME = fillit
+
 CC = gcc
 
 CFLAGS = -c -Wall -Wextra -Werror
 
-NAME = fillit
-
 SOURCES	=	main.c	\
 
-SRC =	$(SOURCES:%=src/%)		\
+HEADERS = fillit.h	\
 
-OBJ =	$(CHECK:%.c=%.o)	\
-		$(LST:%.c=%.o)		\
-		$(MEM:%.c=%.o)		\
-		$(NUM:%.c=%.o)		\
-		$(PRINT:%.c=%.o)	\
-		$(STR:%.c=%.o)		\
+LIBS =	libft	\
 
-INC = libft.h
+SRC_DIR = src/
+INC_DIR = inc/
 
-all: $(NAME)
+SRC = $(SOURCES:%=src/%) 
+OBJ = $(SOURCES:%.c=%.o)
+INC = $(HEADERS:%=inc/%)
 
-$(NAME):
+all: comp $(NAME) clean
+
+comp:
 	$(CC) $(CFLAGS) $(SRC) -I $(INC)
-	ar rcs $(NAME) $(OBJ)
-	ranlib $(NAME)
+
+# $(NAME)
+
+debug:
+	@cd inc/libft && make && mv libft.a ../../ && cd ../../
+	@echo "Compiled libft"
+	@$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o a.out
+	@echo "Compiled fillit debug"
 
 clean:
 	rm -rf $(OBJ)
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf a.out.dSYM/
-	rm -f a.out
+	rm -rf a.*
+	rm -rf $(LIBS:%=%.a)
 
 re: fclean all
