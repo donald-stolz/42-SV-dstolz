@@ -19,19 +19,24 @@
 #include <fcntl.h>
 #include "libft/libft.h"
 
-typedef struct s_etromino t_etromino;
+#define CHECK(x, y){(!(*(uint64_t *)x & y))}
+#define TOGGLE(x,y){(*(uint64_t *)x ^= y);}
+#define FAIL(str){ft_putendl(str); return 1;}
+
+typedef struct s_etromino t_et;
 
 struct s_etromino
 {
-	uint16_t 		value;
+	uint64_t 		value;
 	unsigned char	id;
 	unsigned char	x;
 	unsigned char	y;
 	unsigned char	width;
 	unsigned char	height;
-	t_etromino		*last;
+	t_et			*last;
 };
 
-int	read_file(const int fd, t_etromino *pieces);
+int	read_file(const int fd, t_et *piece);
+int	solve(uint16_t *map, t_et *piece, const int count);
 
 #endif

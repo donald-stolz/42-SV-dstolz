@@ -17,6 +17,8 @@ CC = gcc
 CFLAGS = -c -Wall -Wextra -Werror
 
 SOURCES	=	main.c	\
+			read.c	\
+			solve.c	
 
 HEADERS = fillit.h	\
 
@@ -29,7 +31,7 @@ SRC = $(SOURCES:%=src/%)
 OBJ = $(SOURCES:%.c=%.o)
 INC = $(HEADERS:%=inc/%)
 
-all: @$(NAME) clean
+all: $(NAME) clean
 
 lib:
 	@make -C inc/$(LIBS)
@@ -44,7 +46,7 @@ $(NAME): comp
 	@echo "Compiled fillit"
 
 debug: lib
-	@$(CC) $(CFLAGS) -g $(SRC) $(LIBS:%=%.a) -o a.out
+	@$(CC) $(CFLAGS) -g $(SRC) libft.a -o a.out
 	@echo "Compiled fillit debug"
 
 clean:

@@ -14,15 +14,16 @@
 
 int main(int argc, char **argv)
 {
-	t_etromino	tetromino[MAX_TETRI + 1];
+	t_et		pieces[MAX_TETRI + 1];
 	uint16_t	map[16];
 	int			count;
-	int			size;
+	// int			size;
 
 	if (argc != 2)
 		FAIL("usage: ./fillit [file_path]");
-	if ((count = read_file((open(argv[1], O_RDONLY)), &tetromino)))
+	if ((count = read_file(open(argv[1], O_RDONLY), pieces)))
 		FAIL("Invalid board");
+	solve(map, pieces, count);
 	/**
 	 * 0. Check args for errors
 	 * 1. Read map into list
@@ -30,5 +31,4 @@ int main(int argc, char **argv)
 	 * 3. Print map
 	 * 4. Free map & list
 	 **/ 
-
 }
