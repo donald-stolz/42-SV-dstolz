@@ -35,6 +35,7 @@ Tested using [42FileChecker](https://github.com/jgigault/42FileChecker)
 ### /num
 
 - [atoi](num/ft_atoi.c)
+- [flrsqrt](num/ft_flrsqrt.c)
 - [itoa](num/ft_itoa.c)
 - [numlen](num/ft_numlen.c)
 
