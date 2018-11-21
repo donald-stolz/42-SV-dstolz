@@ -12,7 +12,7 @@
 
 #include "../inc/fillit.h"
 
-inline void	min_max_calc(const char *buf, char *m)
+void	min_max_calc(const char *buf, char *m)
 {
 	int		i;
 
@@ -25,25 +25,25 @@ inline void	min_max_calc(const char *buf, char *m)
 	{
 		if (buf[i] == '#')
 		{
-			if(i % 5 < m[0])
+			if (i % 5 < m[0])
 				m[0] = i % 5;
-			if(i % 5 > m[1])
+			if (i % 5 > m[1])
 				m[1] = i % 5;
-			if(i / 5 < m[2])
+			if (i / 5 < m[2])
 				m[2] = i / 5;
-			if(i / 5 > m[3])
+			if (i / 5 > m[3])
 				m[3] = i / 5;
 		}
 		i++;
 	}
 }
 
-inline t_et set_piece(const char *buf, const char curr_id)
+t_et	set_piece(const char *buf, const char curr_id)
 {
-	t_et 	tetromino;
-	char 		m[4];
-	int			x;
-	int			y;
+	t_et	tetromino;
+	char	m[4];
+	int		x;
+	int		y;
 
 	min_max_calc(buf, m);
 	tetromino.width = m[1] - m[0] + 1;
@@ -51,7 +51,6 @@ inline t_et set_piece(const char *buf, const char curr_id)
 	tetromino.id = curr_id;
 	tetromino.value = 0;
 	tetromino.last = NULL;
-
 	y = 0;
 	while (y < tetromino.height)
 	{
@@ -67,7 +66,7 @@ inline t_et set_piece(const char *buf, const char curr_id)
 	return (tetromino);
 }
 
-inline int	check_surround(char *buf)
+int		check_surround(char *buf)
 {
 	int	connects;
 	int i;
@@ -78,13 +77,13 @@ inline int	check_surround(char *buf)
 	{
 		if (buf[i] == '#')
 		{
-			if((i + 1) < 20 && buf[i + 1] == '#')
+			if ((i + 1) < 20 && buf[i + 1] == '#')
 				++connects;
-			if((i - 1) >= 0 && buf[i - 1] == '#')
+			if ((i - 1) >= 0 && buf[i - 1] == '#')
 				++connects;
-			if((i + 5) < 20 && buf[i + 5] == '#')
+			if ((i + 5) < 20 && buf[i + 5] == '#')
 				++connects;
-			if((i - 5) >= 0 && buf[i - 5] == '#')
+			if ((i - 5) >= 0 && buf[i - 5] == '#')
 				++connects;
 		}
 		++i;
@@ -92,7 +91,7 @@ inline int	check_surround(char *buf)
 	return (connects == 6 || connects == 8);
 }
 
-inline int	check_chars(char *buf, int count)
+int		check_chars(char *buf, int count)
 {
 	int i;
 	int hash;
@@ -119,12 +118,12 @@ inline int	check_chars(char *buf, int count)
 	return (1);
 }
 
-int	read_file(const int fd, t_et *pieces)
+int		read_file(const int fd, t_et *pieces)
 {
 	char	buf[22];
 	int		count;
 	char	curr_id;
-	int	    i;
+	int		i;
 	int		c;
 
 	i = 0;

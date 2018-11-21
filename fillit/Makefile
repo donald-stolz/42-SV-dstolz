@@ -14,7 +14,7 @@ NAME = fillit
 
 CC = gcc
 
-CFLAGS = -c -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SOURCES	=	main.c	\
 			read.c	\
@@ -39,18 +39,18 @@ lib:
 	@echo "Compiled libft"
 
 comp: lib
-	@$(CC) $(CFLAGS) $(SRC) -I $(INC)
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(INC)
 
 $(NAME): comp
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
+	@$(CC) $(OBJ) libft.a -o $(NAME)
 	@echo "Compiled fillit"
 
 debug: lib
-	@$(CC) $(CFLAGS) -g $(SRC) libft.a -o a.out
+	@$(CC) $(CFLAGS) -g $(SRC) libft.a -o $(NAME)
 	@echo "Compiled fillit debug"
 
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 	@echo "Removed all object files"
 
 fclean: clean

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "..inc/libft.h"
+#include "../inc/fillit.h"
 
 char		*create_empty_map(int size)
 {
@@ -55,43 +55,29 @@ void		solution_print(t_et *p, int count, int size)
 			}
 			y++;
 		}
-		t++;
+		p++;
 		count--;
 	}
 	ft_putstr(str);
 	ft_strdel(&str);
 }
 
-int main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	t_et		pieces[MAX_TETRI + 1];
+	t_et		pieces[MAX_PIECES + 1];
 	uint16_t	map[16];
 	int			count;
-	// int			size;
+	int			size;
 
 	if (argc != 2)
 		FAIL("usage: ./fillit [file_path]");
+	ft_bzero(pieces, sizeof(t_et) * (MAX_PIECES + 1));
 	if ((count = read_file(open(argv[1], O_RDONLY), pieces)))
 		FAIL("Invalid board");
 	solve(map, pieces, count);
-	/**
-	 * 0. Check args for errors
-	 * 1. Read map into list
-	 * 2. Solve map
-	 * 3. Print map
-	 * 4. Free map & list
-	 * int		main(int argc, char **argv)
-
-	if (argc != 2)
-		return (end("usage: ./fillit [valid input file]"));
-	ft_bzero(tetri, sizeof(t_et) * (MAX_PIECES + 1));
-	if ((count = read_file(open(argv[1], O_RDONLY), tetri)) == 0)
-		return (end("error"));
-	ft_bzero(map, sizeof(unint16_t) * 16);
-	if ((size = solve(tetri, count, map)) == 0)
-		return (end("error"));
-	solution_print(tetri, count, size);
+	ft_bzero(map, sizeof(uint16_t) * 16);
+	if ((size = solve(map, pieces, count)))
+		FAIL("error");
+	solution_print(pieces, count, size);
 	return (0);
-}
-	 **/
 }

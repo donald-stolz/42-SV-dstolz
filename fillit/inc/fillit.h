@@ -12,14 +12,14 @@
 
 #ifndef FILLIT_H
 #define FILLIT_H
-#define MAX_TETRI 26
+#define MAX_PIECES 26
 #include <string.h>
-#include <stdint.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "libft/libft.h"
 
-#define CHECK(x, y){(!(*(uint64_t *)x & y))}
+#define CHECK(x, y)(!(*(uint64_t *)x & y)) 
 #define TOGGLE(x,y){(*(uint64_t *)x ^= y);}
 #define FAIL(str){ft_putendl(str); return 1;}
 
@@ -36,7 +36,10 @@ struct s_etromino
 	t_et			*last;
 };
 
-int	read_file(const int fd, t_et *piece);
-int	solve(uint16_t *map, t_et *piece, const int count);
-
+int		read_file(const int fd, t_et *piece);
+int		solve(uint16_t *map, t_et *piece, const int count);
+void	min_max_calc(const char *buf, char *m);
+t_et	set_piece(const char *buf, const char curr_id);
+int		check_surround(char *buf);
+int		check_chars(char *buf, int count);
 #endif

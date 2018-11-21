@@ -41,14 +41,14 @@ int	solve_map(t_et *piece, int size, uint16_t *map)
 	return (0);
 }
 
-int	solve(uint16_t *map, t_et *piece, const int count)
+int	solve(uint16_t *map, t_et *pieces, const int count)
 {
 	int	size;
 
 	size = 2;
 	while (size * size < count * 4)
 		++size;
-	while (!(solve_map(piece, size, map) && size++ <= 16))
+	while (!(solve_map(pieces, size, map) && size++ <= 16))
 		ft_bzero(map, sizeof(uint16_t) * 16);
 	return (size == 17 ? 0 : size);
 }
