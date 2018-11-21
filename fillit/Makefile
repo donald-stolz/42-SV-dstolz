@@ -46,7 +46,7 @@ $(NAME): comp
 	@echo "Compiled fillit"
 
 debug: lib
-	@$(CC) $(CFLAGS) -g $(SRC) libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) -g $(SRC) libft.a -o a.out
 	@echo "Compiled fillit debug"
 
 clean:

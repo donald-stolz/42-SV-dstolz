@@ -72,11 +72,11 @@ int			main(int argc, char **argv)
 	if (argc != 2)
 		FAIL("usage: ./fillit [file_path]");
 	ft_bzero(pieces, sizeof(t_et) * (MAX_PIECES + 1));
-	if ((count = read_file(open(argv[1], O_RDONLY), pieces)))
+	if ((count = read_file(open(argv[1], O_RDONLY), pieces)) == 0)
 		FAIL("Invalid board");
 	solve(map, pieces, count);
 	ft_bzero(map, sizeof(uint16_t) * 16);
-	if ((size = solve(map, pieces, count)))
+	if ((size = solve(map, pieces, count)) == 0)
 		FAIL("error");
 	solution_print(pieces, count, size);
 	return (0);
