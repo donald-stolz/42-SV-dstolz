@@ -48,7 +48,10 @@ int	solve(uint16_t *map, t_et *pieces, const int count)
 	size = 2;
 	while (size * size < count * 4)
 		++size;
-	while (!(solve_map(pieces, size, map) && size++ <= 16))
+	while (!(solve_map(pieces, size, map) && size <= 16))
+	{
 		ft_bzero(map, sizeof(uint16_t) * 16);
+		++size;
+	}
 	return (size == 17 ? 0 : size);
 }
