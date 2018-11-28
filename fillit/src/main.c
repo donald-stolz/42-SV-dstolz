@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fillit.h"
+#include "fillit.h"
 
 char		*create_empty_map(int size)
 {
@@ -62,6 +62,12 @@ void		solution_print(t_et *p, int count, int size)
 	ft_strdel(&str);
 }
 
+inline int	fail(void)
+{
+	ft_putendl("error");
+	return (1);
+}
+
 int			main(int argc, char **argv)
 {
 	t_et		pieces[MAX_PIECES + 1];
@@ -70,14 +76,13 @@ int			main(int argc, char **argv)
 	int			size;
 
 	if (argc != 2)
-		FAIL("usage: ./fillit [file_path]");
+		return (fail());
 	ft_bzero(pieces, sizeof(t_et) * (MAX_PIECES + 1));
-	if ((count = read_file(open(argv[1], O_RDONLY), pieces)) == 0)
-		FAIL("Invalid board");
-	solve(map, pieces, count);
+	if (!(count = read_file(open(argv[1], O_RDONLY), pieces)))
+		return (fail());
 	ft_bzero(map, sizeof(uint16_t) * 16);
-	if ((size = solve(map, pieces, count)) == 0)
-		FAIL("error");
+	if (!(size = solve(map, pieces, count)))
+		return (fail());
 	solution_print(pieces, count, size);
 	return (0);
 }
