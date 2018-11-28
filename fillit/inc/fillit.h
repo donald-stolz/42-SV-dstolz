@@ -11,23 +11,22 @@
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
-#define FILLIT_H
-#define MAX_PIECES 26
-#include <string.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "libft/libft.h"
+# define FILLIT_H
+# define MAX_PIECES 26
+# include <string.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
 
-#define CHECK(x, y)(!(*(uint64_t *)x & y)) 
-#define TOGGLE(x,y){(*(uint64_t *)x ^= y);}
-#define FAIL(str){ft_putendl(str); return 1;}
+# define CHECK(x, y)(!(*(uint64_t *)x & y))
+# define TOGGLE(x,y)((*(uint64_t *)x ^= y))
 
-typedef struct s_etromino t_et;
+typedef	struct s_etromino	t_et;
 
-struct s_etromino
+struct	s_etromino
 {
-	uint64_t 		value;
+	uint64_t		value;
 	unsigned char	id;
 	unsigned char	x;
 	unsigned char	y;
@@ -42,4 +41,5 @@ void	min_max_calc(const char *buf, char *m);
 t_et	set_piece(const char *buf, const char curr_id);
 int		check_surround(char *buf);
 int		check_chars(char *buf, int count);
+int		fail(void);
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fillit.h"
+#include "fillit.h"
 
 void	min_max_calc(const char *buf, char *m)
 {
@@ -102,7 +102,7 @@ int		check_chars(char *buf, int count)
 	{
 		if (i % 5 < 4)
 		{
-			if (buf[i] != '.' || buf[i] != '#')
+			if (buf[i] != '.' && buf[i] != '#')
 				return (0);
 			if (buf[i] == '#' && ++hash > 4)
 				return (0);
@@ -111,7 +111,7 @@ int		check_chars(char *buf, int count)
 			return (0);
 		i++;
 	}
-	if (count == 21 && buf[i] != '\n')
+	if (count == 21 && buf[20] != '\n')
 		return (0);
 	if (!check_surround(buf))
 		return (0);
@@ -130,7 +130,8 @@ int		read_file(const int fd, t_et *pieces)
 	curr_id = 'A';
 	while ((count = read(fd, buf, 21)) >= 20)
 	{
-		check_chars(buf, count);
+		if (!check_chars(buf, count))
+			return (0);
 		pieces[i] = set_piece(buf, curr_id++);
 		c = i - 1;
 		while (c >= 0)
@@ -140,6 +141,8 @@ int		read_file(const int fd, t_et *pieces)
 			c--;
 		}
 		i++;
+		if (count == 20)
+			buf[20] = '\0';
 	}
-	return ((count != 0) ? 0 : (curr_id - 'A'));
+	return ((count != 0 || buf[20] != '\0') ? 0 : (curr_id - 'A'));
 }

@@ -24,39 +24,38 @@ HEADERS = fillit.h	\
 
 LIBS =	libft	\
 
-SRC_DIR = src/
-INC_DIR = inc/
+SRC_DIR = source/
 
-SRC = $(SOURCES:%=src/%) 
+SRC = $(SOURCES:%=source/%) 
 OBJ = $(SOURCES:%.c=%.o)
-INC = $(HEADERS:%=inc/%)
 
-all: $(NAME) clean
+all: $(NAME)
 
 lib:
-	@make -C inc/$(LIBS)
-	@mv inc/libft/libft.a ./
+	@make -C $(LIBS)
 	@echo "Compiled libft"
 
 comp: lib
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(INC)
+	@$(CC) $(CFLAGS) -c $(SRC)
 
 $(NAME): comp
-	@$(CC) $(OBJ) libft.a -o $(NAME)
+	@$(CC) $(OBJ) libft/libft.a -o $(NAME)
 	@echo "Compiled fillit"
 
 debug: lib
-	@$(CC) $(CFLAGS) -g $(SRC) libft.a -o a.out
+	@$(CC) $(CFLAGS) -g $(SRC) libft/libft.a -o a.out
 	@echo "Compiled fillit debug"
 
 clean:
 	@rm -rf $(OBJ)
+	@make fclean -C $(LIBS)
 	@echo "Removed all object files"
 
 fclean: clean
-	@rm -rf $(NAME)
 	@rm -rf a.*
 	@rm -rf $(LIBS:%=%.a)
 	@echo "Removed all temp files"
+	@rm -rf $(NAME)
+	@echo "Removed executable"
 
 re: fclean all

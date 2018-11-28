@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fillit.h"
+#include "fillit.h"
 
 int	solve_map(t_et *piece, int size, uint16_t *map)
 {
@@ -27,14 +27,14 @@ int	solve_map(t_et *piece, int size, uint16_t *map)
 		{
 			if (CHECK((map + piece->y), (piece->value >> piece->x)))
 			{
-				TOGGLE((map + piece->y), (piece->value >> piece->x))
+				TOGGLE((map + piece->y), (piece->value >> piece->x));
 				if (solve_map(piece + 1, size, map))
 					return (1);
-				TOGGLE((map + piece->y), (piece->value >> piece->x))	
+				TOGGLE((map + piece->y), (piece->value >> piece->x));
 			}
 			piece->x++;
 		}
-	piece->y++;
+		piece->y++;
 	}
 	piece->x = 0;
 	piece->y = 0;
