@@ -6,7 +6,7 @@
 #    By: dstolz <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 11:15:21 by dstolz            #+#    #+#              #
-#    Updated: 2018/11/04 11:15:27 by dstolz           ###   ########.fr        #
+#    Updated: 2018/11/28 19:44:45 by dstolz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,38 +22,38 @@ SOURCES	=	main.c	\
 
 HEADERS = fillit.h	\
 
-LIBS =	libft	\
+LIB =	libft	\
 
 SRC_DIR = source/
 
 SRC = $(SOURCES:%=source/%) 
 OBJ = $(SOURCES:%.c=%.o)
 
-all: $(NAME)
+all: $(NAME) 
 
-lib:
-	@make -C $(LIBS)
+$(NAME): $(LIB)
+	@make -C $(LIB)
 	@echo "Compiled libft"
-
-comp: lib
 	@$(CC) $(CFLAGS) -c $(SRC)
-
-$(NAME): comp
 	@$(CC) $(OBJ) libft/libft.a -o $(NAME)
 	@echo "Compiled fillit"
 
-debug: lib
-	@$(CC) $(CFLAGS) -g $(SRC) libft/libft.a -o a.out
+debug:
+	@make -C $(LIB)
+	@$(CC) -g $(SRC) libft/libft.a -o a.out
 	@echo "Compiled fillit debug"
+
+$(LIB):
+	@make -C $(LIB)
+	@echo "Compiled libft"
 
 clean:
 	@rm -rf $(OBJ)
-	@make fclean -C $(LIBS)
+	@make fclean -C $(LIB)
 	@echo "Removed all object files"
 
 fclean: clean
 	@rm -rf a.*
-	@rm -rf $(LIBS:%=%.a)
 	@echo "Removed all temp files"
 	@rm -rf $(NAME)
 	@echo "Removed executable"

@@ -137,7 +137,10 @@ int		read_file(const int fd, t_et *pieces)
 		while (c >= 0)
 		{
 			if (pieces[c].value == pieces[i].value)
+			{
 				pieces[i].last = pieces + c;
+				break ;
+			}
 			c--;
 		}
 		i++;
