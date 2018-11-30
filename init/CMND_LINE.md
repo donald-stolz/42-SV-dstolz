@@ -17,3 +17,14 @@ user files: /home/user/
 devices: /dev/
 removable media: /mnt/ or /media/
 hardware stats: /proc/\*info
+
+#Other useful commands
+sudo, date, time, which, whereis, uname -a, sort, echo
+
+| pipe output to input
+du -sh | sort -hr | head -n 10
+
+#Help
+apropos _topic_
+man _command_
+_command_ --help
