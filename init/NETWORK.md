@@ -1,5 +1,5 @@
-#1
-ifconfig -l
-#2
-ipconfig getifaddr en0
-#3
+# 1 
+ifconfig - 
+# 2 
+ipconfig getifaddr en 
+# 3  
