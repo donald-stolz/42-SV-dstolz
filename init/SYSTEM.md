@@ -1,37 +1,37 @@
-1. In what file can you find the installed version of your Debian?
+1. In what file can you find the installed version of your Debian? Define: Debian.
 
 ```
-
+/etc/debian_version
 ```
 
-2. What command can you use to rename your system?
+2. ?What command can you use to rename your system?
 
 ```
-
+hostname "new_name"
 ```
 
-3. What file has to be modified to make it permanent?
+3. ?What file has to be modified to make it permanent?
 
 ```
-
+/etc/hostname
 ```
 
 4. What command gives you the time since your system was last booted?
 
 ```
-
+uptime
 ```
 
 5. Name the command that determines the state of the SSH service.
 
 ```
-
+launchctl list | grep ssh
 ```
 
 6. Name the command that reboots the SSH service.
 
 ```
-
+launchctl start com.openssh.ssh-agent
 ```
 
 7. Figure out the PID of the SSHD service.
