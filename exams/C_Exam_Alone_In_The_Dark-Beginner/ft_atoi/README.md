@@ -1,3 +1,6 @@
+# ft_atoi
+- [ ] Corrected
+
 ## Subject:
 ```
 Assignment name  : ft_atoi

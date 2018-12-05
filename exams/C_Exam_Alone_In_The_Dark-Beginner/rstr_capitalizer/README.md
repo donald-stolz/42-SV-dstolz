@@ -1,3 +1,6 @@
+# rstr_capitalizer
+- [ ] Corrected
+
 ## Subject:
 ```
 Assignment name  : rstr_capitalizer
