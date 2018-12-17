@@ -63,13 +63,13 @@ traceroute slash16.org
 11. Use the output of the previous command to find the name and IP address of the device that makes the link between you (local network) and the outside world
 
 ```
-
+traceroute -m 3 slash16.org | grep nat | awk '{print $2 $3}'
 ```
 
 12. Find the IP that was assigned to you by dhcp server
 
 ```
-
+ipconfig getifaddr en0
 ```
 
 13. Thanks previously answer and DNS sever find your hostname
