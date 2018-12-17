@@ -75,7 +75,7 @@ ipconfig getifaddr en0
 13. Thanks previously answer and DNS sever find your hostname
 
 ```
-
+nslookup 10.112.3.26 | grep name | awk '{print $2 $3 $4}'
 ```
 
 14. What file contains the local DNS entries?
