@@ -38,9 +38,9 @@ service ssh restart
    something to do with 'ps' command
 
 ```
-? ps -ax | grep ssh ?
-	or
 service ssh status | grep 'Main PID' | awk -F '[ ]' '{print $3" " $4}'
+	or
+ps -ax | grep ssh // Returns other things as well
 ```
 
 8. What file contains the RSA keys of systems that are authorized to connect via SSH?
@@ -118,7 +118,8 @@ ps aux | grep ssh
 19. List all services which are started at boot time and name this kind of services
 
 ```
-? systemctl list-units --type service ?
+systemctl list-unit-files --type service
+// Lists initialization services
 ```
 
 20. List all existing users on the VM
@@ -160,7 +161,7 @@ userdel
 23. Explain how to connect yourself as new user. (With graphic session and ssh session)
 
 ```
-? Use 'su' ?
+su
 ```
 
 24. Find the command that list all packages [Ask Ubuntu](https://askubuntu.com/questions/17823/how-to-list-all-installed-packages)
