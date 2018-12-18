@@ -35,9 +35,12 @@ service ssh restart
 ```
 
 7. Figure out the PID of the SSHD service.
+   something to do with 'ps' command
 
 ```
-
+? ps -ax | grep ssh ?
+	or
+service ssh status | grep 'Main PID' | awk -F '[ ]' '{print $3" " $4}'
 ```
 
 8. What file contains the RSA keys of systems that are authorized to connect via SSH?
@@ -115,7 +118,7 @@ ps aux | grep ssh
 19. List all services which are started at boot time and name this kind of services
 
 ```
-
+? systemctl list-units --type service ?
 ```
 
 20. List all existing users on the VM
@@ -124,7 +127,7 @@ ps aux | grep ssh
 compgen -u
 ```
 
-or
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or
 
 ```
 awk -F':' '{ print $1}' /etc/passwd
@@ -136,7 +139,7 @@ awk -F':' '{ print $1}' /etc/passwd
 awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd
 ```
 
-or
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or
 
 ```
 cut -d: -f1,3 /etc/passwd | egrep ':[0-9]{4}$' | cut -d: -f1
@@ -154,14 +157,14 @@ adduser
 userdel
 ```
 
-23. Explain how connect yourself as new user. (With graphic session and ssh session)
+23. Explain how to connect yourself as new user. (With graphic session and ssh session)
 
 ```
-
+? Use 'su' ?
 ```
 
-24. Find the command that list all packages
+24. Find the command that list all packages [Ask Ubuntu](https://askubuntu.com/questions/17823/how-to-list-all-installed-packages)
 
 ```
-
+apt list --installed
 ```
