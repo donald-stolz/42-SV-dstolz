@@ -97,13 +97,19 @@ cron
 17. Find the command that allows you to connect via ssh on the VM.(In parallel with the graphic session)
 
 ```
-
+ssh -p 2222 <username>@localhost
 ```
 
 18. Find the command that kills ssh service
 
 ```
+kill ssh
+```
 
+- Find current ssh processes
+
+```
+ps aux | grep ssh
 ```
 
 19. List all services which are started at boot time and name this kind of services
@@ -115,19 +121,37 @@ cron
 20. List all existing users on the VM
 
 ```
-
+compgen -u
 ```
 
-21. List all real users on the VM
+or
 
 ```
+awk -F':' '{ print $1}' /etc/passwd
+```
 
+21. List all real users on the VM [Ask Ubuntu](https://askubuntu.com/questions/257421/list-all-human-users)
+
+```
+awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd
+```
+
+or
+
+```
+cut -d: -f1,3 /etc/passwd | egrep ':[0-9]{4}$' | cut -d: -f1
 ```
 
 22. Find the command that add a new local user
 
 ```
+adduser
+```
 
+- Remove user
+
+```
+userdel
 ```
 
 23. Explain how connect yourself as new user. (With graphic session and ssh session)
