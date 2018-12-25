@@ -5,11 +5,15 @@ ifconfig -l
 ```
 
 2. Identify and display the Ethernet interface characteristics:  
-   &nbsp;&nbsp;&nbsp;&nbsp;a. Indentify broadcast address  
-   &nbsp;&nbsp;&nbsp;&nbsp;b. Indentify all IP adresses which are part of the same subnet
+   &nbsp;&nbsp;&nbsp;&nbsp;(a) Indentify broadcast address  
+   &nbsp;&nbsp;&nbsp;&nbsp;(b) Indentify all IP adresses which are part of the same subnet
 
 ```
-ipconfig getigaddr en0
+ifconfig en0
+	(a) ipconfig getifaddr en0
+	(a) ifconfig en0 | grep -w "inet" | awk '{print $2}'
+	(b) ping 10.112.255.255
+	(b) ping $(ifconfig en0 | grep -w "inet" | awk '{print $6}')
 ```
 
 3. Identify the MAC address of the Wi-Fi card
