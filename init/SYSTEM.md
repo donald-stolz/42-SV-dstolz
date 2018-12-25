@@ -4,13 +4,13 @@
 /etc/debian_version
 ```
 
-2. ? What command can you use to rename your system ?
+2. What command can you use to rename your system?
 
 ```
 hostname "new_name"
 ```
 
-3. ?What file has to be modified to make it permanent?
+3. What file has to be modified to make it permanent?
 
 ```
 /etc/hostname
@@ -54,74 +54,74 @@ ps -ax | grep ssh // Returns other things as well
 who
 ```
 
-10. Name the command that lists the partition tables of drives?
+10. Name the command that lists the partition tables of drives.
 
 ```
 sudo  fdisk -l
 ```
 
-11. Name the command that displays the available space left and used on the system in an humanly understandable way
+11. Name the command that displays the available space left and used on the system in an humanly understandable way.
 
 ```
 df -h
 ```
 
-12. Figure out the exact size of each folder of /var in a humanly understandable way followed by the path of it
+12. Figure out the exact size of each folder of /var in a humanly understandable way followed by the path of it.
 
 ```
 sudo du -h /var/*
 ```
 
-13. Name the command that find, in real time, currently running processes
+13. Name the command that find, in real time, currently running processes.
 
 ```
 top
 ```
 
-14. Run the ‘tail -f /var/log/syslog‘ command in background
+14. Run the ‘tail -f /var/log/syslog‘ command in background.
 
 ```
 tail -f /var/log/syslog &
 ```
 
-15. Find the command that kills the background command’s process
+15. Find the command that kills the background command’s process.
 
 ```
 pkill tail
 ```
 
-16. Find the service which makes it possible to run specific tasks following a regular schedule
+16. Find the service which makes it possible to run specific tasks following a regular schedule.
 
 ```
 cron
 ```
 
-17. Find the command that allows you to connect via ssh on the VM.(In parallel with the graphic session)
+17. Find the command that allows you to connect via ssh on the VM.(In parallel with the graphic session).
 
 ```
 ssh -p 2222 <username>@localhost
 ```
 
-18. Find the command that kills ssh service
+18. Find the command that kills ssh service.
 
 ```
 kill ssh
 ```
 
-- Find current ssh processes
+- Find current ssh processes.
 
 ```
 ps aux | grep ssh
 ```
 
-19. List all services which are started at boot time and name this kind of services
+19. List all services which are started at boot time and name this kind of services.
 
 ```
 systemctl list-unit-files --type service
 // Lists initialization services
 ```
 
-20. List all existing users on the VM
+20. List all existing users on the VM.
 
 ```
 compgen -u
@@ -145,7 +145,7 @@ awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd
 cut -d: -f1,3 /etc/passwd | egrep ':[0-9]{4}$' | cut -d: -f1
 ```
 
-22. Find the command that add a new local user
+22. Find the command that add a new local user.
 
 ```
 adduser
