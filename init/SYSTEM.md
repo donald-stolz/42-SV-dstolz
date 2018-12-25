@@ -4,13 +4,13 @@
 /etc/debian_version
 ```
 
-2. ? What command can you use to rename your system ?
+2. What command can you use to rename your system ?
 
 ```
 hostname "new_name"
 ```
 
-3. ?What file has to be modified to make it permanent?
+3. What file has to be modified to make it permanent
 
 ```
 /etc/hostname
