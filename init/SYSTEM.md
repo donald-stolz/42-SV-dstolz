@@ -4,7 +4,7 @@
 /etc/debian_version
 ```
 
-2. ?What command can you use to rename your system?
+2. ? What command can you use to rename your system ?
 
 ```
 hostname "new_name"
@@ -35,7 +35,6 @@ service ssh restart
 ```
 
 7. Figure out the PID of the SSHD service.
-   something to do with 'ps' command
 
 ```
 service ssh status | grep 'Main PID' | awk -F '[ ]' '{print $3" " $4}'
