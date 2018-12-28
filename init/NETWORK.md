@@ -10,7 +10,7 @@ ifconfig -l
 
 ```
 ifconfig en0
-	(a) ifconfig en0 | grep -w "inet" | awk '{print $2}'
+	(a) ifconfig en0 | grep -w "inet" | awk '{print $6}'
 	(b) ping $(ifconfig en0 | grep -w "inet" | awk '{print $6}')
 ```
 
