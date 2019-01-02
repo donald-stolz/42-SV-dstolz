@@ -11,4 +11,4 @@
 3. Write a script of your choice  
    a. This script conveniently opens all the windows and websites I open on startup for a work day
 
-- [open_start.sh](./scriputs/open_start.sh)
+- [open_start.sh](./scripts/open_start.sh)

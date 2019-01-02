@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../inc/fillit.h"
 
-int	solve_map(t_et *piece, int size, uint16_t *map)
+int solve_map(t_et *piece, int size, uint16_t *map)
 {
-	int	pos;
+	int pos;
 
 	if (piece->id == 0)
 		return (1);
@@ -41,9 +41,9 @@ int	solve_map(t_et *piece, int size, uint16_t *map)
 	return (0);
 }
 
-int	solve(uint16_t *map, t_et *pieces, const int count)
+int solve(uint16_t *map, t_et *pieces, const int count)
 {
-	int	size;
+	int size;
 
 	size = 2;
 	while (size * size < count * 4)

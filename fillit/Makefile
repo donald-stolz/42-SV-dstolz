@@ -18,15 +18,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 SOURCES	=	main.c	\
 			read.c	\
-			solve.c	
+			non_r_solve.c	
 
 HEADERS = fillit.h	\
 
-LIB =	libft	\
+LIB =	inc/libft	\
 
-SRC_DIR = source/
+SRC_DIR = src/
 
-SRC = $(SOURCES:%=source/%) 
+SRC = $(SOURCES:%=src/%) 
 OBJ = $(SOURCES:%.c=%.o)
 
 all: $(NAME) 
@@ -35,12 +35,12 @@ $(NAME): $(LIB)
 	@make -C $(LIB)
 	@echo "Compiled libft"
 	@$(CC) $(CFLAGS) -c $(SRC)
-	@$(CC) $(OBJ) libft/libft.a -o $(NAME)
+	@$(CC) $(OBJ) inc/libft/libft.a -o $(NAME)
 	@echo "Compiled fillit"
 
 debug:
 	@make -C $(LIB)
-	@$(CC) -g $(SRC) libft/libft.a -o a.out
+	@$(CC) -g $(SRC) inc/libft/libft.a -o a.out
 	@echo "Compiled fillit debug"
 
 $(LIB):

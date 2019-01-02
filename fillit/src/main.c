@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../inc/fillit.h"
 
-char		*create_empty_map(int size)
+char *create_empty_map(int size)
 {
-	char	*str;
-	int		x;
-	int		y;
+	char *str;
+	int x;
+	int y;
 
 	str = ft_strnew((size + 1) * size);
 	y = 0;
@@ -34,11 +34,11 @@ char		*create_empty_map(int size)
 	return (str);
 }
 
-void		solution_print(t_et *p, int count, int size)
+void solution_print(t_et *p, int count, int size)
 {
-	char	*str;
-	int		x;
-	int		y;
+	char *str;
+	int x;
+	int y;
 
 	str = create_empty_map(size);
 	while (count > 0)
@@ -62,18 +62,18 @@ void		solution_print(t_et *p, int count, int size)
 	ft_strdel(&str);
 }
 
-inline int	fail(void)
+inline int fail(void)
 {
 	ft_putendl("error");
 	return (1);
 }
 
-int			main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_et		pieces[MAX_PIECES + 1];
-	uint16_t	map[16];
-	int			count;
-	int			size;
+	t_et pieces[MAX_PIECES + 1];
+	uint16_t map[16];
+	int count;
+	int size;
 
 	if (argc != 2)
 		return (fail());
