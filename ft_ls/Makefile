@@ -15,11 +15,12 @@ NAME = ft_ls
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-FILES =	ft_ls.c			\
-		ft_getinfo.c	\
-		ft_sortdir.c	\
-		ft_displaydir.c	\
-		ft_freestructs.c\
+FILES =	ft_ls.c				\
+		ft_getinfo.c		\
+		ft_sortdir.c		\
+		ft_displaydir.c		\
+		ft_freestructs.c	\
+		ft_recursivedir.c	\
 
 HEADERS	= 	ft_ls.h	\
 			libft.h	\
@@ -41,12 +42,12 @@ $(NAME): $(LIB)
 	@echo "Compiled libft"
 	@$(CC) $(CFLAGS) -c $(SRC)
 	@$(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
-	@echo "Compiled fillit"
+	@echo "Compiled ft_ls"
 
 debug:
 	@make -C $(LIBS:%=$(LIB_DIR)%)
 	@$(CC) -g $(SRC) $(LIBS:%=%.a) -o a.out
-	@echo "Compiled fillit debug"
+	@echo "Compiled ft_ls debug"
 
 $(LIB):
 	@make -C $(LIBS:%=$(LIB_DIR)%)
@@ -55,7 +56,6 @@ $(LIB):
 comp:
 	$(CC) $(CFLAGS) -c  $(SRC) -I $(INC)
 	make -C $(LIBS:%=$(LIB_DIR)%)
-	# $(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

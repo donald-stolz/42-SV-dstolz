@@ -20,7 +20,7 @@ void	ft_freelist(t_dir *dir)
 	while (curr)
 	{
 		curr = dir->next;
-		free(dir->permissions); // pointer freed that wasn't allocated
+		free(dir->permissions);  // pointer freed that wasn't allocated
 		free(dir);
 		dir = curr;
 	}

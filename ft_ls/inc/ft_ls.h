@@ -28,8 +28,8 @@
 
 typedef enum
 {
-	false = 0,
-	true = 1
+	false,
+	true
 }	t_bool;
 
 typedef struct	s_opt
@@ -38,6 +38,7 @@ typedef struct	s_opt
 	t_bool	a_op: 1;
 	t_bool	r_op: 1;
 	t_bool	t_op: 1;
+	t_bool	R_op: 1;
 }				t_opt;
 
 typedef struct	s_dir
@@ -76,4 +77,5 @@ t_dir			*ft_getfile(char *name, size_t *total, struct dirent *dirread);
 void			ft_freelist(t_dir *dir);
 void			ft_getlink(char **path, size_t size);
 t_dirlist		*ft_revnames(t_dirlist *names);
+t_dirlist		*ft_getchildren(t_dirlist *list);
 #endif

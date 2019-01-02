@@ -12,6 +12,7 @@
 
 #include "../inc/ft_ls.h"
 
+// ToDo: Replace printf
 t_dirlist	*ft_parseargs(int argc, const char **argv, t_opt *options)
 {
 	t_dirlist	*curr;
@@ -83,6 +84,7 @@ void ft_setflags(const char *flags, t_opt *options)
 		options->a_op = ft_strchr(flags, 'a') ? true : options->a_op;
 		options->r_op = ft_strchr(flags, 'r') ? true : options->r_op;
 		options->t_op = ft_strchr(flags, 't') ? true : options->t_op;
+		options->R_op = ft_strchr(flags, 'R') ? true : options->R_op;
 		return ;
 	}
 	printf("ft_ls: illegal option -- - \n");
@@ -98,6 +100,7 @@ t_opt	*ft_newflags()
 	new->a_op = false;
 	new->r_op = false;
 	new->t_op = false;
+	new->R_op = false;
 	return (new);
 }
 
@@ -109,6 +112,8 @@ int		main(int argc, const char *argv[])
 
 	options = ft_newflags();
 	directory = ft_parseargs(argc, argv, options);
+	if(options->R_op)
+		directory = ft_getchildren(directory);
 	i = 0;
 	while(directory){
 		directory->total = 0;
@@ -117,9 +122,9 @@ int		main(int argc, const char *argv[])
 		{
 			directory->head = ft_sortdir(directory->head, options);
 			ft_displaydir(directory, options);
-			ft_freelist(directory->head);
+			// ft_freelist(directory->head);
 		}
-		directory = directory->next;
+		directory = directory->next; // Need to free rest of struct
 	}
 	free(directory);
 	free(options);
