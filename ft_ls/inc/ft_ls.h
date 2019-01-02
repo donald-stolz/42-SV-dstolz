@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "macros.h"
+# include "b_printf.h"
 # include <unistd.h>
 # include <dirent.h>
 # include <sys/types.h>
@@ -23,7 +24,6 @@
 # include <grp.h>
 # include <time.h>
 # include <errno.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 typedef enum

@@ -20,13 +20,13 @@ SRC_DIR  = sources/
 INC_DIR  = includes/
 
 FILES = b_printf.c		\
-		ft_putchar.c	\
-		ft_puts.c		\
-		ft_putptr.c		\
-		ft_strrev.c		\
-		ft_numlen.c		\
-		ft_strlen.c		\
-		ft_itoa.c		\
+		b_putchar.c	\
+		b_puts.c		\
+		b_putptr.c		\
+		b_strrev.c		\
+		b_numlen.c		\
+		b_strlen.c		\
+		b_itoa.c		\
 		
 
 SRC = $(FILES:%=$(SRC_DIR)%)
@@ -49,6 +49,7 @@ $(NAME): comp
 clean:
 	rm -rf $(OBJ)
 	rm -rf $(TEST).o
+	mv $(NAME).a ../../
 
 fclean: clean
 	rm -rf $(LIB)

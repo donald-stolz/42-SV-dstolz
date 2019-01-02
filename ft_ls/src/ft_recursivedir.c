@@ -51,7 +51,7 @@ char *ft_relpath(char *curr_dir, char *next_dir)
 	len += ft_strlen((const char *)next_dir);
 	relpath = ft_strnew(len + 2);
 	ft_strcat(relpath, curr_dir);
-	if (ft_strcmp(curr_dir, "./"))
+	if (curr_dir[ft_strlen(curr_dir) - 1] != '/') 
 		ft_strcat(relpath, "/");
 	ft_strcat(relpath, next_dir);
 	return (relpath);
@@ -74,7 +74,7 @@ t_dirlist	*ft_recursivedir(char *dir_name)
 	dirstream = opendir(dir_name);
 	if (dirstream == NULL)
 	{
-		printf("ft_ls: %s: No such file or directory\n", dir_name);
+		b_printf("ft_ls: %s: No such file or directory\n", dir_name);
 		return (NULL);
 	}
 	while ((curr = readdir(dirstream)) != NULL )

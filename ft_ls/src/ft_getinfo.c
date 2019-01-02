@@ -94,7 +94,7 @@ t_dir	*ft_getinfo(t_dirlist *directory, t_opt *options)
 	dirstream = opendir(directory->name);
 	if (dirstream == NULL)
 	{
-		printf("ft_ls: %s: No such file or directory\n", directory->name);
+		b_printf("ft_ls: %s: No such file or directory\n", directory->name);
 		return (NULL);
 	}
 	info = NULL;

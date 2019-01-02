@@ -22,33 +22,33 @@ int	b_printf(const char *restrict format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-			i += ft_lookup(arg, *++format);
+			i += b_lookup(arg, *++format);
 		else
-			i += ft_putchar(*format);
+			i += b_putchar(*format);
 		format++;
 	}
 	va_end(arg);
 	return (i);
 }
 
-int	ft_lookup(va_list arg, char c)
+int	b_lookup(va_list arg, char c)
 {
 	if (c == 's')
-		return (ft_puts(va_arg(arg, char *)));
+		return (b_puts(va_arg(arg, char *)));
 	else if (c == 'c')
-		return (ft_putchar(va_arg(arg, int)));
+		return (b_putchar(va_arg(arg, int)));
 	else if (c == 'i' || c == 'd')
-		return (ft_puts(ft_itoa((long long)va_arg(arg, int), 10)));
+		return (b_puts(b_itoa((long long)va_arg(arg, int), 10)));
 	else if (c == 'p')
-		return (ft_putptr(arg));
+		return (b_putptr(arg));
 	else if (c == 'o')
-		return (ft_puts(ft_itoa((long long)va_arg(arg, unsigned int), 8)));
+		return (b_puts(b_itoa((long long)va_arg(arg, unsigned int), 8)));
 	else if (c == 'u')
-		return (ft_puts(ft_itoa((long long)va_arg(arg, unsigned int), 10)));
+		return (b_puts(b_itoa((long long)va_arg(arg, unsigned int), 10)));
 	else if (c == 'x')
-		return (ft_puts(ft_itoa((long long)va_arg(arg, unsigned int), 16)));
+		return (b_puts(b_itoa((long long)va_arg(arg, unsigned int), 16)));
 	else if (c == '%')
-		return (ft_putchar('%'));
+		return (b_putchar('%'));
 	else
 		return (0);
 }

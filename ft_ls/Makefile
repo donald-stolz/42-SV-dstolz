@@ -22,10 +22,12 @@ FILES =	ft_ls.c				\
 		ft_freestructs.c	\
 		ft_recursivedir.c	\
 
-HEADERS	= 	ft_ls.h	\
-			libft.h	\
+HEADERS	= 	ft_ls.h		\
+			libft.h		\
+			b_printf.h	\
 
-LIBS =	libft	\
+LIBS =	libft		\
+		b_printf	\
 
 SRC_DIR = src/
 INC_DIR = inc/
@@ -37,20 +39,18 @@ INC = $(HEADERS:%=$(INC_DIR)%)
 
 all: $(NAME)
 
-$(NAME): $(LIB)
-	@make -C $(LIBS:%=$(LIB_DIR)%)
-	@echo "Compiled libft"
+$(NAME): libs
 	@$(CC) $(CFLAGS) -c $(SRC)
 	@$(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
 	@echo "Compiled ft_ls"
 
-debug:
-	@make -C $(LIBS:%=$(LIB_DIR)%)
+debug: libs
 	@$(CC) -g $(SRC) $(LIBS:%=%.a) -o a.out
 	@echo "Compiled ft_ls debug"
 
-$(LIB):
-	@make -C $(LIBS:%=$(LIB_DIR)%)
+libs:
+	@make -C assets/libft
+	@make -C assets/b_printf
 	@echo "Compiled assets"
 
 comp:

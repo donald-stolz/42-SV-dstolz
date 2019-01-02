@@ -87,7 +87,7 @@ void ft_setflags(const char *flags, t_opt *options)
 		options->R_op = ft_strchr(flags, 'R') ? true : options->R_op;
 		return ;
 	}
-	printf("ft_ls: illegal option -- - \n");
+	ft_putstr("ft_ls: illegal option -- - \n");
 	exit(1);
 }
 

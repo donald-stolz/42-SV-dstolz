@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   b_puts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/17 08:23:32 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/20 11:01:20 by dstolz           ###   ########.fr       */
+/*   Created: 2018/09/13 09:57:06 by dstolz            #+#    #+#             */
+/*   Updated: 2018/09/25 18:45:15 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "../includes/b_printf.h"
 
-# define SWAP(x, y, T) { T swap = x; x = y; y = swap;}
-# define MAX(a, b)  (((a) > (b)) ? (a) : (b))
-# define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-# define ABS(x) ((x) < 0 ? -(x) : (x))
+int	b_puts(char *s)
+{
+	int i;
 
-#endif
+	i = 0;
+	if (s == NULL)
+		return (b_puts("(null)"));
+	while (*(s + i))
+		i++;
+	write(1, s, i);
+	return (i);
+}
+
+int	b_putarg(va_list arg)
+{
+	return (b_putchar(va_arg(arg, int)));
+}

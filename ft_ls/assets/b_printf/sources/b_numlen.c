@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   b_numlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/17 08:23:32 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/20 11:01:20 by dstolz           ###   ########.fr       */
+/*   Created: 2018/09/30 09:53:44 by dstolz            #+#    #+#             */
+/*   Updated: 2018/09/30 09:53:46 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "../includes/b_printf.h"
 
-# define SWAP(x, y, T) { T swap = x; x = y; y = swap;}
-# define MAX(a, b)  (((a) > (b)) ? (a) : (b))
-# define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-# define ABS(x) ((x) < 0 ? -(x) : (x))
+int	b_numlen(long long n, int base)
+{
+	int	digits;
 
-#endif
+	digits = 0;
+	if (n <= 0)
+	{
+		n = -n;
+		digits++;
+	}
+	while (n)
+	{
+		n /= base;
+		digits++;
+	}
+	return (digits);
+}

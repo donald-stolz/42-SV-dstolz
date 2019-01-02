@@ -35,7 +35,7 @@ void	ft_displayl(t_dir *dir)
 	while (dir)
 	{
 		m_time = ft_parsetime(ctime(&dir->mtime.tv_sec));
-		printf("%s %3d %s %s %6lld %s %s\n", dir->permissions, dir->links,
+		b_printf("%s %d %s %s %d %s %s\n", dir->permissions, dir->links,
 				dir->owner, dir->group, dir->size, m_time, dir->name);
 		free(m_time);
 		dir = dir->next;
@@ -47,16 +47,19 @@ void	ft_displaydir(t_dirlist *dir, t_opt *options)
 	t_dir	*nav;
 
 	nav = dir->head;
+	if (options->R_op)
+		if (ft_strcmp(dir->name, "./"))
+			b_printf("\n%s\n", dir->name);
 	if (options->l_op)
 	{
-		printf("total %zu\n", dir->total);
+		b_printf("total %d\n", dir->total);
 		return (ft_displayl(nav));
 	}
 	while (nav)
 	{
-		printf("%-16s", nav->name);
+		b_printf("%s    ", nav->name);
 		nav = nav->next;
 	}
-	printf("\n");
+	b_printf("\n");
 	free(nav);
 }

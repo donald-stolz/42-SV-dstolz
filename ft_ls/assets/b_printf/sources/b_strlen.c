@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   b_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/17 08:23:32 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/20 11:01:20 by dstolz           ###   ########.fr       */
+/*   Created: 2018/09/11 08:31:00 by dstolz            #+#    #+#             */
+/*   Updated: 2018/09/17 19:07:35 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "../includes/b_printf.h"
 
-# define SWAP(x, y, T) { T swap = x; x = y; y = swap;}
-# define MAX(a, b)  (((a) > (b)) ? (a) : (b))
-# define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-# define ABS(x) ((x) < 0 ? -(x) : (x))
+int	b_strlen(const char *s)
+{
+	int i;
 
-#endif
+	i = 0;
+	while (*(s + i))
+		i++;
+	return (i);
+}
