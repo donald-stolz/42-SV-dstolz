@@ -1,0 +1,138 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-image: url(https://images4.alphacoders.com/258/thumb-1920-258026.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+h1 {
+  margin: 40px auto;
+  color: yellow;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+footer {
+  margin: 5px;
+  padding: 10px;
+  text-align: right;
+}
+
+table {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  margin: auto;
+  padding: 0px 2.5% 50px 2.5%;
+  text-shadow: none;
+}
+
+tr {
+  width: 100%;
+  height: 10%;
+}
+
+.cell {
+  width: 5.55%;
+  height: 10%;
+}
+
+.empty {
+  width: 100%;
+  height: 40px;
+}
+
+.element {
+  width: 100%;
+  height: 100%;
+  border-radius: 2.5px;
+  background-color: green;
+}
+
+.elem-id {
+  float: right;
+  font-size: 1.2rem;
+  margin: 7.5px;
+}
+
+.elem-symbol {
+  text-align: center;
+  margin: 5px;
+  clear: right;
+}
+
+.elem-weight {
+  font-size: 1.2rem;
+  margin: 7.5px;
+  float: left;
+}
+
+@media only screen and (max-width: 1000px) {
+  .elem-id {
+    font-size: 1.2rem;
+    margin: 7.5px;
+  }
+
+  .elem-symbol {
+    font-size: 2rem;
+    margin: 5px;
+  }
+
+  .elem-weight {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 822px) {
+  h1 {
+    font-size: 2.8rem;
+    margin: 30px auto;
+  }
+
+  .empty {
+    height: 30px;
+  }
+
+  .elem-id {
+    font-size: 1rem;
+    margin: 5px;
+  }
+
+  .elem-symbol {
+    font-size: 1.8rem;
+    margin: 2.5px;
+  }
+
+  .elem-weight {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  h1 {
+    font-size: 2.2rem;
+    margin: 20px auto;
+  }
+
+  .empty {
+    height: 20px;
+  }
+
+  .elem-id {
+    font-size: 0.5rem;
+    margin: 2.5px;
+  }
+
+  .elem-symbol {
+    font-size: 0.9rem;
+    margin: 1px;
+  }
+
+  .elem-weight {
+    display: none;
+  }
+}

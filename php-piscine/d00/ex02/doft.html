@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Day of the 42</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="doft.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="box">
+        <img id="doft" src="resources/day_of_the_42.png" alt="Day of the 42" />
+        <ul class="window-nav">
+          <li>
+            <a href="http://www.disney.com/">
+              <img
+                id="reload"
+                src="resources/reload.png"
+                alt="Start from the beginning"
+              />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.relaischateaux.com/">
+              <img id="close" src="resources/close.gif" alt="Disconnect" />
+            </a>
+          </li>
+        </ul>
+        <img id="mag-glass" src="resources/loupe.png" alt="Magnifying glass" />
+      </header>
+      <div class="main-content">
+        <aside class="box" id="left-nav">
+          <ul class="nav-list">
+            <li>
+              <img src="resources/arrow.png" alt="Advance" id="advance" />
+            </li>
+            <li><img src="resources/main.png" alt="Take" id="take" /></li>
+            <li><img src="resources/oeil.png" alt="Look" id="look" /></li>
+            <li><img src="resources/outil.png" alt="Use" id="use" /></li>
+            <li>
+              <img src="resources/chat-icon.png" alt="Speak" id="speak" />
+            </li>
+          </ul>
+        </aside>
+        <div class="box" id="main-img">
+          <img src="resources/cluster.jpg" alt="View port" />
+          <a href="http://www.ikea.com/"> <div id="zone-1"></div> </a>
+          <a href="https://www.apple.com/"> <div id="zone-2"></div> </a>
+        </div>
+        <aside class="box" id="right-nav">
+          <ul class="tools-list">
+            <li><img id="book" src="resources/book.png" alt="Book" /></li>
+            <li><img id="towel" src="resources/towel.png" alt="Towel" /></li>
+            <li><img id="brick" src="resources/brick.jpg" /></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="msg-box">
+        <p>You <strong>enter</strong> a room full of computers...</p>
+        <i>- Hello, are your new here?</i> <br />
+        <input type="text" name="response" value="" />
+        <button type="button" name="button">Respond</button>
+      </div>
+    </div>
+  </body>
+</html>
