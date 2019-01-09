@@ -9,13 +9,19 @@ function ft_split(str) {
 function ft_sort_function(a, b) {
   let i = 0;
   while (a[i] && a[i] == b[i]) i++;
+  if (a[i].match(/[a-zA-Z0-9]/i) && !b[i].match(/[a-zA-Z0-9]/i)) {
+    return -1;
+  }
+  if (!a[i].match(/[a-zA-Z0-9]/i) && b[i].match(/[a-zA-Z0-9]/i)) {
+    return 1;
+  }
   if (Number(a[i]) && !Number(b[i])) {
     return 1;
   }
   if (!Number(a[i]) && Number(b[i])) {
     return -1;
   }
-  return a.localeCompare(b);
+  return a[i].toLowerCase() > b[i].toLowerCase();
 }
 
 if (process.argv.length >= 3) {
