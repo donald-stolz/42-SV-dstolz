@@ -16,8 +16,8 @@ if (process.argv.length >= 3) {
       result.push(element);
     });
   });
-  array.sort();
-  array.forEach(element => {
+  result.sort();
+  result.forEach(element => {
     console.log(element);
   });
 }
