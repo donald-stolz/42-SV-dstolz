@@ -3,7 +3,7 @@
 var stdin = process.openStdin();
 process.stdout.write("Enter a number: ");
 stdin.addListener("data", function(answer) {
-  if (!isNaN(parseFloat(answer))) {
+  if (answer - !isNaN(answer)) {
     if (answer % 2 == 0) {
       console.log(`The number ${answer.toString().trim()} is even`);
     } else {
