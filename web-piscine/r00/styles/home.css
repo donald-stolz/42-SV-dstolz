@@ -1,0 +1,203 @@
+:root {
+  --komaru: #3d2b56;
+  --blue: #2c497f;
+  --silver: #808a9f;
+  --smith-apple: #bad29f;
+  --tea-green: #ccf5ac;
+}
+
+* {
+  font-family: sans-serif;
+  color: white;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  background: var(--blue);
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 0;
+}
+
+/* 
+ * Header styles
+ */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100vw;
+  height: 60px;
+  background-color: var(--komaru);
+}
+
+.header-text {
+  color: var(--tea-green);
+  font-weight: 700;
+}
+
+.img-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: 600px;
+  background-image: url("https://i.ytimg.com/vi/aiU22lKiZbA/maxresdefault.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-title {
+  color: var(--tea-green);
+  font-size: 6rem;
+}
+
+#rocket {
+  padding-top: 7.5px;
+  height: 50px;
+  width: 50px;
+  padding-right: 20px;
+}
+
+/* 
+ * Categories Menu
+ */
+.dropdown {
+  height: 100%;
+}
+
+.dropbtn {
+  background-color: var(--tea-green);
+  color: var(--komaru);
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  border-radius: 0;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--smith-apple);
+}
+
+.dropdown:hover #menu {
+  display: block;
+}
+
+#desert-link:hover .desert-content {
+  display: block;
+}
+
+.menu {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* 
+ * Tour/Item styles
+ */
+
+.item-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.box:nth-of-type(even) {
+  background-color: var(--komaru);
+  flex-direction: row-reverse;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 30vh;
+  min-height: 450px;
+}
+
+.item-image {
+  min-width: 200px;
+  min-height: 200px;
+  height: 25vh;
+  width: 25vh;
+  border-radius: 6px;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 50vw;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.button-row {
+  display: flex;
+  width: 30vw;
+  justify-content: space-around;
+}
+
+.counter-container {
+  display: flex;
+  width: 80px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.add-button {
+  flex: 1;
+  background-color: var(--komaru);
+  font-size: 1.1rem;
+  max-width: 140px;
+}
+
+.add-button:hover {
+  background-color: var(--smith-apple);
+  color: var(--komaru);
+}
+
+.small-button {
+  background-color: white;
+  color: var(--blue);
+  width: 25px;
+  height: 25px;
+}

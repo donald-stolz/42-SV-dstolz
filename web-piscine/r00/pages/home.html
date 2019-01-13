@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>The Coolest Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../styles/home.css"
+    />
+    <script type="text/javascript" src="../js/home.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="dropdown">
+        <button class="dropbtn">Categories</button>
+        <div id="menu" class="dropdown-content">
+          <a onclick="sortCruises(event)" href="#">Star Cruise</a>
+          <a onclick="sortExcursions(event)" href="#">Planet Excursion</a>
+          <a onclick="sortSpas(event)" href="#">Satellite Spa</a>
+        </div>
+      </div>
+      <div><h2 class="header-text">Space Tours</h2></div>
+      <img
+        src="http://cdn.onlinewebfonts.com/svg/img_236952.png"
+        alt="cart"
+        id="rocket"
+      />
+    </header>
+    <div class="main">
+      <div class="img-header"><h1 class="main-title">Hello World!</h1></div>
+      <div id="item-0" class="item-row">
+        <div class="image-container">
+          <img
+            class="item-image"
+            src="http://backgrounds4k.net/wp-content/uploads/2016/02/Mars-background.jpg"
+            alt="mars"
+          />
+        </div>
+        <div class="details-container">
+          <h3 class="item-title">Mission Mars</h3>
+          <p class="item-description">
+            &nbsp;Small quantities of methane and formaldehyde detected by Mars
+            orbiters are both claimed to be possible evidence for life, as these
+            chemical compounds would quickly break down in the Martian
+            atmosphere.
+          </p>
+          <div class="button-row">
+            <div class="counter-container">
+              <button onclick="minusCount(counter-0)" class="small-button">
+                -
+              </button>
+              <p id="counter-0" class="counter">1</p>
+              <button onclick="plusCount(counter-0)" class="small-button">
+                +
+              </button>
+            </div>
+            <button onclick="addToCart(item-0, counter-0)" class="add-button">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
