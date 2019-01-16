@@ -65,5 +65,6 @@ fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(NAME).dSYM
 	rm -rf $(LIBS:%=%.a)
+	rm -rf a.out*
 
 re: fclean all

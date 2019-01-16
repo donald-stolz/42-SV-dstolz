@@ -37,14 +37,14 @@ INC = $(INC_DIR)$(NAME).h
 
 LIB = $(NAME).a
 
-all: comp $(NAME) clean
+all: comp $(NAME)
 
 comp:
-	$(CC) $(CFLAGS) $(SRC) -I $(INC)
+	@$(CC) $(CFLAGS) $(SRC) -I $(INC)
 
 $(NAME): comp
-	ar rcs $(LIB) $(OBJ)
-	ranlib $(LIB)
+	@ar rcs $(LIB) $(OBJ)
+	@ranlib $(LIB)
 
 clean:
 	rm -rf $(OBJ)

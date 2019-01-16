@@ -100,14 +100,14 @@ OBJ =	$(CHECK:%.c=%.o)	\
 
 INC = libft.h
 
-all: comp $(NAME) clean
+all: comp $(NAME)
 
 comp:
-	$(CC) $(CFLAGS) $(SRC) -I $(INC)
+	@$(CC) $(CFLAGS) $(SRC) -I $(INC)
 
 $(NAME): comp
-	ar rcs $(NAME).a $(OBJ)
-	ranlib $(NAME).a
+	@ar rcs $(NAME).a $(OBJ)
+	@ranlib $(NAME).a
 
 debug: comp
 

@@ -42,14 +42,20 @@ void	ft_displayl(t_dir *dir)
 	}
 }
 
-void	ft_displaydir(t_dirlist *dir, t_opt *options)
+void	ft_displayr(char *dirname)
+{
+	dirname[ft_strlen((const char *)dirname) - 1] = ':';
+	b_printf("\n%s\n", dirname);
+}
+
+void	ft_displaydir(t_dirlist *dir, t_opt *options, int i)
 {
 	t_dir	*nav;
 
 	nav = dir->head;
 	if (options->R_op)
-		if (ft_strcmp(dir->name, "./"))
-			b_printf("\n%s\n", dir->name);
+		if (i > 0)
+			ft_displayr(dir->name);
 	if (options->l_op)
 	{
 		b_printf("total %d\n", dir->total);

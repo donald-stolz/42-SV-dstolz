@@ -70,12 +70,12 @@ t_dir			*ft_sortdir(t_dir *dir, t_opt *option);
 void			ft_sortmtime(t_dir *dir);
 t_dir			*ft_revlist(t_dir *dir);
 void			ft_swapdata(t_dir *dir1, t_dir *dir2);
-void			ft_displaydir(t_dirlist *dir, t_opt *options);
+void			ft_displaydir(t_dirlist *dir, t_opt *options, int i);
 char			*ft_printtime(char *m_time);
 t_opt			*ft_newflags();
 t_dir			*ft_getfile(char *name, size_t *total, struct dirent *dirread);
 void			ft_freelist(t_dir *dir);
 void			ft_getlink(char **path, size_t size);
 t_dirlist		*ft_revnames(t_dirlist *names);
-t_dirlist		*ft_getchildren(t_dirlist *list);
+t_dirlist		*ft_getchildren(t_dirlist *list, t_bool a_op);
 #endif

@@ -113,7 +113,7 @@ int		main(int argc, const char *argv[])
 	options = ft_newflags();
 	directory = ft_parseargs(argc, argv, options);
 	if(options->R_op)
-		directory = ft_getchildren(directory);
+		directory = ft_getchildren(directory, options->a_op);
 	i = 0;
 	while(directory){
 		directory->total = 0;
@@ -121,8 +121,8 @@ int		main(int argc, const char *argv[])
 		if (directory->head)
 		{
 			directory->head = ft_sortdir(directory->head, options);
-			ft_displaydir(directory, options);
-			// ft_freelist(directory->head);
+			ft_displaydir(directory, options, i++);
+			ft_freelist(directory->head);
 		}
 		directory = directory->next; // Need to free rest of struct
 	}

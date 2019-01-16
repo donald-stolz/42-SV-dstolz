@@ -15,7 +15,6 @@
 // Should most of these functions be static?
 int			ft_isdir(const char *path)
 {
-	// need to accomodate -a option (pass from previos functions)
 	struct stat statbuf;
 	if (stat(path, &statbuf) != 0)
 		return 0;
@@ -35,6 +34,7 @@ t_dirlist	*ft_newdir(char *name)
 	t_dirlist *new;
 	new = malloc(sizeof(struct s_dirlist));
 	// Do I need to dup or simply assign
+	// Need a temp to free - definetly leaks here
 	new->name = ft_strdup((const char *)name);
 	new->head = NULL;
 	new->total = 0;
@@ -49,21 +49,16 @@ char *ft_relpath(char *curr_dir, char *next_dir)
 
 	len = ft_strlen((const char*)curr_dir);
 	len += ft_strlen((const char *)next_dir);
-	relpath = ft_strnew(len + 2);
+	relpath = ft_strnew(len + 3);
 	ft_strcat(relpath, curr_dir);
 	if (curr_dir[ft_strlen(curr_dir) - 1] != '/') 
 		ft_strcat(relpath, "/");
 	ft_strcat(relpath, next_dir);
+	ft_strcat(relpath, "/");
 	return (relpath);
 }
 
-/*
- * While parent has childern
- * 		if child == directory
- * 			parent[tail]->next = ft_recursivedir(child)
- * 		next child
- */
-t_dirlist	*ft_recursivedir(char *dir_name)
+t_dirlist	*ft_recursivedir(char *dir_name, t_bool a_op)
 {
 	DIR		*dirstream;
 	struct	dirent *curr;
@@ -79,26 +74,27 @@ t_dirlist	*ft_recursivedir(char *dir_name)
 	}
 	while ((curr = readdir(dirstream)) != NULL )
 	{
-		if (ft_strcmp(curr->d_name, ".") && ft_strcmp(curr->d_name, ".."))
+		if (!ft_strchr(curr->d_name, '.') || a_op)
 		{
 			n_name = ft_relpath(dir_name, curr->d_name);
 			if (ft_isdir(n_name))
-				ft_lsttail(result)->next = ft_recursivedir(n_name);
+				ft_lsttail(result)->next = ft_recursivedir(n_name, a_op);
 		}
 	}
 	return (result);
 }
 
-t_dirlist	*ft_getchildren(t_dirlist *list)
+t_dirlist	*ft_getchildren(t_dirlist *list, t_bool a_op)
 {
 	t_dirlist *result;
 
-	result = ft_recursivedir(list->name);
-	list = list->next; // Watch for leaks
+	result = ft_recursivedir(list->name, a_op);
+	list = list->next;
 	while (list)
 	{
-		ft_lsttail(result)->next = ft_recursivedir(list->name);
+		ft_lsttail(result)->next = ft_recursivedir(list->name, a_op);
 		list = list->next;
 	}
+	// Lex sort
 	return (result);
 }
