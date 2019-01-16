@@ -14,7 +14,6 @@
 # define FT_LS_H
 
 # include "libft.h"
-# include "macros.h"
 # include "b_printf.h"
 # include <unistd.h>
 # include <dirent.h>
@@ -77,5 +76,6 @@ t_dir			*ft_getfile(char *name, size_t *total, struct dirent *dirread);
 void			ft_freelist(t_dir *dir);
 void			ft_getlink(char **path, size_t size);
 t_dirlist		*ft_revnames(t_dirlist *names);
-t_dirlist		*ft_getchildren(t_dirlist *list, t_bool a_op);
+t_dirlist		*ft_getchildren(t_dirlist *list, t_opt *options);
+t_dirlist		*ft_nextfree(t_dirlist *directory);
 #endif

@@ -84,17 +84,43 @@ t_dirlist	*ft_recursivedir(char *dir_name, t_bool a_op)
 	return (result);
 }
 
-t_dirlist	*ft_getchildren(t_dirlist *list, t_bool a_op)
+t_dirlist *ft_sortparentlex(t_dirlist *dir)
+{
+	t_dirlist	*sort;
+	t_dirlist	*curr;
+	char		*swap;
+
+	sort = dir;
+	while (sort)
+	{
+		curr = sort;
+		while (curr)
+		{
+			if (ft_strcmp(curr->name, sort->name) < 0)
+			{
+				swap = curr->name;
+				curr->name = sort->name;
+				sort->name = swap;
+			}
+			curr = curr->next;
+		}
+		sort = sort->next;
+	}
+	return (dir);
+}
+
+t_dirlist	*ft_getchildren(t_dirlist *list, t_opt *options)
 {
 	t_dirlist *result;
 
-	result = ft_recursivedir(list->name, a_op);
+	result = ft_recursivedir(list->name, options->a_op);
 	list = list->next;
 	while (list)
 	{
-		ft_lsttail(result)->next = ft_recursivedir(list->name, a_op);
+		ft_lsttail(result)->next = ft_recursivedir(list->name, options->a_op);
 		list = list->next;
 	}
-	// Lex sort
+	if (!options->t_op)
+		result->next = ft_sortparentlex(result->next);
 	return (result);
 }

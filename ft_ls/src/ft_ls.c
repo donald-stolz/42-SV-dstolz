@@ -12,7 +12,6 @@
 
 #include "../inc/ft_ls.h"
 
-// ToDo: Replace printf
 t_dirlist	*ft_parseargs(int argc, const char **argv, t_opt *options)
 {
 	t_dirlist	*curr;
@@ -113,7 +112,7 @@ int		main(int argc, const char *argv[])
 	options = ft_newflags();
 	directory = ft_parseargs(argc, argv, options);
 	if(options->R_op)
-		directory = ft_getchildren(directory, options->a_op);
+		directory = ft_getchildren(directory, options);
 	i = 0;
 	while(directory){
 		directory->total = 0;
@@ -122,9 +121,8 @@ int		main(int argc, const char *argv[])
 		{
 			directory->head = ft_sortdir(directory->head, options);
 			ft_displaydir(directory, options, i++);
-			ft_freelist(directory->head);
 		}
-		directory = directory->next; // Need to free rest of struct
+		directory = ft_nextfree(directory);
 	}
 	free(directory);
 	free(options);

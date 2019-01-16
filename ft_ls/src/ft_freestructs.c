@@ -25,3 +25,13 @@ void	ft_freelist(t_dir *dir)
 		dir = curr;
 	}
 }
+
+t_dirlist *ft_nextfree(t_dirlist *directory)
+{
+	t_dirlist	*next;
+	
+	next = directory->next;
+	ft_freelist(directory->head);
+	free(directory);
+	return (next);
+}
