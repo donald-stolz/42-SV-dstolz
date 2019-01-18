@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Checkout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../styles/root.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../styles/checkout.css"
+    />
+    <script src="../js/checkout.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="dropdown">
+        <a href="pages/home.html"> <button class="dropbtn">Home</button> </a>
+      </div>
+
+      <div><h2 class="header-text">Space Tours</h2></div>
+      <div class="dropdown">
+        <img src="../images/rocket.png" alt="cart" id="rocket" />
+        <div id="menu" class="user-content">
+          <a onclick="signUp()" href="#">Sign Up</a>
+          <a onclick="signIn()" href="#">Sign In</a>
+          <a href="/pages/checkout.html">Checkout</a>
+        </div>
+      </div>
+    </header>
+    <div class="checkout-page">
+      <div class="checkout-container">
+        <table id="cart-table"></table>
+        <hr />
+        <div class="cart-checkout">
+          <button id="submit-button">Submit Order</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
