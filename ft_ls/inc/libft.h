@@ -58,15 +58,11 @@ char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *haystack, const char *needle,
 					size_t len);
-// void			ft_putchar(char c);
 void			ft_putstr(const char *s);
-// void			ft_putendl(const char *s);
-// void			ft_putnbr(int n);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(const char *s, int fd);
 void			ft_putendl_fd(const char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-// char			*ft_itoa(int n);
 char			*ft_strrev(char *str);
 size_t			ft_numlen(int n, int base);
 char			*ft_strnew(size_t size);

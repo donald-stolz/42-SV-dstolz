@@ -21,6 +21,7 @@ FILES =	ft_ls.c				\
 		ft_displaydir.c		\
 		ft_freestructs.c	\
 		ft_recursivedir.c	\
+		ft_helpers.c		\
 
 HEADERS	= 	ft_ls.h		\
 			libft.h		\
@@ -47,6 +48,7 @@ $(NAME): libs
 debug: libs
 	@$(CC) -g $(SRC) $(LIBS:%=%.a) -o a.out
 	@echo "Compiled ft_ls debug"
+	@make clean
 
 libs:
 	@make -C assets/libft

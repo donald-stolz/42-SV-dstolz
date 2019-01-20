@@ -100,7 +100,7 @@ OBJ =	$(CHECK:%.c=%.o)	\
 
 INC = libft.h
 
-all: comp $(NAME)
+all: comp $(NAME) clean
 
 comp:
 	@$(CC) $(CFLAGS) $(SRC) -I $(INC)
@@ -112,8 +112,8 @@ $(NAME): comp
 debug: comp
 
 clean:
-	rm -rf $(OBJ)
-	mv $(NAME).a ../../
+	@rm -rf $(OBJ)
+	@mv $(NAME).a ../../
 
 fclean: clean
 	rm -rf $(NAME).a

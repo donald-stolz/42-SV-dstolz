@@ -12,58 +12,27 @@
 
 #include "../inc/ft_ls.h"
 
-// Should most of these functions be static?
-int			ft_isdir(const char *path)
+char		*ft_relpath(char *curr_dir, char *next_dir)
 {
-	struct stat statbuf;
-	if (stat(path, &statbuf) != 0)
-		return 0;
-	return S_ISDIR(statbuf.st_mode);
-}
+	char	*relpath;
+	int		len;
 
-t_dirlist	*ft_lsttail(t_dirlist *head)
-{
-	while (head->next){
-		head = head->next;
-	}
-	return (head);
-}
-
-t_dirlist	*ft_newdir(char *name)
-{
-	t_dirlist *new;
-	new = malloc(sizeof(struct s_dirlist));
-	// Do I need to dup or simply assign
-	// Need a temp to free - definetly leaks here
-	new->name = ft_strdup((const char *)name);
-	new->head = NULL;
-	new->total = 0;
-	new->next = NULL;
-	return (new);
-}
-
-char *ft_relpath(char *curr_dir, char *next_dir)
-{
-	char *relpath;
-	int len;
-
-	len = ft_strlen((const char*)curr_dir);
+	len = ft_strlen((const char *)curr_dir);
 	len += ft_strlen((const char *)next_dir);
 	relpath = ft_strnew(len + 3);
 	ft_strcat(relpath, curr_dir);
-	if (curr_dir[ft_strlen(curr_dir) - 1] != '/') 
+	if (curr_dir[ft_strlen(curr_dir) - 1] != '/')
 		ft_strcat(relpath, "/");
 	ft_strcat(relpath, next_dir);
-	ft_strcat(relpath, "/");
 	return (relpath);
 }
 
 t_dirlist	*ft_recursivedir(char *dir_name, t_bool a_op)
 {
-	DIR		*dirstream;
-	struct	dirent *curr;
-	t_dirlist *result;
-	char	*n_name;
+	DIR				*dirstream;
+	struct dirent	*curr;
+	t_dirlist		*result;
+	char			*n_name;
 
 	result = ft_newdir(dir_name);
 	dirstream = opendir(dir_name);
@@ -72,19 +41,22 @@ t_dirlist	*ft_recursivedir(char *dir_name, t_bool a_op)
 		b_printf("ft_ls: %s: No such file or directory\n", dir_name);
 		return (NULL);
 	}
-	while ((curr = readdir(dirstream)) != NULL )
+	while ((curr = readdir(dirstream)) != NULL)
 	{
 		if (!ft_strchr(curr->d_name, '.') || a_op)
 		{
 			n_name = ft_relpath(dir_name, curr->d_name);
 			if (ft_isdir(n_name))
+			{
+				ft_strcat(n_name, "/");
 				ft_lsttail(result)->next = ft_recursivedir(n_name, a_op);
+			}
 		}
 	}
 	return (result);
 }
 
-t_dirlist *ft_sortparentlex(t_dirlist *dir)
+t_dirlist	*ft_sortparentlex(t_dirlist *dir)
 {
 	t_dirlist	*sort;
 	t_dirlist	*curr;

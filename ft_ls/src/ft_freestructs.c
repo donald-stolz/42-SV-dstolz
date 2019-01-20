@@ -12,26 +12,30 @@
 
 #include "../inc/ft_ls.h"
 
-void	ft_freelist(t_dir *dir)
+void		ft_freelist(t_dir *dir)
 {
 	t_dir *curr;
-	curr = dir;
 
+	curr = dir;
 	while (curr)
 	{
 		curr = dir->next;
-		free(dir->permissions);  // pointer freed that wasn't allocated
+		free(dir->permissions);
+		free(dir->name);
 		free(dir);
+		dir = NULL;
 		dir = curr;
 	}
 }
 
-t_dirlist *ft_nextfree(t_dirlist *directory)
+t_dirlist	*ft_nextfree(t_dirlist *directory)
 {
 	t_dirlist	*next;
-	
+
 	next = directory->next;
 	ft_freelist(directory->head);
+	free(directory->name);
 	free(directory);
+	directory = NULL;
 	return (next);
 }

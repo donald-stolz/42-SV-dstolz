@@ -37,7 +37,7 @@ INC = $(INC_DIR)$(NAME).h
 
 LIB = $(NAME).a
 
-all: comp $(NAME)
+all: comp $(NAME) clean
 
 comp:
 	@$(CC) $(CFLAGS) $(SRC) -I $(INC)
@@ -47,9 +47,9 @@ $(NAME): comp
 	@ranlib $(LIB)
 
 clean:
-	rm -rf $(OBJ)
-	rm -rf $(TEST).o
-	mv $(NAME).a ../../
+	@rm -rf $(OBJ)
+	@rm -rf $(TEST).o
+	@mv $(NAME).a ../../
 
 fclean: clean
 	rm -rf $(LIB)

@@ -6,7 +6,7 @@
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 09:01:20 by dstolz            #+#    #+#             */
-/*   Updated: 2018/09/30 09:01:22 by dstolz           ###   ########.fr       */
+/*   Updated: 2019/01/20 11:56:12 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,28 @@ int	b_printf(const char *restrict format, ...)
 
 int	b_lookup(va_list arg, char c)
 {
+	char	*tmp;
+	int		count;
+
 	if (c == 's')
 		return (b_puts(va_arg(arg, char *)));
 	else if (c == 'c')
 		return (b_putchar(va_arg(arg, int)));
-	else if (c == 'i' || c == 'd')
-		return (b_puts(b_itoa((long long)va_arg(arg, int), 10)));
-	else if (c == 'p')
-		return (b_putptr(arg));
-	else if (c == 'o')
-		return (b_puts(b_itoa((long long)va_arg(arg, unsigned int), 8)));
-	else if (c == 'u')
-		return (b_puts(b_itoa((long long)va_arg(arg, unsigned int), 10)));
-	else if (c == 'x')
-		return (b_puts(b_itoa((long long)va_arg(arg, unsigned int), 16)));
 	else if (c == '%')
 		return (b_putchar('%'));
+	else if (c == 'p')
+		return (b_putptr(arg));
+	else if (c == 'i' || c == 'd')
+		tmp = b_itoa((long long)va_arg(arg, int), 10);
+	else if (c == 'o')
+		tmp = b_itoa((long long)va_arg(arg, unsigned int), 8);
+	else if (c == 'u')
+		tmp = b_itoa((long long)va_arg(arg, unsigned int), 10);
+	else if (c == 'x')
+		tmp = b_itoa((long long)va_arg(arg, unsigned int), 16);
 	else
 		return (0);
+	count = b_puts(tmp);
+	free(tmp);
+	return (count);
 }

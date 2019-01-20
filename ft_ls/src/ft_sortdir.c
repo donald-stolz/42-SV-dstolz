@@ -71,7 +71,7 @@ void	ft_sortmtime(t_dir *dir)
 				if (nav->mtime.tv_nsec > sort->mtime.tv_nsec)
 					ft_swapdata(sort, nav);
 				else if (ft_strcmp(nav->name, sort->name) < 0 &&
-						 nav->mtime.tv_nsec == sort->mtime.tv_nsec)
+							nav->mtime.tv_nsec == sort->mtime.tv_nsec)
 					ft_swapdata(sort, nav);
 			}
 			nav = nav->next;

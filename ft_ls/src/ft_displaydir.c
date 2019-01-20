@@ -37,6 +37,7 @@ void	ft_displayl(t_dir *dir)
 		m_time = ft_parsetime(ctime(&dir->mtime.tv_sec));
 		b_printf("%s %d %s %s %d %s %s\n", dir->permissions, dir->links,
 				dir->owner, dir->group, dir->size, m_time, dir->name);
+		m_time = NULL;
 		free(m_time);
 		dir = dir->next;
 	}
@@ -53,7 +54,7 @@ void	ft_displaydir(t_dirlist *dir, t_opt *options, int i)
 	t_dir	*nav;
 
 	nav = dir->head;
-	if (options->R_op)
+	if (options->rec_op)
 		if (i > 0)
 			ft_displayr(dir->name);
 	if (options->l_op)
@@ -67,5 +68,4 @@ void	ft_displaydir(t_dirlist *dir, t_opt *options, int i)
 		nav = nav->next;
 	}
 	b_printf("\n");
-	free(nav);
 }
