@@ -6,7 +6,7 @@
 #    By: dstolz <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/11 08:08:33 by dstolz            #+#    #+#              #
-#    Updated: 2018/09/20 11:26:30 by dstolz           ###   ########.fr        #
+#    Updated: 2019/01/20 15:46:22 by dstolz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ FILES =	ft_ls.c				\
 		ft_displaydir.c		\
 		ft_freestructs.c	\
 		ft_recursivedir.c	\
+		ft_flags.c			\
 		ft_helpers.c		\
 
 HEADERS	= 	ft_ls.h		\
@@ -46,18 +47,18 @@ $(NAME): libs
 	@echo "Compiled ft_ls"
 
 debug: libs
-	@$(CC) -g $(SRC) $(LIBS:%=%.a) -o a.out
+	@$(CC) -g $(SRC) $(LIBS:%=%.a) -o a.out 
 	@echo "Compiled ft_ls debug"
 	@make clean
-
+# -fsanitize=address 
 libs:
 	@make -C assets/libft
 	@make -C assets/b_printf
 	@echo "Compiled assets"
 
 comp:
-	$(CC) $(CFLAGS) -c  $(SRC) -I $(INC)
-	make -C $(LIBS:%=$(LIB_DIR)%)
+	@$(CC) $(CFLAGS) -c  $(SRC) -I $(INC)
+	@make -C $(LIBS:%=$(LIB_DIR)%)
 
 clean:
 	rm -rf $(OBJ)

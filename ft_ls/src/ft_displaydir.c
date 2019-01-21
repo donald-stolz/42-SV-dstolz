@@ -37,7 +37,6 @@ void	ft_displayl(t_dir *dir)
 		m_time = ft_parsetime(ctime(&dir->mtime.tv_sec));
 		b_printf("%s %d %s %s %d %s %s\n", dir->permissions, dir->links,
 				dir->owner, dir->group, dir->size, m_time, dir->name);
-		m_time = NULL;
 		free(m_time);
 		dir = dir->next;
 	}
@@ -49,13 +48,34 @@ void	ft_displayr(char *dirname)
 	b_printf("\n%s\n", dirname);
 }
 
+void	ft_displayfile(char *filename, t_opt *options)
+{
+	t_dir	*file;
+	char	*d_name;
+	size_t	i;
+
+	d_name = NULL;
+	if (!options->l_op)
+	{
+		b_printf("%s	", filename);
+		return ;
+	}
+	if (ft_strchr(filename, '/') > 0)
+	{
+		// split on index
+	}
+	// else -> set d_name to "./"
+	file = ft_getfile(filename, &i, d_name, options);
+	ft_displayl(file);
+}
+
 void	ft_displaydir(t_dirlist *dir, t_opt *options, int i)
 {
 	t_dir	*nav;
 
 	nav = dir->head;
 	if (options->rec_op)
-		if (i > 0)
+		if (i > 0 || options->m_arg)
 			ft_displayr(dir->name);
 	if (options->l_op)
 	{

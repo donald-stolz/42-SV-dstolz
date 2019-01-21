@@ -63,18 +63,18 @@ void	ft_getlink(char **path, size_t size)
 	free(tmp);
 }
 
-t_dir	*ft_getfile(char *name, size_t *total, struct dirent *dirread,
+t_dir	*ft_getfile(char *name, size_t *total, char *d_name,
 					t_opt *options)
 {
 	t_dir			*tmp;
 	struct stat		filestats;
 	char			*dirpath;
 
-	dirpath = ft_strjoin(name, dirread->d_name);
+	dirpath = ft_strjoin(name, d_name);
 	tmp = malloc(sizeof(struct s_dir));
 	lstat(dirpath, &filestats);
 	free(dirpath);
-	tmp->name = ft_strdup(dirread->d_name);
+	tmp->name = ft_strdup(d_name);
 	tmp->permissions = ft_parsepermissions(filestats.st_mode);
 	tmp->links = filestats.st_nlink;
 	tmp->owner = getpwuid(filestats.st_uid)->pw_name;
@@ -105,8 +105,8 @@ t_dir	*ft_getinfo(t_dirlist *directory, t_opt *options)
 	{
 		if (*(dirread->d_name) != '.' || options->a_op)
 		{
-			tmp = ft_getfile(directory->name, &directory->total, dirread,
-								options);
+			tmp = ft_getfile(directory->name, &directory->total, 
+						dirread->d_name, options);
 			tmp->next = info;
 			info = tmp;
 		}

@@ -38,7 +38,15 @@ typedef struct	s_opt
 	t_bool	r_op: 1;
 	t_bool	t_op: 1;
 	t_bool	rec_op: 1;
+	t_bool	m_arg: 1;
 }				t_opt;
+
+typedef struct	s_args
+{
+	char			*curr;
+	t_bool			is_dir;
+	struct s_args	*next;
+}				t_args;
 
 typedef struct	s_dir
 {
@@ -60,7 +68,10 @@ typedef struct	s_dirlist
 	struct s_dirlist	*next;
 }				t_dirlist;
 
-t_dirlist		*ft_parseargs(int argc, const char **argv, t_opt *options);
+void			ft_ls(t_args *args, t_opt *options);
+void			ft_setflags(const char *flags, t_opt *options);
+t_opt			*ft_newflags(void);
+t_args			*ft_getargs(int argc, const char **argv, t_opt *options);
 t_dir			*ft_getinfo(t_dirlist *directory, t_opt *options);
 char			*ft_checkname(char *str);
 void			ft_setflags(const char *flags, t_opt *options);
@@ -72,11 +83,11 @@ void			ft_swapdata(t_dir *dir1, t_dir *dir2);
 void			ft_displaydir(t_dirlist *dir, t_opt *options, int i);
 char			*ft_printtime(char *m_time);
 t_opt			*ft_newflags(void);
-t_dir			*ft_getfile(char *name, size_t *total, struct dirent *dirread,
+t_dir			*ft_getfile(char *name, size_t *total, char *d_name,
 							t_opt *options);
 void			ft_freelist(t_dir *dir);
 void			ft_getlink(char **path, size_t size);
-t_dirlist		*ft_revnames(t_dirlist *names);
+t_args			*ft_revargs(t_args *names);
 t_dirlist		*ft_getchildren(t_dirlist *list, t_opt *options);
 t_dirlist		*ft_nextfree(t_dirlist *directory);
 int				ft_isdir(const char *path);

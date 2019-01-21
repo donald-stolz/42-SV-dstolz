@@ -43,7 +43,8 @@ t_dirlist	*ft_recursivedir(char *dir_name, t_bool a_op)
 	}
 	while ((curr = readdir(dirstream)) != NULL)
 	{
-		if (!ft_strchr(curr->d_name, '.') || a_op)
+		if ((!ft_strchr(curr->d_name, '.') || a_op) &&
+			(ft_strcmp(curr->d_name, ".") && ft_strcmp(curr->d_name, "..")))
 		{
 			n_name = ft_relpath(dir_name, curr->d_name);
 			if (ft_isdir(n_name))
