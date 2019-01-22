@@ -81,6 +81,7 @@ void			ft_sortmtime(t_dir *dir);
 t_dir			*ft_revlist(t_dir *dir);
 void			ft_swapdata(t_dir *dir1, t_dir *dir2);
 void			ft_displaydir(t_dirlist *dir, t_opt *options, int i);
+void			ft_displayfile(char *filepath, t_opt *options);
 char			*ft_printtime(char *m_time);
 t_opt			*ft_newflags(void);
 t_dir			*ft_getfile(char *name, size_t *total, char *d_name,

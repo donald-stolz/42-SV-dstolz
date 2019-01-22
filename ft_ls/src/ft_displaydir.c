@@ -48,25 +48,28 @@ void	ft_displayr(char *dirname)
 	b_printf("\n%s\n", dirname);
 }
 
-void	ft_displayfile(char *filename, t_opt *options)
+void	ft_displayfile(char *filepath, t_opt *options)
 {
 	t_dir	*file;
-	char	*d_name;
+	char	*filename;
+	char	*dirpath;
 	size_t	i;
 
-	d_name = NULL;
+	i = ft_strlen(filepath);
+	filename = ft_strrchr(filepath, '/');
 	if (!options->l_op)
+		return (b_printf("%s	", filepath));
+	dirpath = ft_strnew(i);
+	if (!filename)
 	{
-		b_printf("%s	", filename);
-		return ;
+		filename = filepath;
+		dirpath = ft_strcat(dirpath, "./");
 	}
-	if (ft_strchr(filename, '/') > 0)
-	{
-		// split on index
-	}
-	// else -> set d_name to "./"
-	file = ft_getfile(filename, &i, d_name, options);
+	else
+		dirpath = ft_strncpy(dirpath, filepath, (i - ft_strlen(filename)));
+	file = ft_getfile(dirpath, &i, filename, options);
 	ft_displayl(file);
+	free(dirpath);
 }
 
 void	ft_displaydir(t_dirlist *dir, t_opt *options, int i)

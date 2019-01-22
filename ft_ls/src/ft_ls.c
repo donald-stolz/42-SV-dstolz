@@ -49,7 +49,7 @@ void		ft_ls(t_args *args, t_opt *options)
 	int i;
 	if (!args->is_dir)
 	{
-		// ft_displayfile(args->curr, options);
+		ft_displayfile(args->curr, options);
 		return ;
 	}
 	directory = malloc(sizeof(t_dirlist));
