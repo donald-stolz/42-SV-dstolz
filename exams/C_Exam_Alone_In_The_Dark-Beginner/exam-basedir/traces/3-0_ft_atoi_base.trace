@@ -1,0 +1,100 @@
+= Host-specific information ====================================================
+$> hostname; uname -msr
+e1z2r3p31.42.us.org
+Darwin 17.4.0 x86_64
+$> date
+Mon Jan 28 10:01:12 PST 2019
+$> gcc --version
+Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
+Apple LLVM version 10.0.0 (clang-1000.10.44.2)
+Target: x86_64-apple-darwin17.4.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+$> clang --version
+Apple LLVM version 10.0.0 (clang-1000.10.44.2)
+Target: x86_64-apple-darwin17.4.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+
+= User files collection ========================================================
+Collecting user files from Vogsphere
+Repository URL: auto-exam/2019/c-exam-alone-in-the-dark-beginner/practice-exam_20190128/dstolz
+
+= Git history ==================================================================
+$> git -C /var/folders/77/svfq338x3yz14k50khj99kq80000gp/T/tmpiCQLfH/user log --pretty='%H - %an, %ad : %s'
+c0c17c6444d0bf780018d787cc2b36b9f5407902 - donald-stolz, Mon Jan 28 10:00:06 2019 -0800 : Submit atoi_base
+3be760d870f1b36eb910e4214d5f487f9d7322df - donald-stolz, Mon Jan 28 09:03:13 2019 -0800 : Submitting ft_strdup
+83f15c276d4907cf90142f18ec9354e46ba9b3ec - donald-stolz, Mon Jan 28 08:53:13 2019 -0800 : Submitting rot_13
+be7d8d1a89b7ee18ee7691dd5d41ba6e6d9751ef - donald-stolz, Mon Jan 28 08:39:13 2019 -0800 : Submitting ft_countdown
+ 
+= Collected files ==========================================
+$> ls -lAR /var/folders/77/svfq338x3yz14k50khj99kq80000gp/T/tmpiCQLfH/user
+total 8
+-rw-r--r--  1 deepthought  deepthought  972 Jan 28 10:01 __GIT_HISTORY
+drwxr-xr-x  3 deepthought  deepthought  102 Jan 28 10:01 ft_atoi_base
+drwxr-xr-x  3 deepthought  deepthought  102 Jan 28 10:01 ft_countdown
+drwxr-xr-x  3 deepthought  deepthought  102 Jan 28 10:01 ft_strdup
+drwxr-xr-x  3 deepthought  deepthought  102 Jan 28 10:01 rot_13
+
+/var/folders/77/svfq338x3yz14k50khj99kq80000gp/T/tmpiCQLfH/user/ft_atoi_base:
+total 8
+-rw-r--r--  1 deepthought  deepthought  622 Jan 28 10:01 ft_atoi_base.c
+
+/var/folders/77/svfq338x3yz14k50khj99kq80000gp/T/tmpiCQLfH/user/ft_countdown:
+total 8
+-rw-r--r--  1 deepthought  deepthought  81 Jan 28 10:01 ft_countdown.c
+
+/var/folders/77/svfq338x3yz14k50khj99kq80000gp/T/tmpiCQLfH/user/ft_strdup:
+total 8
+-rw-r--r--  1 deepthought  deepthought  188 Jan 28 10:01 ft_strdup.c
+
+/var/folders/77/svfq338x3yz14k50khj99kq80000gp/T/tmpiCQLfH/user/rot_13:
+total 8
+-rw-r--r--  1 deepthought  deepthought  361 Jan 28 10:01 rot_13.c
+ 
+= ft_atoi_base =================================================================
+$> gcc -Wextra -Wall -Werror ft_atoi_base.c main.c -o user_exe 
+
+= Test 1 ===================================================
+$> ./nen8brxjr833mr0djgrotruh 
+$> diff -U 3 user_output_test1 test1.output | cat -e
+
+Diff OK :D
+= Test 2 ===================================================
+$> ./5vbvi110fzn73cnrsewdy2da "21" "2313" "12"
+$> diff -U 3 user_output_test2 test2.output | cat -e
+
+Diff OK :D
+= Test 3 ===================================================
+$> ./6m6dx7dm94chw17iqtkhiou4 "2147483647" "10"
+$> diff -U 3 user_output_test3 test3.output | cat -e
+
+Diff OK :D
+= Test 4 ===================================================
+$> ./tsp5jq794hek32ja7pk499qa "-2147483648" "10"
+$> diff -U 3 user_output_test4 test4.output | cat -e
+
+Diff OK :D
+= Test 5 ===================================================
+$> ./ufj4gel70aeoyjvy5nb9xbz2 "0" "2"
+$> diff -U 3 user_output_test5 test5.output | cat -e
+
+Diff OK :D
+= Test 6 ===================================================
+$> ./08t2gvxk83vfemofn9te7gul "--223" "10"
+$> diff -U 3 user_output_test6 test6.output | cat -e
+
+Diff OK :D
+= Test 7 ===================================================
+$> ./9vls8r7yj08v4b5w8xwvpywt "31203200301303" "4"
+$> diff -U 3 user_output_test7 test7.output | cat -e
+--- user_output_test7	2019-01-28 10:01:18.000000000 -0800$
++++ test7.output	2019-01-28 10:01:18.000000000 -0800$
+@@ -1 +1 @@$
+-54$
++227413107$
+
+Diff KO :(
+Grade: 0
+
+= Final grade: 0 ===============================================================

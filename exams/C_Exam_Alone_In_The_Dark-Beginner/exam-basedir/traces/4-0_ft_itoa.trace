@@ -1,0 +1,92 @@
+= Host-specific information ====================================================
+$> hostname; uname -msr
+e1z2r4p11.42.us.org
+Darwin 17.4.0 x86_64
+$> date
+Mon Jan 28 10:51:50 PST 2019
+$> gcc --version
+Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
+Apple LLVM version 10.0.0 (clang-1000.10.44.4)
+Target: x86_64-apple-darwin17.4.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+$> clang --version
+Apple LLVM version 10.0.0 (clang-1000.10.44.4)
+Target: x86_64-apple-darwin17.4.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+
+= User files collection ========================================================
+Collecting user files from Vogsphere
+Repository URL: auto-exam/2019/c-exam-alone-in-the-dark-beginner/practice-exam_20190128/dstolz
+
+= Git history ==================================================================
+$> git -C /var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user log --pretty='%H - %an, %ad : %s'
+d167c54d8bf7a97a9ea9aaa7843ccd4863840f93 - donald-stolz, Mon Jan 28 10:51:34 2019 -0800 : Submitting ft_itoa
+d860c33897dacbb3a953fb66f745d5f69c9bb755 - donald-stolz, Mon Jan 28 10:20:09 2019 -0800 : Submitting lcm
+c0c17c6444d0bf780018d787cc2b36b9f5407902 - donald-stolz, Mon Jan 28 10:00:06 2019 -0800 : Submit atoi_base
+3be760d870f1b36eb910e4214d5f487f9d7322df - donald-stolz, Mon Jan 28 09:03:13 2019 -0800 : Submitting ft_strdup
+83f15c276d4907cf90142f18ec9354e46ba9b3ec - donald-stolz, Mon Jan 28 08:53:13 2019 -0800 : Submitting rot_13
+be7d8d1a89b7ee18ee7691dd5d41ba6e6d9751ef - donald-stolz, Mon Jan 28 08:39:13 2019 -0800 : Submitting ft_countdown
+ 
+= Collected files ==========================================
+$> ls -lAR /var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user
+total 8
+-rw-r--r--  1 deepthought  deepthought  1463 Jan 28 10:51 __GIT_HISTORY
+drwxr-xr-x  3 deepthought  deepthought   102 Jan 28 10:51 ft_atoi_base
+drwxr-xr-x  3 deepthought  deepthought   102 Jan 28 10:51 ft_countdown
+drwxr-xr-x  3 deepthought  deepthought   102 Jan 28 10:51 ft_itoa
+drwxr-xr-x  3 deepthought  deepthought   102 Jan 28 10:51 ft_strdup
+drwxr-xr-x  3 deepthought  deepthought   102 Jan 28 10:51 lcm
+drwxr-xr-x  3 deepthought  deepthought   102 Jan 28 10:51 rot_13
+
+/var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user/ft_atoi_base:
+total 8
+-rw-r--r--  1 deepthought  deepthought  622 Jan 28 10:51 ft_atoi_base.c
+
+/var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user/ft_countdown:
+total 8
+-rw-r--r--  1 deepthought  deepthought  81 Jan 28 10:51 ft_countdown.c
+
+/var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user/ft_itoa:
+total 8
+-rw-r--r--  1 deepthought  deepthought  739 Jan 28 10:51 ft_itoa.c
+
+/var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user/ft_strdup:
+total 8
+-rw-r--r--  1 deepthought  deepthought  188 Jan 28 10:51 ft_strdup.c
+
+/var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user/lcm:
+total 8
+-rw-r--r--  1 deepthought  deepthought  198 Jan 28 10:51 lcm.c
+
+/var/folders/nt/cqf9kph51gj7nk7nzp8wf5k80000gp/T/tmpSqzWzW/user/rot_13:
+total 8
+-rw-r--r--  1 deepthought  deepthought  361 Jan 28 10:51 rot_13.c
+ 
+= ft_itoa ======================================================================
+$> gcc -Wextra -Wall -Werror main.c ft_itoa.c -o user_exe 
+
+= Test 1 ===================================================
+$> ./24y7ljgune076m5zvxb7h6l4 
+$> diff -U 3 user_output_test1 test1.output | cat -e
+
+Diff OK :D
+= Test 2 ===================================================
+$> ./dqsls9xckvtzqybtu7k6ihfu "1" "2" "3" "4" "5" "6"
+$> diff -U 3 user_output_test2 test2.output | cat -e
+
+Diff OK :D
+= Test 3 ===================================================
+$> ./bzes8ytwbfugqa0pbgjpwybl 0
+$> diff -U 3 user_output_test3 test3.output | cat -e
+--- user_output_test3	2019-01-28 10:51:55.000000000 -0800$
++++ test3.output	2019-01-28 10:51:55.000000000 -0800$
+@@ -1 +1 @@$
+--$
++0$
+
+Diff KO :(
+Grade: 0
+
+= Final grade: 0 ===============================================================
