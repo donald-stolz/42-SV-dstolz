@@ -1,39 +1,44 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   paramsum.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/21 10:00:05 by exam              #+#    #+#             */
-/*   Updated: 2018/09/21 10:56:00 by exam             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
 #include <unistd.h>
-void ft_putchar(int c);
-void ft_putint(int c);
-
-int	main(int argc, char const *argv[])
+#include <stdio.h>
+int numlen(int num)
 {
-	ft_putint(argc);
-	if ((void *)argv == NULL)
-		return 0;
-	ft_putchar('\n');
-	return 0;
-}
-
-void ft_putint(int c)
-{
-	if (c > 0)
+	int i = 0;
+	while (num > 0)
 	{
-		ft_putint(c/10);
-		ft_putchar(47 + (c%10));
+		i++;
+		num /= 10;
 	}
+	return i;
 }
 
-void ft_putchar(int c)
+void writeItoa(int num)
 {
-	write(1, &c, 1);
+	long rev = 0;
+	int check = num;
+	char c;
+	while(num > 0)
+	{
+		rev = rev * 10 + (num % 10);
+		num /= 10;
+	}
+	while (rev > 0)
+	{
+		c = rev % 10 + '0';
+		rev /= 10;
+		write(1, &c, 1);	
+	}
+	if (check % 10 == 0)
+		write(1, "0", 1);
+	if (check % 100 == 0)
+		write(1, "0", 1);
+	write(1, "\n", 1);
+}
+
+int main(int argc, char **argv)
+{
+	if (argc == 1 && argv)
+		write(1, "0\n", 2);
+	else
+		writeItoa( (argc-1));
+	return 0;
 }
