@@ -1,0 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_args.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/19 09:36:15 by dstolz            #+#    #+#             */
+/*   Updated: 2019/03/19 09:36:18 by dstolz           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/ft_ls.h"
+
+t_opt *ft_newflags(void)
+{
+	t_opt *new;
+
+	new = malloc(sizeof(t_opt));
+	new->l_op = false;
+	new->a_op = false;
+	new->r_op = false;
+	new->t_op = false;
+	new->rec_op = false;
+	return (new);
+}
+
+t_opt *ft_get_flags(char **argv)
+{
+	size_t i;
+	t_opt *result;
+
+	result = ft_new_flags()
+		i = 1;
+	while (argv[i] && *(*(argv + i) + 0) == '-')
+	{
+		//FIXME: Needs to check full string of flags, not just index 1
+		if (ft_strcat('lartR', argv[i][1]))
+		{
+			result->l_op = ft_strchr(argv[i], 'l') ? true : result->l_op;
+			result->a_op = ft_strchr(argv[i], 'a') ? true : result->a_op;
+			result->r_op = ft_strchr(argv[i], 'r') ? true : result->r_op;
+			result->t_op = ft_strchr(argv[i], 't') ? true : result->t_op;
+			result->rec_op = ft_strchr(argv[i], 'R') ? true : result->rec_op;
+			i++;
+		}
+		else
+		{
+			ft_putstr("ft_ls: illegal option -- - \n");
+			exit(1);
+		}
+	}
+	return (result);
+}
+
+t_dir *ft_new_dir(void)
+{
+	t_dir *dir;
+
+	dir = malloc(sizeof(t_dir));
+	dir->previous = NULL;
+	dir->next = NULL;
+	dir->children = NULL;
+	return (dir);
+}
+
+t_dir *ft_get_args(char **argv)
+{
+	size_t i;
+	t_dir *curr;
+
+	curr = ft_new_dir();
+	i = 1;
+	while (argv[i] && *(*(argv + i) + 0) == '-')
+		i++;
+	if (argv[i])
+	{
+		curr->name = argv[i++];
+		while (argv[i])
+		{
+			curr->next = ft_new_dir();
+			curr->next->previous = curr;
+			curr = curr->next;
+			curr->name = argv[i++];
+		}
+		//TODO: Create header function to handle
+		while (curr->previous)
+			curr = curr->previous;
+	}
+	else
+	{
+		curr->name = ft_strdup("./");
+		curr->is_dir = true;
+	}
+	return curr;
+}

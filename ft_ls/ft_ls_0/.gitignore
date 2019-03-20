@@ -1,0 +1,10 @@
+ft_ls
+.DS_Store
+._.*
+*.a
+a.out*
+*.o
+.vscode
+src_archive/
+test/
+vscode/
