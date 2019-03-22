@@ -25,6 +25,8 @@
 # include <errno.h>
 # include <stdlib.h>
 
+# define A_OP(str, a) (*(str) != '.' || a)
+
 typedef enum
 {
 	false,
@@ -43,6 +45,7 @@ typedef struct	s_opt
 typedef struct	s_dir
 {
 	char				*name;
+	char				*path;
 	t_bool				is_dir;
 	// is_link?
 	size_t				total;

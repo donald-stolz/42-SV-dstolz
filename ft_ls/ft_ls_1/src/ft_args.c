@@ -53,43 +53,26 @@ t_opt *ft_get_flags(char **argv)
 	return (result);
 }
 
-t_dir *ft_new_dir(void)
-{
-	t_dir *dir;
 
-	dir = malloc(sizeof(t_dir));
-	dir->previous = NULL;
-	dir->next = NULL;
-	dir->children = NULL;
-	return (dir);
-}
 
 t_dir *ft_get_args(char **argv)
 {
 	size_t i;
 	t_dir *curr;
 
-	curr = ft_new_dir();
 	i = 1;
 	while (argv[i] && *(*(argv + i) + 0) == '-')
 		i++;
 	if (argv[i])
 	{
-		curr->name = argv[i++];
+		curr = ft_new_dir(argv[i++]);
 		while (argv[i])
-		{
-			curr->next = ft_new_dir();
-			curr->next->previous = curr;
-			curr = curr->next;
-			curr->name = argv[i++];
-		}
-		//TODO: Create header function to handle
-		while (curr->previous)
-			curr = curr->previous;
+			curr = ft_add_dir(argv[i++]);
+		curr = ft_get_head(curr);
 	}
 	else
 	{
-		curr->name = ft_strdup("./");
+		curr = ft_new_dir(ft_strdup("./"));
 		curr->is_dir = true;
 	}
 	return curr;
