@@ -13,24 +13,19 @@
 #include "../inc/ft_ls.h"
 
 //TODO: Error file?
-static t_dir *ft_nofile(char *name)
+static t_dir	*ft_nofile(char *name)
 {
 	b_printf("ft_ls: %s: No such file or directory\n", name);
 	return (NULL);
 }
-/*
- * 0. Start with head of list
- * 1. Send to name dirstream
- * 2. Get file names, check is_dir and a_op
- * 3. Create t_dir list of children
- * 4. Return list of children
- */
-t_dir	*ft_set_children(char *p_name, t_opt *opts)
+
+static t_dir	*ft_set_children(char *p_name, t_opt *opts)
 {
 	DIR				*dirstream;
 	struct dirent	*curr;
 	t_dir			*result;
 	char			*name;
+	char			*path;
 
 	result = NULL;
 	dirstream = opendir(p_name);
@@ -41,8 +36,10 @@ t_dir	*ft_set_children(char *p_name, t_opt *opts)
 		name = curr->d_name;
 		if (A_OP(name, opts->a_op))
 		{
-			result = result ? ft_add_dir(result, name, opts)
-							: ft_new_dir(name, opts);
+			path = ft_strjoin(p_name, "/");
+			result = result ? ft_add_dir(result, ft_strjoin(path, name), opts)
+							: ft_new_dir(ft_strjoin(path, name), opts);
+			ft_strdel(path);
 		}
 		result->path = NULL;
 	}
@@ -50,7 +47,7 @@ t_dir	*ft_set_children(char *p_name, t_opt *opts)
 	return (result);
 }
 
-t_dir	*ft_set_children_rec(char *p_name, t_opt *opts)
+static t_dir	*ft_set_children_rec(char *p_name, t_opt *opts)
 {
 	DIR				*dirstream;
 	struct dirent	*curr;
@@ -68,22 +65,19 @@ t_dir	*ft_set_children_rec(char *p_name, t_opt *opts)
 		if (A_OP(name, opts->a_op) && (ft_strcmp(name, ".") 
 			&& ft_strcmp(name, ".."))
 		{
-			result = result ? ft_add_dir(result, name, opts) 
-							: ft_new_dir(name, opts);
-			result->path = ft_strjoin(p_name, "/");
+			path = ft_strjoin(p_name, "/");
+			result = result ? ft_add_dir(result, ft_strjoin(path, name), opts)
+							: ft_new_dir(ft_strjoin(path, name), opts);
+			ft_strdel(path);
 			if(result->is_dir)
-			{
-				nxt_path = ft_strjoin(result->path, name);
-				result->children = ft_set_children_rec(nxt_path, opts);
-				ft_strdel(nxt_path);
-			}
+				result->children = ft_set_children_rec(result->path, opts);
 		}
 	}
 	result = ft_get_head(result);
 	return (result);
 }
 
-void ft_get_children(t_opt *opts, t_dir *p)
+void			ft_get_children(t_opt *opts, t_dir *p)
 {
 	while(p)
 	{

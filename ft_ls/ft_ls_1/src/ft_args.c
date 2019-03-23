@@ -12,7 +12,7 @@
 
 #include "../inc/ft_ls.h"
 
-t_opt *ft_newflags(void)
+static t_opt	*ft_newflags(void)
 {
 	t_opt *new;
 
@@ -25,7 +25,7 @@ t_opt *ft_newflags(void)
 	return (new);
 }
 
-t_opt *ft_get_flags(char **argv)
+t_opt			*ft_get_flags(char **argv)
 {
 	size_t i;
 	t_opt *result;
@@ -53,9 +53,7 @@ t_opt *ft_get_flags(char **argv)
 	return (result);
 }
 
-
-
-t_dir *ft_get_args(char **argv)
+t_dir			*ft_get_args(char **argv)
 {
 	size_t i;
 	t_dir *curr;

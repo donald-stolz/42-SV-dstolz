@@ -14,7 +14,7 @@
 
 void	ft_swap_dir(t_dir *a, t_dir *b)
 {
-	t_dir *temp;
+	t_dir	*temp;
 
 	temp->next = a->next;
 	a->next = b->next;
@@ -32,3 +32,22 @@ void	ft_swap_dir(t_dir *a, t_dir *b)
 		b->previous->next = b;
 }
 
+void	ft_place_left(t_dir *pivot, t_dir *move)
+{
+	move->next->previous = move->previous;
+	move->previous->next = move->next;	
+	pivot->previous->next = move;
+	move->previos = pivot->previous;
+	pivot->previous = move;
+	move->next = pivot;
+}
+
+void	ft_place_right(t_dir *pivot, t_dir *move)
+{
+	move->next->previous = move->previous;
+	move->previous->next = move->next;
+	pivot->next->previous = move;
+	move->next = pivot->next;
+	pivot->next = move;
+	move->previous = pivot;
+}

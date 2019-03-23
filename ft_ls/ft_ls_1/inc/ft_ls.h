@@ -47,18 +47,28 @@ typedef struct	s_dir
 	char				*name;
 	char				*path;
 	t_bool				is_dir;
-	// is_link?
 	size_t				total;
 	char				*permissions;
 	nlink_t				links;
 	char				*owner;
 	char				*group;
 	off_t				size;
-	struct timespec		mtime;
+	struct timespec		m_time;
 	struct s_dir		*children;
 	struct s_dir		*previous;
 	struct s_dir		*next;
 }				t_dir;
 
- 
+t_opt	*ft_get_flags(char **argv);
+t_dir	*ft_get_args(char **argv);
+void	ft_sort(t_opt *opts, t_dir *p);
+void	ft_get_children(t_opt *opts, t_dir *p);
+void	ft_print_ls(t_opt *opts, t_dir *p);
+t_dir	*ft_new_dir(char *path, t_opt *opts);
+t_dir	*ft_add_dir(t_dir curr, char *path, t_opt *opts);
+void	*ft_get_dir_info(t_dir *dir, t_opt *opts)
+t_dir	*ft_get_head(t_dir *curr);
+t_dir	*ft_get_tail(t_dir *curr);
+
+
 #endif
