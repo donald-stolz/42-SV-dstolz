@@ -12,7 +12,7 @@
 
 #include "../inc/ft_ls.h"
 
-static t_opt	*ft_newflags(void)
+static t_opt	*ft_new_flags(void)
 {
 	t_opt *new;
 
@@ -25,17 +25,17 @@ static t_opt	*ft_newflags(void)
 	return (new);
 }
 
-t_opt			*ft_get_flags(char **argv)
+t_opt			*ft_get_flags(const char **argv)
 {
 	size_t i;
 	t_opt *result;
 
-	result = ft_new_flags()
+	result = ft_new_flags();
 		i = 1;
 	while (argv[i] && *(*(argv + i) + 0) == '-')
 	{
 		//FIXME: Needs to check full string of flags, not just index 1
-		if (ft_strcat('lartR', argv[i][1]))
+		if (ft_strchr("lartR", argv[i][1]))
 		{
 			result->l_op = ft_strchr(argv[i], 'l') ? true : result->l_op;
 			result->a_op = ft_strchr(argv[i], 'a') ? true : result->a_op;
@@ -53,7 +53,7 @@ t_opt			*ft_get_flags(char **argv)
 	return (result);
 }
 
-t_dir			*ft_get_args(char **argv)
+t_dir			*ft_get_args(char **argv, t_opt *opts)
 {
 	size_t i;
 	t_dir *curr;
@@ -63,15 +63,12 @@ t_dir			*ft_get_args(char **argv)
 		i++;
 	if (argv[i])
 	{
-		curr = ft_new_dir(argv[i++]);
+		curr = ft_new_dir(argv[i++], opts);
 		while (argv[i])
-			curr = ft_add_dir(argv[i++]);
+			curr = ft_add_dir(argv[i++], opts);
 		curr = ft_get_head(curr);
 	}
 	else
-	{
-		curr = ft_new_dir(ft_strdup("./"));
-		curr->is_dir = true;
-	}
+		curr = ft_new_dir(ft_strdup("./"), opts);
 	return curr;
 }

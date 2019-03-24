@@ -59,16 +59,20 @@ typedef struct	s_dir
 	struct s_dir		*next;
 }				t_dir;
 
-t_opt	*ft_get_flags(char **argv);
-t_dir	*ft_get_args(char **argv);
+t_opt	*ft_get_flags(const char **argv);
+t_dir	*ft_get_args(char **argv, t_opt opts);
 void	ft_sort(t_opt *opts, t_dir *p);
 void	ft_get_children(t_opt *opts, t_dir *p);
-void	ft_print_ls(t_opt *opts, t_dir *p);
+void	ft_print_ls(t_opt *opts, t_dir *p, t_bool root);
 t_dir	*ft_new_dir(char *path, t_opt *opts);
 t_dir	*ft_add_dir(t_dir curr, char *path, t_opt *opts);
-void	*ft_get_dir_info(t_dir *dir, t_opt *opts)
+void	ft_get_dir_info(t_dir *dir, t_opt *opts);
 t_dir	*ft_get_head(t_dir *curr);
 t_dir	*ft_get_tail(t_dir *curr);
-
+void	ft_swap_dir(t_dir *a, t_dir *b)
+void	ft_place_left(t_dir *pivot, t_dir *move)
+void	ft_place_right(t_dir *pivot, t_dir *move)
+void	ft_free_opts(t_opt **opts);
+void	ft_free_dirs(t_dir **dir);
 
 #endif

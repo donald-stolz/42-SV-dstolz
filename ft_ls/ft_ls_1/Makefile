@@ -16,13 +16,14 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 FILES =	ft_ls.c				\
-		ft_getinfo.c		\
-		ft_sortdir.c		\
-		ft_displaydir.c		\
-		ft_freestructs.c	\
-		ft_recursivedir.c	\
-		ft_flags.c			\
-		ft_helpers.c		\
+		ft_args.c			\
+		ft_dir_info.c		\
+		ft_dir_utility.c	\
+		ft_free.c			\
+		ft_get.c			\
+		ft_print.c			\
+		ft_sort_utility.c	\
+		ft_sort.c			\
 
 HEADERS	= 	ft_ls.h		\
 			libft.h		\

@@ -16,6 +16,7 @@ void	ft_swap_dir(t_dir *a, t_dir *b)
 {
 	t_dir	*temp;
 
+	// FIXME: Initialize TEMP 
 	temp->next = a->next;
 	a->next = b->next;
 	b->next = temp->next;
@@ -37,7 +38,7 @@ void	ft_place_left(t_dir *pivot, t_dir *move)
 	move->next->previous = move->previous;
 	move->previous->next = move->next;	
 	pivot->previous->next = move;
-	move->previos = pivot->previous;
+	move->previous = pivot->previous;
 	pivot->previous = move;
 	move->next = pivot;
 }
@@ -50,4 +51,9 @@ void	ft_place_right(t_dir *pivot, t_dir *move)
 	move->next = pivot->next;
 	pivot->next = move;
 	move->previous = pivot;
+}
+
+void	ft_rev_list(t_dir *dir)
+{
+	// TODO:
 }

@@ -58,8 +58,8 @@ static void	ft_quick_sort_time(t_dir *tail, t_dir *head)
 
 void		ft_sort(t_opt *opts, t_dir *parents)
 {
-	t_dir head;
-	t_dir tail;
+	t_dir *head;
+	t_dir *tail;
 
 	head = ft_get_head(parents);
 	tail = ft_get_tail(parents);

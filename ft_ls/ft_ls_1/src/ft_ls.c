@@ -25,7 +25,7 @@ static void	ft_ls(t_opt *options, t_dir *parents)
 {
 	ft_get_children(options, parents);
 	ft_sort_children(options, parents);
-	ft_print_ls(options, parents);
+	ft_print_ls(options, parents, true);
 }
 
 int		main(int argc, const char **argv)
@@ -34,12 +34,14 @@ int		main(int argc, const char **argv)
 	t_dir	*parents;
 
 	options = ft_get_flags(argv);
-	parents = ft_get_args(argv);
+	parents = ft_get_args(argv, options);
 	ft_sort(options, parents);
-	ft_ls(options, parents);
-	ft_free(options, parents);
+	ft_ls(options, ft_get_head(parents));
+	ft_free_opts(&opts);
+	ft_free_dirs(&parents);
 	return (0);
 }
+
 /*	1. Parse args
  *		- Get directory args into linked arglist
  *		- If sort options, sort parents first
