@@ -53,7 +53,7 @@ t_opt			*ft_get_flags(const char **argv)
 	return (result);
 }
 
-t_dir			*ft_get_args(char **argv, t_opt *opts)
+t_dir			*ft_get_args(const char **argv, t_opt *opts)
 {
 	size_t i;
 	t_dir *curr;
@@ -65,7 +65,7 @@ t_dir			*ft_get_args(char **argv, t_opt *opts)
 	{
 		curr = ft_new_dir(argv[i++], opts);
 		while (argv[i])
-			curr = ft_add_dir(argv[i++], opts);
+			curr = ft_add_dir(argv[i++], ft_strdup("./"), opts);
 		curr = ft_get_head(curr);
 	}
 	else

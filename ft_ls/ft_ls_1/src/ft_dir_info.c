@@ -31,7 +31,7 @@ static char		ft_getdescriptor(mode_t m)
 	return ('0');
 }
 
-static char	*ft_parsepermissions(mode_t st_mode)
+static char	*ft_parse_permissions(mode_t st_mode)
 {
 	char *permissions;
 
@@ -57,8 +57,8 @@ static void	ft_set_link(char *path, char **link, size_t size)
 
 	free(*link);
 	linkname = malloc(size);
-	readlink(*path, linkname, size);
-	tmp = ft_strjoin(*path, " -> ");
+	readlink((const char *)path, linkname, size);
+	tmp = ft_strjoin(path, " -> ");
 	linkname = ft_strjoin(tmp, linkname);
 	ft_strdel(&tmp);
 	*link = linkname;
@@ -71,7 +71,7 @@ void		ft_get_dir_info(t_dir *dir, t_opt *opts)
 	
 	lstat(dir->path, &dir_stats);
 	dir->name = ft_strdup(d_name);
-	dir->is_dir = S_ISDIR(dir_stats.st_mode) && !S_ISLNK(dir_stats.st_mode)
+	dir->is_dir = S_ISDIR(dir_stats.st_mode) && !S_ISLNK(dir_stats.st_mode);
 	dir->permissions = ft_parse_permissions(dir_stats.st_mode);
 	dir->links = dir_stats.st_nlink;
 	dir->owner = getpwuid(dir_stats.st_uid)->pw_name;
@@ -79,5 +79,5 @@ void		ft_get_dir_info(t_dir *dir, t_opt *opts)
 	dir->size = dir_stats.st_size;
 	dir->m_time = dir_stats.st_mtimespec;
 	if (S_ISLNK(dir_stats.st_mode && opts->l_op))
-		ft_set_link(&dir->path, dir->name, (size_t)(filestats.st_size + 1));void
+		ft_set_link(dir->path, &dir->name, (size_t)(dir_stats.st_size + 1));
 }

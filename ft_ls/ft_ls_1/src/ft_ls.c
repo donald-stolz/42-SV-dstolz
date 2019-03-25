@@ -33,12 +33,15 @@ int		main(int argc, const char **argv)
 	t_opt	*options;
 	t_dir	*parents;
 
-	options = ft_get_flags(argv);
-	parents = ft_get_args(argv, options);
-	ft_sort(options, parents);
-	ft_ls(options, ft_get_head(parents));
-	ft_free_opts(&opts);
-	ft_free_dirs(&parents);
+	if (argc > 0)
+	{
+		options = ft_get_flags(argv);
+		parents = ft_get_args(argv, options);
+		ft_sort(options, parents);
+		ft_ls(options, ft_get_head(parents));
+		ft_free_opts(&opts);
+		ft_free_dirs(&parents);
+	}
 	return (0);
 }
 

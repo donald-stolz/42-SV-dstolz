@@ -12,9 +12,9 @@
 
 #include "../inc/ft_ls.h"
 
-t_dir	*ft_add_dir(t_dir curr, char *path, t_opt *opts)
+t_dir	*ft_add_dir(t_dir *curr, char *path, t_opt *opts)
 {
-	t_dir	tail;
+	t_dir	*tail;
 
 	tail = ft_get_tail(curr);
 	tail->next = ft_new_dir(path, opts);

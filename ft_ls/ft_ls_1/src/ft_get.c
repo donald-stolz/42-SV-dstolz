@@ -30,7 +30,7 @@ static t_dir	*ft_set_children(char *p_name, t_opt *opts)
 	result = NULL;
 	dirstream = opendir(p_name);
 	if (dirstream == NULL)
-		return *ft_nofile(p_name);
+		return ft_nofile(p_name);
 	while((curr = readdir(dirstream)) != NULL)
 	{
 		name = curr->d_name;
@@ -39,7 +39,7 @@ static t_dir	*ft_set_children(char *p_name, t_opt *opts)
 			path = ft_strjoin(p_name, "/");
 			result = result ? ft_add_dir(result, ft_strjoin(path, name), opts)
 							: ft_new_dir(ft_strjoin(path, name), opts);
-			ft_strdel(path);
+			ft_strdel(&path);
 		}
 		result->path = NULL;
 	}
@@ -53,17 +53,16 @@ static t_dir	*ft_set_children_rec(char *p_name, t_opt *opts)
 	struct dirent	*curr;
 	t_dir			*result;
 	char			*name;
-	char			*nxt_path;
+	char			*path;
 
 	result = NULL;
 	dirstream = opendir(p_name);
 	if (dirstream)
-		return *ft_nofile(p_name);
+		return ft_nofile(p_name);
 	while((curr = readdir(dirstream)))
 	{
 		name = curr->d_name;
-		if (A_OP(name, opts->a_op) && (ft_strcmp(name, ".") 
-			&& ft_strcmp(name, ".."))
+		if (A_OP(name, opts->a_op) && (ft_strcmp(name, ".") && ft_strcmp(name, "..")))
 		{
 			path = ft_strjoin(p_name, "/");
 			result = result ? ft_add_dir(result, ft_strjoin(path, name), opts)

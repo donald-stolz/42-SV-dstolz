@@ -16,7 +16,8 @@ void	ft_swap_dir(t_dir *a, t_dir *b)
 {
 	t_dir	*temp;
 
-	// FIXME: Initialize TEMP 
+	// FIXME: Initialize TEMP
+	temp = dir = malloc(sizeof(t_dir));
 	temp->next = a->next;
 	a->next = b->next;
 	b->next = temp->next;
@@ -31,6 +32,7 @@ void	ft_swap_dir(t_dir *a, t_dir *b)
 		a->previous->next = a;
 	if (b->previous)
 		b->previous->next = b;
+	free(&temp);
 }
 
 void	ft_place_left(t_dir *pivot, t_dir *move)

@@ -42,7 +42,7 @@ static void	ft_print_children_l(t_dir *p)
 {
 	t_dir	*nav;
 
-	*nav = p->children;
+	nav = p->children;
 	b_printf("total %d\n", p->total);
 	while (nav)
 	{
