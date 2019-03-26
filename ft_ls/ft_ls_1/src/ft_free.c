@@ -14,35 +14,35 @@
 
 void	ft_free_opts(t_opt **opts)
 {
-	// free(*opts);
-	// *opts = NULL;
+	free(*opts);
+	*opts = NULL;
 }
 
-static void ft_dir_del(t_dir **dir)
+static void ft_dir_del(t_dir *dir)
 {
-	// if (*temp->children)
-	// 	ft_free_dirs(&(*temp->children));
-	// if (*dir)
-	// {
-	// 	ft_strdel(*dir->name);
-	// 	ft_strdel(*dir->path);
-	// 	ft_strdel(*dir->permissions);
-	// 	free(*dir);
-	// 	dir = NULL;
-	// }
+	if ((dir)->children)
+		ft_free_dirs(&(dir)->children);
+	if (dir)
+	{
+		ft_strdel(&(dir)->name);
+		ft_strdel(&(dir)->path);
+		ft_strdel(&(dir)->permissions);
+		free(dir);
+		dir = NULL;
+	}
 }
 
 void	ft_free_dirs(t_dir **dir)
 {
-	// t_dir **temp;
+	t_dir *temp;
 
-	// &temp = ft_get_head(*dir);
-	// while(*temp->next)
-	// {	
-	// 	&temp = *temp->next;
-	// 	ft_dir_del(&temp->previous);
-	// }
-	// ft_dir_del(temp);
+	temp = ft_get_head(*dir);
+	while(temp->next)
+	{	
+		temp = temp->next;
+		ft_dir_del(temp->previous);
+	}
+	ft_dir_del(temp);
 }
 	/* 
 	 * 0. Get head of list

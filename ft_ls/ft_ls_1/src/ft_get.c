@@ -12,7 +12,6 @@
 
 #include "../inc/ft_ls.h"
 
-//TODO: Error file?
 static t_dir	*ft_nofile(char *name)
 {
 	b_printf("ft_ls: %s: No such file or directory\n", name);
@@ -33,12 +32,14 @@ static t_dir	*ft_set_children(char *p_name, t_opt *opts)
 		return ft_nofile(p_name);
 	while((curr = readdir(dirstream)) != NULL)
 	{
-		name = curr->d_name;
+		name = ft_strdup(curr->d_name);
 		if (A_OP(name, opts->a_op))
 		{
 			path = ft_strjoin(p_name, "/");
-			result = result ? ft_add_dir(result, ft_strjoin(path, name), opts)
-							: ft_new_dir(ft_strjoin(path, name), opts);
+			if (result)
+				result = ft_add_dir(name, result, ft_strjoin(path, name), opts);
+			else
+				result = ft_new_dir(name, ft_strjoin(path, name), opts);
 			ft_strdel(&path);
 		}
 		result->path = NULL;
@@ -61,13 +62,14 @@ static t_dir	*ft_set_children_rec(char *p_name, t_opt *opts)
 		return ft_nofile(p_name);
 	while((curr = readdir(dirstream)))
 	{
-		name = curr->d_name;
+		name = ft_strdup(curr->d_name);
 		if (A_OP(name, opts->a_op) && (ft_strcmp(name, ".") && ft_strcmp(name, "..")))
 		{
 			path = ft_strjoin(p_name, "/");
-			result = result ? ft_add_dir(result, ft_strjoin(path, name), opts)
-							: ft_new_dir(ft_strjoin(path, name), opts);
-			ft_strdel(path);
+			result = result ? ft_add_dir(name, result, 
+								ft_strjoin(path, name), opts)
+							: ft_new_dir(name, ft_strjoin(path, name), opts);
+			ft_strdel(&path);
 			if(result->is_dir)
 				result->children = ft_set_children_rec(result->path, opts);
 		}

@@ -70,11 +70,10 @@ void		ft_get_dir_info(t_dir *dir, t_opt *opts)
 	struct stat	dir_stats;
 	
 	lstat(dir->path, &dir_stats);
-	dir->name = ft_strdup(d_name);
 	dir->is_dir = S_ISDIR(dir_stats.st_mode) && !S_ISLNK(dir_stats.st_mode);
 	dir->permissions = ft_parse_permissions(dir_stats.st_mode);
 	dir->links = dir_stats.st_nlink;
-	dir->owner = getpwuid(dir_stats.st_uid)->pw_name;
+	dir->owner = getpwuid(dir_stats.st_uid)->pw_name; //Exception
 	dir->group = getgrgid(dir_stats.st_gid)->gr_name;
 	dir->size = dir_stats.st_size;
 	dir->m_time = dir_stats.st_mtimespec;

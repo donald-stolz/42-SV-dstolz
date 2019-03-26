@@ -36,10 +36,10 @@ int		main(int argc, const char **argv)
 	if (argc > 0)
 	{
 		options = ft_get_flags(argv);
-		parents = ft_get_args(argv, options);
+		parents = ft_get_args((char **)argv, options);
 		ft_sort(options, parents);
 		ft_ls(options, ft_get_head(parents));
-		ft_free_opts(&opts);
+		ft_free_opts(&options);
 		ft_free_dirs(&parents);
 	}
 	return (0);

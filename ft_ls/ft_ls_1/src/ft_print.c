@@ -55,14 +55,14 @@ static void	ft_print_children(t_dir *children)
 {
 	while(children)
 	{
-		b_printf("%s	", children->name);
+		b_printf("%s    ", children->name);
 		children = children->next;
 	}
 }
 
 static void	ft_print_path(char *path)
 {
-	path[ft_strlen((const char *)path) - 1] = ":";
+	path[ft_strlen((const char *)path) - 1] = ':';
 	b_printf("\n%s\n", path);
 }
 
@@ -77,8 +77,8 @@ void		ft_print_ls(t_opt *opts, t_dir *p, t_bool root)
 		{
 			if (opts->l_op)
 				ft_print_l(p);
-			else
-				ft_print_name(p->name);
+			else if (p->next || p->previous)
+				b_printf("%s\n", p->name);
 		}
 		if (p->children)
 		{

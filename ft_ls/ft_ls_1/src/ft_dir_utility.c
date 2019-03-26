@@ -12,21 +12,22 @@
 
 #include "../inc/ft_ls.h"
 
-t_dir	*ft_add_dir(t_dir *curr, char *path, t_opt *opts)
+t_dir	*ft_add_dir(char *name, t_dir *curr, char *path, t_opt *opts)
 {
 	t_dir	*tail;
 
 	tail = ft_get_tail(curr);
-	tail->next = ft_new_dir(path, opts);
+	tail->next = ft_new_dir(name, path, opts);
 	tail->next->previous = tail;
 	return (tail);
 }
 
-t_dir	*ft_new_dir(char *path, t_opt *opts)
+t_dir	*ft_new_dir(char *name, char *path, t_opt *opts)
 {
 	t_dir	*dir;
 
 	dir = malloc(sizeof(t_dir));
+	dir->name = name;
 	dir->path = path;
 	dir->previous = NULL;
 	dir->next = NULL;
@@ -35,14 +36,14 @@ t_dir	*ft_new_dir(char *path, t_opt *opts)
 	return (dir);
 }
 
-t_dir *ft_get_head(t_dir *curr)
+t_dir	*ft_get_head(t_dir *curr)
 {
 	while (curr && curr->previous)
 		curr = curr->previous;
 	return (curr);
 }
 
-t_dir *ft_get_tail(t_dir *curr)
+t_dir	*ft_get_tail(t_dir *curr)
 {
 	while (curr && curr->next)
 		curr = curr->next;
