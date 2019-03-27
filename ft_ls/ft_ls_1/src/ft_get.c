@@ -36,15 +36,13 @@ static t_dir	*ft_set_children(char *p_name, t_opt *opts)
 		if (A_OP(name, opts->a_op))
 		{
 			path = ft_strjoin(p_name, "/");
-			if (result)
-				result = ft_add_dir(name, result, ft_strjoin(path, name), opts);
+			if (result != NULL)
+				ft_push(&result, ft_new_dir(name, path, opts));
 			else
-				result = ft_new_dir(name, ft_strjoin(path, name), opts);
-			ft_strdel(&path);
+				result = ft_new_dir(name, path, opts);
+			// ft_strdel(&path); TODO: Check if leak
 		}
-		result->path = NULL;
 	}
-	result = ft_get_head(result);
 	return (result);
 }
 
@@ -66,15 +64,15 @@ static t_dir	*ft_set_children_rec(char *p_name, t_opt *opts)
 		if (A_OP(name, opts->a_op) && (ft_strcmp(name, ".") && ft_strcmp(name, "..")))
 		{
 			path = ft_strjoin(p_name, "/");
-			result = result ? ft_add_dir(name, result, 
-								ft_strjoin(path, name), opts)
-							: ft_new_dir(name, ft_strjoin(path, name), opts);
-			ft_strdel(&path);
+			if (result != NULL)
+				ft_push(&result, ft_new_dir(name, path, opts));
+			else
+				result = ft_new_dir(name, path, opts);
+			// ft_strdel(&path);
 			if(result->is_dir)
 				result->children = ft_set_children_rec(result->path, opts);
 		}
 	}
-	result = ft_get_head(result);
 	return (result);
 }
 

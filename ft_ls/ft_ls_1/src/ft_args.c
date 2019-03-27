@@ -67,10 +67,9 @@ t_dir			*ft_get_args(char **argv, t_opt *opts)
 		i++;
 		while (argv[i])
 		{
-			curr = ft_add_dir(ft_strdup(argv[i]), curr, argv[i], opts);
+			ft_push(&curr, ft_new_dir(ft_strdup(argv[i]), argv[i], opts));
 			i++;
 		}
-		curr = ft_get_head(curr);
 	}
 	else
 		curr = ft_new_dir(ft_strdup("./"), ft_strdup("./"),opts);

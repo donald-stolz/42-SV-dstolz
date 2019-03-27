@@ -66,18 +66,18 @@ static void	ft_print_path(char *path)
 	b_printf("\n%s\n", path);
 }
 
+// FIXME:
 void		ft_print_ls(t_opt *opts, t_dir *p, t_bool root)
 {
-	p = ft_get_head(p);
 	while(p)
 	{
-		if ((p->next || p->previous) || (opts->rec_op && p->is_dir))
+		if (p->next || (opts->rec_op && p->is_dir))
 			ft_print_path(p->path);
 		else if (root)
 		{
 			if (opts->l_op)
 				ft_print_l(p);
-			else if (p->next || p->previous)
+			else if (p->next)
 				b_printf("%s\n", p->name);
 		}
 		if (p->children)

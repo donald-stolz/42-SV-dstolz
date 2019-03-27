@@ -16,7 +16,7 @@ static void	ft_sort_children(t_opt *opts, t_dir *parents)
 {
 	while (parents)
 	{
-		ft_sort(opts, parents->children);
+		ft_sort(opts, &parents->children);
 		parents = parents->next;
 	}
 }
@@ -37,10 +37,10 @@ int		main(int argc, const char **argv)
 	{
 		options = ft_get_flags(argv);
 		parents = ft_get_args((char **)argv, options);
-		ft_sort(options, parents);
-		ft_ls(options, ft_get_head(parents));
-		ft_free_opts(&options);
-		ft_free_dirs(&parents);
+		ft_sort(options, &parents);
+		ft_ls(options, parents);
+		// ft_free_opts(&options);
+		// ft_free_dirs(&parents);
 	}
 	return (0);
 }

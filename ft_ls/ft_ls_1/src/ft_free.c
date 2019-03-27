@@ -36,12 +36,8 @@ void	ft_free_dirs(t_dir **dir)
 {
 	t_dir *temp;
 
-	temp = ft_get_head(*dir);
-	while(temp->next)
-	{	
-		temp = temp->next;
-		ft_dir_del(temp->previous);
-	}
+	// temp = (*dir);
+
 	ft_dir_del(temp);
 }
 	/* 

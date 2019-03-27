@@ -11,92 +11,87 @@
 /* ************************************************************************** */
 
 #include "../inc/ft_ls.h"
-// FIXME: None of this works :(
-static t_dir	*ft_partition_lex(t_dir *tail, t_dir *head)
-{
-	t_dir	*nav;
-	t_bool	cmp;
 
-	nav = head;
-	if (!tail)
-		return head;
-	if (!head)
-		return tail;
-	
-	while(nav && nav != tail)
+// FIXME: Norminette only allows 4 parameters per function
+static t_dir	*ft_partition(t_dir *head, t_dir *tail, t_dir **n_head,
+	t_dir **n_tail, t_bool (*cmp)(t_dir, t_dir))
+{
+	t_dir	*pivot;
+	t_dir	*prev;
+	t_dir	*cur;
+
+	pivot = tail;
+	prev = NULL;
+	cur = head;
+	while (cur != pivot)
 	{
-		cmp = ft_strcmp(tail->name, nav->name) > 0;
-		nav = nav->next;
-		if (!cmp)
-		ft_place_right(tail, nav->previous);
-		// else
-		// 	ft_place_left(tail, nav->previous);
+		if ((*cmp)(*cur, *pivot))
+			ft_place_left(n_head, &prev, &cur);
+		else
+			ft_place_right(&tail, &prev, &cur);
 	}
-	return (tail);
+	if ((*n_head) == NULL)
+		(*n_head) = pivot;
+	(*n_tail) = tail;
+	return (pivot);
 }
 
-static void	ft_quick_sort_lex(t_dir *tail, t_dir *head)
+static t_dir	*ft_quick_sort(t_dir *head, t_dir *tail,
+	t_bool (*cmp)(t_dir, t_dir))
 {
-	t_dir	*partition;
+	t_dir	*n_head;
+	t_dir	*n_tail;
+	t_dir	*pivot;
+	t_dir	*tmp;
 
-	if (head && tail && head != tail && tail != head->next) {
-		partition = ft_partition_lex(tail, head);
-		ft_quick_sort_lex(ft_get_tail(tail), partition->previous);
-		ft_quick_sort_lex(partition->next, ft_get_head(head));
+	if (!head || head == tail)
+		return (head);
+	n_head = NULL;
+	n_tail = NULL;
+	pivot = ft_partition(head, tail, &n_head, &n_tail, (*cmp));
+	if (n_head != pivot)
+	{
+		tmp = n_head;
+		while (tmp->next != pivot)
+			tmp = tmp->next;
+		tmp->next = NULL;
+		n_head = ft_quick_sort(n_head, tmp, (*cmp));
+		tmp = ft_get_tail(n_head);
+		tmp->next = pivot;
 	}
+	pivot->next = ft_quick_sort(pivot->next, n_tail, (*cmp));
+	return (n_head);
 }
 
-void			ft_sort(t_opt *opts, t_dir *parents)
+static t_bool	ft_cmp_lex(t_dir a, t_dir b)
 {
-	t_dir *head;
-	t_dir *tail;
+	return (ft_strcmp(a.name, b.name) < 0);
+}
 
-	if (!parents->next && !parents->previous)
-		return;
-	ft_swap_dir(parents, parents->next);
-	head = ft_get_head(parents);
-	tail = ft_get_tail(parents);
-	// if (opts->t_op)
-	// 	ft_quick_sort_time(tail, head);
-	// else
-		ft_quick_sort_lex(tail, head);
+static t_bool	ft_cmp_time(t_dir a, t_dir b)
+{
+	t_bool cmp;
+
+	cmp = a.m_time.tv_sec == b.m_time.tv_sec;
+	if (cmp)
+		cmp = a.m_time.tv_nsec < b.m_time.tv_nsec;
+	else
+		cmp = a.m_time.tv_sec < b.m_time.tv_sec;
+	return (cmp);
+}
+
+void			ft_sort(t_opt *opts, t_dir **parents)
+{
+	t_dir	*tail;
+	t_bool	(*cmp)(t_dir, t_dir);
+
+	if (!(*parents)->next)
+		return ;
+	tail = ft_get_tail(*parents);
+	cmp = opts->t_op ? &ft_cmp_time : &ft_cmp_lex;
+	*parents = ft_quick_sort(*parents, tail, cmp);
 	if (opts->r_op)
 		ft_rev_list(parents);
-	if (opts->rec_op && parents->is_dir)
-		ft_sort(opts, parents->children);
+	if (opts->rec_op && (*parents)->is_dir)
+		ft_sort(opts, &(*parents)->children);
 }
-
-
-// static t_dir	*ft_partition_time(t_dir *tail, t_dir *head)
-// {
-// 	t_dir *nav;
-// 	t_bool cmp;
-
-// 	nav = head;
-// 	while (nav && nav != tail && nav != head)
-// 	{
-// 		cmp = tail->m_time.tv_sec == nav->m_time.tv_sec;
-// 		if (cmp)
-// 			cmp = tail->m_time.tv_nsec > nav->m_time.tv_nsec;
-// 		else
-// 			cmp = tail->m_time.tv_sec > nav->m_time.tv_sec;
-// 		nav = nav->next;
-// 		if (cmp)
-// 			ft_place_left(tail, nav->previous);
-// 		else
-// 			ft_place_right(tail, nav->previous);
-// 	}
-// 	return (tail);
-// }
-
-// static t_dir	*ft_quick_sort_time(t_dir *tail, t_dir *head)
-// {
-// 	t_dir	*partition;
-
-// 	if (head && head != tail && tail != head->next) {
-// 		partition = ft_partition_time(head, tail);
-// 		partition->previous = ft_quick_sort_time(tail, partition->previous);
-// 		partition->next = ft_quick_sort_time(partition->next, head);
-// 	}
-// 	return partition;
-// }

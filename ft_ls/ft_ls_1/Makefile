@@ -19,11 +19,10 @@ FILES =	ft_ls.c				\
 		ft_args.c			\
 		ft_dir_info.c		\
 		ft_dir_utility.c	\
-		ft_free.c			\
 		ft_get.c			\
 		ft_print.c			\
-		ft_sort_utility.c	\
 		ft_sort.c			\
+		ft_sort_utility.c	\
 
 HEADERS	= 	ft_ls.h		\
 			libft.h		\
