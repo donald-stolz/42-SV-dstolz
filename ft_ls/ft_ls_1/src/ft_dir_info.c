@@ -12,7 +12,7 @@
 
 #include "../inc/ft_ls.h"
 
-static char		ft_getdescriptor(mode_t m)
+static char	ft_getdescriptor(mode_t m)
 {
 	if ((m & S_IFMT) == S_IFREG)
 		return ('-');
@@ -64,18 +64,19 @@ static void	ft_set_link(char *path, char **link, size_t size)
 	*link = linkname;
 }
 
-// TODO: Check calculations for directory total
-void		ft_get_dir_info(t_dir *dir, t_opt *opts)
+// TODO: Check calculations for directory total 
+void		ft_get_dir_info(t_dir *dir, t_opt *opts, size_t *total)
 {
 	struct stat	dir_stats;
-	
+
 	lstat(dir->path, &dir_stats);
 	dir->is_dir = S_ISDIR(dir_stats.st_mode) && !S_ISLNK(dir_stats.st_mode);
 	dir->permissions = ft_parse_permissions(dir_stats.st_mode);
 	dir->links = dir_stats.st_nlink;
-	dir->owner = getpwuid(dir_stats.st_uid)->pw_name; //Exception
+	dir->owner = getpwuid(dir_stats.st_uid)->pw_name;
 	dir->group = getgrgid(dir_stats.st_gid)->gr_name;
 	dir->size = dir_stats.st_size;
+	*total += (size_t)dir_stats.st_blocks;
 	dir->m_time = dir_stats.st_mtimespec;
 	if (S_ISLNK(dir_stats.st_mode && opts->l_op))
 		ft_set_link(dir->path, &dir->name, (size_t)(dir_stats.st_size + 1));

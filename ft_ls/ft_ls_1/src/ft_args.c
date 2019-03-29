@@ -25,16 +25,16 @@ static t_opt	*ft_new_flags(void)
 	return (new);
 }
 
+//FIXME: Needs to check full string of flags, not just index 1
 t_opt			*ft_get_flags(const char **argv)
 {
-	size_t i;
-	t_opt *result;
+	size_t	i;
+	t_opt	*result;
 
 	result = ft_new_flags();
-		i = 1;
+	i = 1;
 	while (argv[i] && *(*(argv + i) + 0) == '-')
 	{
-		//FIXME: Needs to check full string of flags, not just index 1
 		if (ft_strchr("lartR", argv[i][1]))
 		{
 			result->l_op = ft_strchr(argv[i], 'l') ? true : result->l_op;
@@ -55,23 +55,27 @@ t_opt			*ft_get_flags(const char **argv)
 
 t_dir			*ft_get_args(char **argv, t_opt *opts)
 {
-	size_t i;
-	t_dir *curr;
+	size_t	i;
+	t_dir	*curr;
+	char	*path;
+	size_t	tmp;
 
 	i = 1;
 	while (argv[i] && *(*(argv + i) + 0) == '-')
 		i++;
 	if (argv[i])
 	{
-		curr = ft_new_dir(ft_strdup(argv[i]), argv[i], opts);
+		path = ft_parse_path(argv[i], "./");
+		curr = ft_new_dir(ft_strdup(argv[i]), path, opts, &tmp);
 		i++;
 		while (argv[i])
 		{
-			ft_push(&curr, ft_new_dir(ft_strdup(argv[i]), argv[i], opts));
+			path = ft_parse_path(argv[i], "./");
+			ft_push(&curr, ft_new_dir(ft_strdup(argv[i]), path, opts, &tmp));
 			i++;
 		}
 	}
 	else
-		curr = ft_new_dir(ft_strdup("./"), ft_strdup("./"),opts);
-	return curr;
+		curr = ft_new_dir(ft_strdup("./"), ft_strdup("./"), opts, &tmp);
+	return (curr);
 }

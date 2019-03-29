@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_print_utility.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstolz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/24 11:13:43 by dstolz            #+#    #+#             */
-/*   Updated: 2019/03/24 11:13:44 by dstolz           ###   ########.fr       */
+/*   Created: 2019/03/29 13:29:40 by dstolz            #+#    #+#             */
+/*   Updated: 2019/03/29 13:29:44 by dstolz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_ls.h"
 
-void		ft_free_opts(t_opt **opts)
+char	*ft_parse_time(char *dir_time)
 {
-	free(*opts);
-	*opts = NULL;
-}
+	char	*new;
+	int		i;
 
-static void	ft_dir_del(t_dir *dir)
-{
-	if ((dir)->children)
-		ft_free_dirs(&(dir)->children);
-	if (dir)
+	i = 0;
+	new = (char *)malloc(13);
+	while (i < 12)
 	{
-		ft_strdel(&(dir)->name);
-		ft_strdel(&(dir)->path);
-		ft_strdel(&(dir)->permissions);
-		free(dir);
-		dir = NULL;
+		*(new + i) = *(dir_time + (4 + i));
+		i++;
 	}
+	*(new + i) = '\0';
+	return (new);
 }
 
-// TODO:
-void		ft_free_dirs(t_dir **dir)
+void	ft_print_path(char *path)
 {
-	t_dir *temp;
-
-	ft_dir_del(temp);
+	path[ft_strlen((const char *)path) - 1] = ':';
+	b_printf("\n%s\n", path);
 }

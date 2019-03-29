@@ -18,7 +18,7 @@ static t_dir	*ft_nofile(char *name)
 	return (NULL);
 }
 
-static t_dir	*ft_set_children(char *p_name, t_opt *opts)
+static t_dir	*ft_set_children(char *p_name, t_opt *opts, size_t *total)
 {
 	DIR				*dirstream;
 	struct dirent	*curr;
@@ -29,63 +29,61 @@ static t_dir	*ft_set_children(char *p_name, t_opt *opts)
 	result = NULL;
 	dirstream = opendir(p_name);
 	if (dirstream == NULL)
-		return ft_nofile(p_name);
-	while((curr = readdir(dirstream)) != NULL)
+		return (ft_nofile(p_name));
+	while ((curr = readdir(dirstream)) != NULL)
 	{
 		name = ft_strdup(curr->d_name);
 		if (A_OP(name, opts->a_op))
 		{
-			path = ft_strjoin(p_name, "/");
+			path = ft_parse_path(name, p_name);
 			if (result != NULL)
-				ft_push(&result, ft_new_dir(name, path, opts));
+				ft_push(&result, ft_new_dir(name, path, opts, total));
 			else
-				result = ft_new_dir(name, path, opts);
-			// ft_strdel(&path); TODO: Check if leak
+				result = ft_new_dir(name, path, opts, total);
 		}
 	}
 	return (result);
 }
 
-static t_dir	*ft_set_children_rec(char *p_name, t_opt *opts)
+static t_dir	*ft_set_children_rec(char *p_name, t_opt *opts, size_t *total)
 {
 	DIR				*dirstream;
 	struct dirent	*curr;
-	t_dir			*result;
+	t_dir			*res;
 	char			*name;
 	char			*path;
 
-	result = NULL;
+	res = NULL;
 	dirstream = opendir(p_name);
 	if (dirstream)
-		return ft_nofile(p_name);
-	while((curr = readdir(dirstream)))
+		return (ft_nofile(p_name));
+	while ((curr = readdir(dirstream)))
 	{
 		name = ft_strdup(curr->d_name);
-		if (A_OP(name, opts->a_op) && (ft_strcmp(name, ".") && ft_strcmp(name, "..")))
+		if (A_OP(name, opts->a_op))
 		{
-			path = ft_strjoin(p_name, "/");
-			if (result != NULL)
-				ft_push(&result, ft_new_dir(name, path, opts));
+			path = ft_parse_path(name, p_name);
+			if (res != NULL)
+				ft_push(&res, ft_new_dir(name, path, opts, total));
 			else
-				result = ft_new_dir(name, path, opts);
-			// ft_strdel(&path);
-			if(result->is_dir)
-				result->children = ft_set_children_rec(result->path, opts);
+				res = ft_new_dir(name, path, opts, total);
+			if (res->is_dir && (ft_strcmp(name, ".") && ft_strcmp(name, "..")))
+				res->children = ft_set_children_rec(res->path, opts, total);
 		}
 	}
-	return (result);
+	return (res);
 }
 
 void			ft_get_children(t_opt *opts, t_dir *p)
 {
-	while(p)
+	while (p)
 	{
-		if(!p->is_dir)
+		if (!p->is_dir)
 			p->children = NULL;
 		else if (opts->rec_op)
-			p->children = ft_set_children_rec(p->name, opts);
+			p->children = ft_set_children_rec(p->path, opts, &p->total);
 		else
-			p->children = ft_set_children(p->name, opts);
+			p->children = ft_set_children(p->path, opts, &p->total);
 		p = p->next;
 	}
 }

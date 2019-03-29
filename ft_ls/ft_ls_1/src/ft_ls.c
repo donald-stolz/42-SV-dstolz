@@ -28,7 +28,7 @@ static void	ft_ls(t_opt *options, t_dir *parents)
 	ft_print_ls(options, parents, true);
 }
 
-int		main(int argc, const char **argv)
+int			main(int argc, const char **argv)
 {
 	t_opt	*options;
 	t_dir	*parents;
@@ -44,15 +44,3 @@ int		main(int argc, const char **argv)
 	}
 	return (0);
 }
-
-/*	1. Parse args
- *		- Get directory args into linked arglist
- *		- If sort options, sort parents first
- * 	2. Call ft_ls on list of args(Parent directory(ies)) with option flags
- * 	3. First check for -R option
- * 		- Update directory list with children
- * 	4. Sort children
- * 	5. Print elements
- * 	6. Return to main
- *  7. Free structures
- */
