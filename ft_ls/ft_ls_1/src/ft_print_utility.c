@@ -28,8 +28,20 @@ char	*ft_parse_time(char *dir_time)
 	return (new);
 }
 
-void	ft_print_path(char *path)
+void	ft_print_dir(t_dir *dir, t_bool l_op)
 {
-	path[ft_strlen((const char *)path) - 1] = ':';
-	b_printf("\n%s\n", path);
+	if (l_op)
+		b_printf("%s/%s", dir->path, dir->name);
+	else
+		ft_print_l(dir);
+	if (dir->next)
+		write(1, "\n\n", 2);
+}
+
+void	ft_print_header(t_dir *dir, t_bool root)
+{
+	if (root)
+		b_printf("%s:\n", dir->name);
+	else
+		b_printf("%s/%s:\n", dir->path, dir->name);
 }

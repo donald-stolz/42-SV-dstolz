@@ -14,9 +14,22 @@
 
 static void	ft_sort_children(t_opt *opts, t_dir *parents)
 {
+	t_dir	*temp;
+
 	while (parents)
 	{
-		ft_sort(opts, &parents->children);
+		if (parents->children != NULL)
+			ft_sort(opts, &parents->children);
+		if (opts->rec_op)
+		{
+			temp = parents->children;
+			while (temp)
+			{
+				if (temp->is_dir)
+					ft_sort_children(opts, temp);
+				temp = temp->next;
+			}
+		}
 		parents = parents->next;
 	}
 }
@@ -39,8 +52,8 @@ int			main(int argc, const char **argv)
 		parents = ft_get_args((char **)argv, options);
 		ft_sort(options, &parents);
 		ft_ls(options, parents);
-		// ft_free_opts(&options);
-		// ft_free_dirs(&parents);
+		ft_free_opts(&options);
+		ft_free_dirs(&parents);
 	}
 	return (0);
 }

@@ -64,7 +64,6 @@ static void	ft_set_link(char *path, char **link, size_t size)
 	*link = linkname;
 }
 
-// TODO: Check calculations for directory total 
 void		ft_get_dir_info(t_dir *dir, t_opt *opts, size_t *total)
 {
 	struct stat	dir_stats;

@@ -25,7 +25,25 @@ static t_opt	*ft_new_flags(void)
 	return (new);
 }
 
-//FIXME: Needs to check full string of flags, not just index 1
+static t_bool	ft_check_flag(const char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (arg[i] != '-')
+		return (false);
+	i++;
+	while (arg[i])
+	{
+		if (arg[i] == 'R' || arg[i] == 'a' || arg[i] == 'l' || arg[i] == 'r' ||
+			arg[i] == 't')
+			i++;
+		else
+			return (false);
+	}
+	return (true);
+}
+
 t_opt			*ft_get_flags(const char **argv)
 {
 	size_t	i;
@@ -35,18 +53,19 @@ t_opt			*ft_get_flags(const char **argv)
 	i = 1;
 	while (argv[i] && *(*(argv + i) + 0) == '-')
 	{
-		if (ft_strchr("lartR", argv[i][1]))
+		if (ft_check_flag(argv[i]))
 		{
-			result->l_op = ft_strchr(argv[i], 'l') ? true : result->l_op;
+			result->rec_op = ft_strchr(argv[i], 'R') ? true : result->rec_op;
 			result->a_op = ft_strchr(argv[i], 'a') ? true : result->a_op;
+			result->l_op = ft_strchr(argv[i], 'l') ? true : result->l_op;
 			result->r_op = ft_strchr(argv[i], 'r') ? true : result->r_op;
 			result->t_op = ft_strchr(argv[i], 't') ? true : result->t_op;
-			result->rec_op = ft_strchr(argv[i], 'R') ? true : result->rec_op;
 			i++;
 		}
 		else
 		{
 			ft_putstr("ft_ls: illegal option -- - \n");
+			ft_putstr("usage: ft_ls [-Ralrt] [file ...]");
 			exit(1);
 		}
 	}

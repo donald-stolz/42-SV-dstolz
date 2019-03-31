@@ -92,6 +92,4 @@ void			ft_sort(t_opt *opts, t_dir **parents)
 	*parents = ft_quick_sort(*parents, tail, cmp);
 	if (opts->r_op)
 		ft_rev_list(parents);
-	if (opts->rec_op && (*parents)->is_dir)
-		ft_sort(opts, &(*parents)->children);
 }
