@@ -26,55 +26,52 @@ FILES =	ft_ls.c				\
 		ft_print_utility.c	\
 		ft_sort_utility.c	\
 
-HEADERS	= 	ft_ls.h		\
-			libft.h		\
-			b_printf.h	\
-
-LIBS =	libft		\
-		b_printf	\
+LIBS =	assets/libft/libft.a		\
+		assets/b_printf/b_printf.a	\
 
 SRC_DIR = src/
 INC_DIR = inc/
-LIB_DIR = assets/
 
 SRC = $(FILES:%=$(SRC_DIR)%) 
 OBJ = $(FILES:%.c=%.o)
-INC = $(HEADERS:%=$(INC_DIR)%)
 
 all: $(NAME)
 
-$(NAME): libs
-	@$(CC) $(CFLAGS) -c $(SRC)
-	@$(CC) $(OBJ) $(LIBS:%=%.a) -o $(NAME)
+$(NAME): $(OBJ)
+	@make -C assets/libft
+	@make -C assets/b_printf
+	@echo "Compiled libraries"
+	@$(CC) $^ $(LIBS) -o $@
 	@echo "Compiled ft_ls"
 
+$(OBJ): $(SRC)
+	@$(CC) $(CFLAGS) -c $^
+	@echo "Compiled object files"
+
 debug: libs
-	@$(CC) -g -O0 -std=c11 -ggdb3 $(SRC) $(LIBS:%=%.a) -o a.out 
+	@$(CC) -g -O0 -std=c11 -ggdb3 $(SRC) $(LIBS)
 	@echo "Compiled ft_ls debug"
 	@make clean
 
 leaks: libs
-	@$(CC) -g -fsanitize=address -fno-omit-frame-pointer $(SRC) $(LIBS:%=%.a) -o a.out 
+	@$(CC) -g -fsanitize=address -fno-omit-frame-pointer $(SRC) $(LIBS)
 	@echo "Compiled ft_ls debug leaks"
 	@make clean
 
-libs:
-	@make -C assets/libft
-	@make -C assets/b_printf
-	@echo "Compiled assets"
-
-comp:
-	@$(CC) $(CFLAGS) -c  $(SRC) -I $(INC)
-	@make -C $(LIBS:%=$(LIB_DIR)%)
-
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
+	@make clean -C assets/libft
+	@make clean -C assets/b_printf
+	@echo "Cleaned object files"
 
 fclean: clean
-	rm -rf $(NAME).a
-	rm -rf $(NAME)
-	rm -rf $(NAME).dSYM
-	rm -rf $(LIBS:%=%.a)
-	rm -rf a.out*
+	@make fclean -C assets/libft
+	@make fclean -C assets/b_printf
+	@rm -rf *.a
+	@rm -rf $(NAME)
+	@rm -rf $(NAME).dSYM
+	@rm -rf $(LIBS:%=%.a)
+	@rm -rf a.out*
+	@echo "Cleaned all files"
 
 re: fclean all
