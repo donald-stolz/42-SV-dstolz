@@ -12,7 +12,7 @@
 
 #include "../inc/ft_ls.h"
 
-void	ft_print_l(t_dir *dir)
+void		ft_print_l(t_dir *dir)
 {
 	char *dir_time;
 
@@ -33,6 +33,7 @@ static void	ft_print_children_l(t_dir *p)
 		ft_print_l(nav);
 		nav = nav->next;
 	}
+	write(1, "\n", 1);
 }
 
 static void	ft_print_children(t_dir *children)
@@ -42,6 +43,7 @@ static void	ft_print_children(t_dir *children)
 		b_printf("%s    ", children->name);
 		children = children->next;
 	}
+	write(1, "\n", 1);
 }
 
 void		ft_print_ls(t_opt *opts, t_dir *p, t_bool root)
@@ -51,7 +53,7 @@ void		ft_print_ls(t_opt *opts, t_dir *p, t_bool root)
 	mult = p->next ? true : false;
 	while (p)
 	{
-		if (p->is_dir)
+		if (p->is_dir && ft_strcmp(".", p->name) && ft_strcmp("..", p->name))
 		{
 			if (!root || mult)
 				ft_print_header(p, root);
@@ -61,7 +63,7 @@ void		ft_print_ls(t_opt *opts, t_dir *p, t_bool root)
 				ft_print_children(p->children);
 			if (opts->rec_op && p->children != NULL)
 			{
-				write(1, "\n\n", 2);
+				write(1, "\n", 1);
 				ft_print_ls(opts, p->children, false);
 			}
 		}

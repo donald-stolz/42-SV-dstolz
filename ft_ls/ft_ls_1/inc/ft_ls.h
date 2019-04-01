@@ -77,4 +77,5 @@ void			ft_print_dir(t_dir *dir, t_bool l_op);
 void			ft_print_l(t_dir *dir);
 void			ft_free_opts(t_opt **opts);
 void			ft_free_dirs(t_dir **dir);
+t_dir			*ft_set_children(char *p_name, t_opt *opts, size_t *total);
 #endif

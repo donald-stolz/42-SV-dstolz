@@ -43,5 +43,5 @@ void	ft_print_header(t_dir *dir, t_bool root)
 	if (root)
 		b_printf("%s:\n", dir->name);
 	else
-		b_printf("%s/%s:\n", dir->path, dir->name);
+		b_printf("%s:\n", dir->path);
 }

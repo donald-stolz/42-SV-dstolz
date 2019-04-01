@@ -18,28 +18,22 @@ void		ft_free_opts(t_opt **opts)
 	*opts = NULL;
 }
 
-static void	ft_dir_del(t_dir **dir)
-{
-	if (*dir)
-	{
-		ft_strdel(&(*dir)->name);
-		ft_strdel(&(*dir)->path);
-		ft_strdel(&(*dir)->permissions);
-		free(*dir);
-		*dir = NULL;
-	}
-}
-
 void		ft_free_dirs(t_dir **dir)
 {
-	t_dir **temp;
+	t_dir *cur;
+	t_dir *next;
 
-	while (*dir)
+	cur = *dir;
+	while (cur != NULL)
 	{
-		if ((*dir)->children)
-			ft_free_dirs(&(*dir)->children);
-		temp = &(*dir)->next;
-		ft_dir_del(dir);
-		dir = temp;
+		if (cur->children != NULL)
+			ft_free_dirs(&cur->children);
+		next = cur->next;
+		ft_strdel(&cur->name);
+		ft_strdel(&cur->path);
+		ft_strdel(&cur->permissions);
+		free(cur);
+		cur = next;
 	}
+	*dir = NULL;
 }

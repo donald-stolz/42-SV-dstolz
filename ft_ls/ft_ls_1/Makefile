@@ -49,14 +49,15 @@ $(NAME): libs
 	@echo "Compiled ft_ls"
 
 debug: libs
-	@$(CC) -g $(SRC) $(LIBS:%=%.a) -o a.out 
+	@$(CC) -g -O0 -std=c11 -ggdb3 $(SRC) $(LIBS:%=%.a) -o a.out 
 	@echo "Compiled ft_ls debug"
 	@make clean
 
 leaks: libs
-	@$(CC) -g -fsanitize=address -fno-omit-frame-pointer $(SRC) $(LIBS:%=%.a) -o test.out 
+	@$(CC) -g -fsanitize=address -fno-omit-frame-pointer $(SRC) $(LIBS:%=%.a) -o a.out 
 	@echo "Compiled ft_ls debug leaks"
 	@make clean
+
 libs:
 	@make -C assets/libft
 	@make -C assets/b_printf

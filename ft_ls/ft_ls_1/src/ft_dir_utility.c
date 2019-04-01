@@ -34,7 +34,7 @@ t_dir	*ft_new_dir(char *name, char *path, t_opt *opts, size_t *total)
 {
 	t_dir	*dir;
 
-	dir = malloc(sizeof(t_dir));
+	dir = (t_dir *)malloc(sizeof(t_dir));
 	dir->name = name;
 	dir->path = path;
 	dir->total = 0;

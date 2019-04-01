@@ -12,7 +12,6 @@
 
 #include "../inc/ft_ls.h"
 
-// FIXME: Norminette only allows 4 parameters per function
 static t_dir	*ft_partition(t_dir *head, t_dir *tail, t_dir **n_head,
 	t_dir **n_tail, t_bool (*cmp)(t_dir, t_dir))
 {
@@ -72,8 +71,7 @@ static t_bool	ft_cmp_time(t_dir a, t_dir b)
 {
 	t_bool cmp;
 
-	cmp = a.m_time.tv_sec == b.m_time.tv_sec;
-	if (cmp)
+	if (a.m_time.tv_sec == b.m_time.tv_sec)
 		cmp = a.m_time.tv_nsec > b.m_time.tv_nsec;
 	else
 		cmp = a.m_time.tv_sec > b.m_time.tv_sec;
