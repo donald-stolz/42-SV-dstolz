@@ -16,7 +16,7 @@ void		ft_print_l(t_dir *dir)
 {
 	char *dir_time;
 
-	dir_time = ft_parse_time(ctime(&dir->m_time.tv_sec));
+	dir_time = ft_parse_time(dir->m_time);
 	b_printf("%s %d %s %s %d %s %s\n", dir->permissions, dir->links,
 				dir->owner, dir->group, dir->size, dir_time, dir->name);
 	ft_strdel(&dir_time);

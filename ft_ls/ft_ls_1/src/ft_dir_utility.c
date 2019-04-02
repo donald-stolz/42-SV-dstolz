@@ -18,6 +18,8 @@ char	*ft_parse_path(char *name, char *path)
 	char	*result;
 	int		len;
 
+	if (name[0] == '/')
+		return (ft_strdup(name));
 	len = ft_strlen(path);
 	if (path[len - 1] != '/')
 	{

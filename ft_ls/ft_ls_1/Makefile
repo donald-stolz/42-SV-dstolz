@@ -13,7 +13,7 @@
 NAME = ft_ls
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 FILES =	ft_ls.c				\
 		ft_args.c			\
@@ -48,14 +48,11 @@ $(OBJ): $(SRC)
 	@$(CC) $(CFLAGS) -c $^
 	@echo "Compiled object files"
 
-debug: libs
+debug:
+	@make -C assets/libft
+	@make -C assets/b_printf
 	@$(CC) -g -O0 -std=c11 -ggdb3 $(SRC) $(LIBS)
 	@echo "Compiled ft_ls debug"
-	@make clean
-
-leaks: libs
-	@$(CC) -g -fsanitize=address -fno-omit-frame-pointer $(SRC) $(LIBS)
-	@echo "Compiled ft_ls debug leaks"
 	@make clean
 
 clean:

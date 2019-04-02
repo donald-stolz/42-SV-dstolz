@@ -55,11 +55,12 @@ static void	ft_set_link(char *path, char **link, size_t size)
 	char	*linkname;
 	char	*tmp;
 
-	free(*link);
 	linkname = malloc(size);
 	readlink((const char *)path, linkname, size);
-	tmp = ft_strjoin(path, " -> ");
+	linkname[size] = '\0';
+	tmp = ft_strjoin(*link, " -> ");
 	linkname = ft_strjoin(tmp, linkname);
+	ft_strdel(link);
 	ft_strdel(&tmp);
 	*link = linkname;
 }
@@ -77,6 +78,6 @@ void		ft_get_dir_info(t_dir *dir, t_opt *opts, size_t *total)
 	dir->size = dir_stats.st_size;
 	*total += (size_t)dir_stats.st_blocks;
 	dir->m_time = dir_stats.st_mtimespec;
-	if (S_ISLNK(dir_stats.st_mode && opts->l_op))
+	if (S_ISLNK(dir_stats.st_mode) && opts->l_op)
 		ft_set_link(dir->path, &dir->name, (size_t)(dir_stats.st_size + 1));
 }

@@ -26,6 +26,7 @@
 # include <stdlib.h>
 
 # define A_OP(str, a) (*(str) != '.' || a)
+# define SIXMONTHS ((365 / 2) * 86400)
 
 typedef	enum
 {
@@ -71,7 +72,7 @@ void			ft_rev_list(t_dir **dir);
 void			ft_place_left(t_dir **head, t_dir **prev, t_dir **cur);
 void			ft_place_right(t_dir **tail, t_dir **prev, t_dir **cur);
 char			*ft_parse_path(char *name, char *path);
-char			*ft_parse_time(char *dir_time);
+char			*ft_parse_time(struct timespec m_time);
 void			ft_print_header(t_dir *path, t_bool root);
 void			ft_print_dir(t_dir *dir, t_bool l_op);
 void			ft_print_l(t_dir *dir);
