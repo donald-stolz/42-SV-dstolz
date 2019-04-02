@@ -72,7 +72,12 @@ static t_bool	ft_cmp_time(t_dir a, t_dir b)
 	t_bool cmp;
 
 	if (a.m_time.tv_sec == b.m_time.tv_sec)
-		cmp = a.m_time.tv_nsec > b.m_time.tv_nsec;
+	{
+		if (a.m_time.tv_nsec == b.m_time.tv_nsec)
+			cmp = ft_strcmp(a.name, b.name) < 0;
+		else
+			cmp = a.m_time.tv_nsec> b.m_time.tv_nsec;
+	}
 	else
 		cmp = a.m_time.tv_sec > b.m_time.tv_sec;
 	return (cmp);

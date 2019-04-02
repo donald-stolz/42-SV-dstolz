@@ -33,7 +33,6 @@ static void	ft_print_children_l(t_dir *p)
 		ft_print_l(nav);
 		nav = nav->next;
 	}
-	write(1, "\n", 1);
 }
 
 static void	ft_print_children(t_dir *children)
