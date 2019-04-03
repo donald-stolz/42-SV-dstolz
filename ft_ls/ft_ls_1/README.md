@@ -1,5 +1,11 @@
 # Notes/Pseudo Code
 
+## TODO
+
+- [ ] Error management -> Can't access & does not exist
+- [ ] [setuid, setgid and sticky bits](https://linuxconfig.org/how-to-use-special-permissions-the-setuid-setgid-and-sticky-bits)
+- [ ] Handling files as args
+
 ```c
 ./src/ft_ls.c
 /*

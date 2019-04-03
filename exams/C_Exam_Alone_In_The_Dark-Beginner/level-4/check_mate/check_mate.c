@@ -4,19 +4,23 @@
 
 void get_king(char **map, int *krow, int *kcol)
 {
-	*krow = 0;
-	*kcol = 0;
+	int x = 0;
+	int y = 0;
 
-	while(map[*krow])
+	while(map[x])
 	{
-		while(map[*krow][*kcol])
+		while(map[x][y])
 		{
-			if (map[*krow][*kcol] == 'K')
+			if (map[x][y] == 'K')
+			{
+				*krow = x;
+				*kcol = y;
 				return;
-			*kcol++;
+			}
+			y++;
 		}
-		*krow++;
-		*kcol = 0;
+		x++;
+		y = 0;
 	}
 	*krow = -1;
 	*kcol = -1;
@@ -27,14 +31,16 @@ int check_ortho(char **map, int krow, int kcol)
 	int row = krow;
 	int col = kcol;
 
-	while(row > 0){
+	while(row > 0)
+	{
 		row--;
 		if (map[row][col] == 'Q' || map[row][col] == 'R')
 			return (1);
 		else if (map[row][col] == 'P' || map[row][col] == 'B')
 			break;
 	}
-	while(col > 0){
+	while(col > 0)
+	{
 		col--;
 		if (map[row][col] == 'Q' || map[row][col] == 'R')
 			return (1);
@@ -59,6 +65,7 @@ int check_ortho(char **map, int krow, int kcol)
 		else if (map[row][col] == 'P' || map[row][col] == 'B')
 			break;
 	}
+	return (0);
 }
 
 int	check_diagonal(char **map, int krow, int kcol)
@@ -118,26 +125,25 @@ int	check_diagonal(char **map, int krow, int kcol)
 		else if (map[row][col] == 'P' || map[row][col] == 'R')
 			break;
 	}
-	
-	
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
-	int *krow;
-	int *kcol;
+	int krow = 0;
+	int kcol = 0;
 	char **map;
 	if (argc > 1)
 	{
 		// Parse input into 2D char array
 		map = &argv[1];
 		// Find pos of king
-		get_king(map, krow, kcol);
+		get_king(map, &krow, &kcol);
 		// Check horizontal & vertical (Orthogonal)
-		if(check_ortho(map, &krow, &kcol))
+		if(check_ortho(map, krow, kcol))
 			write(1, "Success", 7);
 		// Check diagonal
-		else if(check_diagonal(map, &krow, &kcol))
+		else if(check_diagonal(map, krow, kcol))
 			write(1, "Success", 7);
 		else
 			write(1, "Fail", 4);
